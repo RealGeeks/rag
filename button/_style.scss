@@ -1,0 +1,156 @@
+$button-size: 34px;
+$button-size-large: 44px;
+$button-border-width: 1px !default;
+$button-border-color: $gray-lighter !default;
+$button-border-radius: $border-radius !default;
+$button-padding: $padding-content !default;
+$button-active-color: $color-primary !default;
+$button-icon-size: 24px !default;
+
+.hitarea {
+  cursor: pointer;
+  user-select: none;
+
+  &.disabled {
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+/**
+ * 1. Ensures inline icons and text is centered vertically.
+ */
+.rag-button {
+  @extend .hitarea;
+  @extend %truncate;
+
+  position: relative;
+  display: inline-block;
+  height: $button-size;
+  min-width: $button-size;
+  padding: 0 $button-padding;
+  line-height: ($button-size - 2 * $button-border-width);
+  font-weight: 500;
+  text-align: center;
+  border: $button-border-width solid $button-border-color;
+  border-radius: $button-border-radius;
+  vertical-align: middle;
+
+  // span {
+  //   @extend %align-middle; /* 1 */
+  // }
+
+  &:hover {
+    z-index: 1;
+    background-color: rgba(0, 0, 0, .02);
+  }
+
+  &.active, &:active {
+    z-index: 1;
+    background-color: $button-active-color;
+    border-color: transparent;
+    color: $text-color-inverted;
+  }
+
+  &.disabled {
+    background-color: transparent;
+    color: $text-color-muted;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &.success {
+    border-color: $color-success;
+  }
+
+  &.warning {
+    border-color: $color-warning;
+  }
+
+  &.danger {
+    border-color: $color-danger;
+  }
+}
+
+.rag-button-large {
+  height: $button-size-large;
+  line-height: ($button-size-large - 2 * $button-border-width);
+}
+
+.rag-button-basic {
+  color: $color-primary;
+  border-radius: 0;
+  border-color: transparent;
+}
+
+.rag-button-accent {
+  color: $color-primary;
+}
+
+.rag-button-prominent {
+  background-color: $color-primary;
+  border-color: transparent;
+  color: $text-color-inverted;
+
+  &:hover {
+    background-color: darken($color-primary, 5%);
+  }
+
+  &.success {
+    background-color: $color-success;
+    border-color: $color-success;
+
+    &:hover {
+      background-color: darken($color-success, 5%);
+    }
+  }
+
+  &.warning {
+    background-color: $color-warning;
+    border-color: $color-warning;
+
+    &:hover {
+      background-color: darken($color-warning, 5%);
+    }
+  }
+
+  &.danger {
+    background-color: $color-danger;
+    border-color: $color-danger;
+
+    &:hover {
+      background-color: darken($color-danger, 5%);
+    }
+  }
+}
+
+.rag-button-overlay {
+  background-color: $gray;
+  background-color: rgba($black, .4);
+  border-color: transparent;
+  color: $text-color-inverted;
+
+  &:hover {
+    background-color: rgba($black, .45);
+  }
+}
+
+.rag-button-block {
+  display: block;
+  max-width: (320px - 2 * $padding-content);
+  margin: auto;
+}
+
+.rag-button-icon-left {
+  padding-left: $button-icon-size + $button-padding;
+  background-position: $button-padding center;
+}
+
+/**
+ * 1. IE8 fallback
+ */
+.rag-button-icon-right {
+  padding-right: $button-icon-size;
+  background-position: right center; /* 1 */
+  background-position: right $button-padding center;
+}

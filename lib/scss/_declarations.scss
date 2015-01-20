@@ -1,0 +1,67 @@
+%text-center {
+  text-align: center;
+}
+
+%align-middle {
+  vertical-align: middle;
+}
+
+%font-weight-400 {
+  font-weight: 400;
+}
+
+%font-weight-700 {
+  font-weight: 700;
+}
+
+%padding {
+  padding: $padding-content;
+}
+
+%overflow-hidden {
+  overflow: hidden;
+}
+
+%overflow-visible {
+  overflow: visible;
+}
+
+%block {
+  display: block;
+}
+
+%float-right {
+  float: right;
+}
+
+%float-left {
+  float: left;
+}
+
+%fifth-width {
+  width: 20%;
+}
+
+%quarter-width {
+  width: 25%;
+}
+
+%third-width {
+  width: 33.33%;
+}
+
+%half-width {
+  width: 50%;
+}
+
+%full-width {
+  width: 100%;
+}
+
+%full-height {
+  height: 100%;
+}
+
+%no-pointer-events {
+  pointer-events: none;
+}

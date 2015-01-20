@@ -1,0 +1,52 @@
+.rag-modal {
+  @extend %fill;
+  @extend %center;
+
+  height: 100%;
+  padding: $padding-content;
+  z-index: 1;
+}
+
+
+/**
+ * 1. On iOS, elements positioned on top of iframes don’t receive
+ *    touch events without this.
+ */
+.rag-modal .rag-modal-close {
+  z-index: 1; /* 1 */
+}
+
+.rag-modal-backdrop {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQIHWNgCAUAAFgAVjI6nJgAAAAASUVORK5CYII=");
+}
+
+.rag-modal-noninteractive {
+  @extend %no-pointer-events;
+}
+
+.rag-modal-window {
+  @extend %panel;
+
+  position: relative;
+  min-width: $grid-unit;
+  min-height: $button-size-large;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.rag-modal-close {
+  $close-icon-size: 24px;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-sizing: content-box;
+  width: $close-icon-size;
+  height: $close-icon-size;
+  padding: 5px 5px 15px 15px;
+  background-position: 15px 5px;
+}
+
+.rag-modal-scroller {
+  @extend %full-height;
+}

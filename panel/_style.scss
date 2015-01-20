@@ -1,0 +1,44 @@
+$panel-background-color: $white !default;
+$panel-border-color: rgba($black, .2) !default;
+$panel-border-color-fallback: $gray-light !default;
+$panel-border-width: 1px !default;
+$panel-border-radius: $border-radius !default;
+
+%panel {
+  background: $panel-background-color;
+  background-clip: padding-box;
+  overflow: hidden;
+  border-style: solid;
+  border-width: $panel-border-width;
+  border-color: $panel-border-color-fallback;
+  border-color: $panel-border-color;
+  border-radius: $panel-border-radius;
+}
+
+%panel-top {
+  @extend %panel;
+
+  border-style: none none solid;
+  border-radius: 0;
+}
+
+%panel-right {
+  @extend %panel;
+
+  border-style: none none none solid;
+  border-radius: 0;
+}
+
+%panel-bottom {
+  @extend %panel;
+
+  border-style: solid none none;
+  border-radius: 0;
+}
+
+%panel-left {
+  @extend %panel;
+
+  border-style: none solid none none;
+  border-radius: 0;
+}
