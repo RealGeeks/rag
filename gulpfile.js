@@ -2,7 +2,6 @@
 
 var path = require('path');
 var join = path.join;
-var writeFile = require('fs').writeFile;
 
 var gulp = require('gulp');
 
@@ -105,8 +104,9 @@ gulp.task('js', ['clean', 'checkJs'], function () {
     .pipe(gulp.dest(outputPath));
 });
 
-gulp.task('vars', function (done) {
-  writeFile(join(tmpPath, 'scss/variables.scss'), scssVars(vars), done);
+gulp.task('vars', function () {
+  return file('_variables.scss', scssVars(vars), {src: true})
+    .pipe(gulp.dest(join(tmpPath, 'scss')));
 });
 
 gulp.task('css',  ['vars', 'images'], function () {
