@@ -1,8 +1,10 @@
 'use strict';
 
+var constant = require('lodash').constant;
 var react = require('react/addons');
 var joinClasses = require('react/lib/joinClasses');
 var createFactory = react.createFactory;
+var surface = createFactory(require('../surface'));
 var scroller = createFactory(require('../scroll-view'));
 var button = createFactory(require('../button'));
 var div = react.DOM.div;
@@ -10,30 +12,71 @@ var div = react.DOM.div;
 var namespace = 'rag-modal';
 
 var componentSpec = {
-  mixins: [require('react-touch-mixin'), react.addons.PureRenderMixin],
+  mixins: [react.addons.PureRenderMixin],
+
+  getDefaultProps: constant({
+    backdrop: true,
+    locked: false
+  }),
+
+  getInitialState: function () {
+    return {
+      open: this.props.open
+    };
+  },
 
   render: function () {
-    var props = this.props;
+    var component = this;
+    var props = component.props;
+    var canClose = !props.locked;
 
-    return div(
+    if (!component.state.open) {
+      return null;
+    }
+
+    return surface(
       {
         className: joinClasses(
           namespace,
-          props.noninteractive && namespace + '-noninteractive',
           props.backdrop && namespace + '-backdrop'
-        )
+        ),
+        onTap: canClose && component.onTap
       },
       div(
         {className: joinClasses(namespace + '-window', props.className)},
-        props.close && button({
+        canClose && button({
           className: namespace + '-close',
           type: ['hitarea'],
           icon: 'x',
-          onTap: props.close
+          onTap: component.close
         }),
         scroller({className: namespace + '-scroller'}, props.children)
       )
     );
+  },
+
+  onTap: function (event) {
+    if (event.target == this.getDOMNode()) {
+      this.close();
+    }
+  },
+
+  isOpen: function () {
+    return this.state.open;
+  },
+
+  open: function () {
+    var onOpen = this.props.onOpen;
+
+    this.setState({open: true});
+    onOpen && onOpen();
+  },
+
+  close: function () {
+    var onClose = this.props.onClose;
+
+    this.setState({open: false});
+    onClose && onClose();
   }
 };
 

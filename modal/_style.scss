@@ -7,7 +7,6 @@
   z-index: 1;
 }
 
-
 /**
  * 1. On iOS, elements positioned on top of iframes don’t receive
  *    touch events without this.
@@ -18,10 +17,6 @@
 
 .rag-modal-backdrop {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQIHWNgCAUAAFgAVjI6nJgAAAAASUVORK5CYII=");
-}
-
-.rag-modal-noninteractive {
-  @extend %no-pointer-events;
 }
 
 .rag-modal-window {

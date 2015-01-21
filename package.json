@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "envify": "^3.2.0",
+    "lodash": "^2.4.1",
     "prevent-overscroll": "^0.1.0",
     "react": "^0.12.2",
     "react-touch-mixin": "^0.1.1",
