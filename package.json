@@ -6,6 +6,9 @@
     "type": "git",
     "url": "https://github.com/RealGeeks/rag.git"
   },
+  "scripts": {
+    "css": "gulp css"
+  },
   "author": "Sorin Iclanzan <sorin@iclanzan.com> (http://iclanzan.com/)",
   "bugs": {
     "url": "https://github.com/RealGeeks/rag/issues"
