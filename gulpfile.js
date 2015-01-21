@@ -90,7 +90,7 @@ var serve = function (done) {
 };
 
 gulp.task('clean', function (done) {
-  del(outputPath, done);
+  del([outputPath, tmpPath], done);
 });
 
 gulp.task('checkJs', checkJs.bind(null, undefined));
