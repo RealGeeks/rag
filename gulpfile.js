@@ -104,7 +104,7 @@ gulp.task('js', ['clean', 'checkJs'], function () {
     .pipe(gulp.dest(outputPath));
 });
 
-gulp.task('vars', function () {
+gulp.task('vars', ['clean'], function () {
   return file('_variables.scss', scssVars(vars), {src: true})
     .pipe(gulp.dest(join(tmpPath, 'scss')));
 });
