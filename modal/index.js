@@ -7,7 +7,6 @@ var createFactory = react.createFactory;
 var surface = createFactory(require('../surface'));
 var scroller = createFactory(require('../scroll-view'));
 var button = createFactory(require('../button'));
-var div = react.DOM.div;
 
 var namespace = 'rag-modal';
 
@@ -42,7 +41,7 @@ var componentSpec = {
         ),
         onTap: canClose && component.onTap
       },
-      div(
+      scroller(
         {className: joinClasses(namespace + '-window', props.className)},
         canClose && button({
           className: namespace + '-close',
@@ -50,7 +49,7 @@ var componentSpec = {
           icon: 'x',
           onTap: component.close
         }),
-        scroller({className: namespace + '-scroller'}, props.children)
+        props.children
       )
     );
   },
