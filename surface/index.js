@@ -1,9 +1,12 @@
 'use strict';
 
-var react = require('react');
+var react = require('react/addons');
 
 var componentSpec = {
-  mixins: [require('react-touch-mixin')],
+  mixins: [
+    require('react-touch-mixin'),
+    react.addons.PureRenderMixin
+  ],
 
   render: function () {
     return react.DOM.div(this.props);
