@@ -62,7 +62,7 @@ var componentSpec = {
   },
 
   value: function () {
-    return this.state.value;
+    return this.state.value.replace(matchNonDigit, '');
   }
 };
 
