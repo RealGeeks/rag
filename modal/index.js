@@ -65,17 +65,11 @@ var componentSpec = {
   },
 
   open: function () {
-    var onOpen = this.props.onOpen;
-
-    this.setState({open: true});
-    onOpen && onOpen();
+    this.setState({open: true}, this.props.didOpen);
   },
 
   close: function () {
-    var onClose = this.props.onClose;
-
-    this.setState({open: false});
-    onClose && onClose();
+    this.setState({open: false}, this.props.didClose);
   }
 };
 
