@@ -1,8 +1,11 @@
 'use strict';
 
-var constant = require('lodash').constant;
+var _ = require('lodash');
+var constant = _.constant;
+var omit = _.omit;
 var react = require('react/addons');
 
+var propsToOmit = ['className', 'limit'];
 var matchNonDigit = /\D/g;
 
 var componentSpec = {
@@ -13,14 +16,16 @@ var componentSpec = {
 
   render: function () {
     var component = this;
-    var className = component.props.className;
+    var props = component.props;
+    var className = props.className;
 
-    return react.DOM.input({
-      type: 'tel',
-      className: 'rag-tel' + (className ? ' ' + className : ''),
-      value: component.state.value,
-      onChange: component.onChange
-    });
+    props = omit(props, propsToOmit);
+    props.type = 'tel';
+    props.className = 'rag-tel' + (className ? ' ' + className : '');
+    props.value = component.state.value;
+    props.onChange = component.onChange;
+
+    return react.DOM.input(props);
   },
 
   onChange: function (event) {
