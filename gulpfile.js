@@ -25,7 +25,7 @@ var watchify = require('watchify');
 var browserSync = require('browser-sync');
 var svgcss = require('svgcss');
 var imageToCss = require('./lib/js/image-to-css');
-var doc = require('./lib/js/document');
+var doc = require('./lib/js/document').toString;
 var vars = require('./lib/js/variables');
 var scssVars = require('./lib/js/scss-vars');
 
@@ -34,7 +34,7 @@ var pkg = require('./package.json');
 var tmpPath = '.tmp';
 
 // Browserify needs a leading './'
-var indexPath = './index.js';
+var indexPath = './lib/js/client.js';
 
 var src = {
   scripts: [
@@ -98,7 +98,7 @@ gulp.task('js', ['clean', 'checkJs'], function () {
   return browserify(indexPath)
     .transform({global: true}, 'uglifyify')
     .bundle()
-    .pipe(source(pkg.name + '.js'))
+    .pipe(source('client.js'))
     .pipe(buffer())
     .pipe(uglify())
     .pipe(gulp.dest(outputPath));
@@ -150,7 +150,7 @@ gulp.task('watchify', ['clean'], function () {
 
     return bundler.bundle()
       .on('error', errorNotifier)
-      .pipe(source(pkg.name + '.js'))
+      .pipe(source('client.js'))
       .pipe(gulp.dest(outputPath))
       .pipe(browserSync.reload({stream: true}));
   };
