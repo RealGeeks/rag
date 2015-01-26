@@ -15,7 +15,7 @@ var componentSpec = {
 
   getInitialState: function () {
     var props = this.props;
-    var value = props.value;
+    var value = props.defaultValue;
 
     return {
       value: value && formatPhoneNumber(value, props.limit)
