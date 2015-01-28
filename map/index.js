@@ -38,9 +38,9 @@ var mapComponent = {
   createMapOptions: function (options, mapsApi) {
     options = _.clone(options);
     var state = this.state;
-    var center = options.center && options.center() || state.center;
+    var center = options.center || state.center;
     options.center = new mapsApi.LatLng(center.lat, center.lng);
-    options.zoom = options.zoom && options.zoom() || state.zoom;
+    options.zoom = options.zoom || state.zoom;
 
     [
     [['mapTypeId'], 'MapTypeId'],

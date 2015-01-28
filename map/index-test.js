@@ -48,11 +48,11 @@ test('Map', function (assert) {
       );
 
       var options = component.createMapOptions({
-        center: _.constant({
+        center: {
           lat: 12,
           lng: 40
-        }),
-        zoom: _.constant(7),
+        },
+        zoom: 7,
         mapTypeId: 'ROADMAP',
         disableDefaultUI: true,
         mapTypeControlOptions: {
