@@ -77,8 +77,11 @@ var mapComponent = {
   },
 
   render: function () {
+    var props = this.props;
+
     return dom.div({
-      className: joinClasses('rag-map', this.props.className)
+      className: joinClasses('rag-map', props.className),
+      style: props.style
     });
   },
 
