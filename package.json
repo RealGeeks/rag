@@ -7,6 +7,7 @@
     "url": "https://github.com/RealGeeks/rag.git"
   },
   "scripts": {
+    "test": "testem ci",
     "build": "gulp build",
     "css": "gulp css"
   },
@@ -32,9 +33,10 @@
     "gulp-uglify": "^1.0.2",
     "merge-stream": "^0.1.7",
     "multipipe": "^0.1.2",
+    "sinon": "^1.12.2",
     "svgcss": "^0.3.0",
-    "tape": "^2.14.0",
-    "testem": "^0.6.18",
+    "tape": "^3.4.0",
+    "testem": "^0.6.33",
     "uglifyify": "^3.0.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
@@ -42,10 +44,14 @@
   },
   "dependencies": {
     "envify": "^3.2.0",
+    "es6-promise": "^2.0.1",
+    "inner": "^0.2.0",
     "lodash": "^2.4.1",
     "prevent-overscroll": "^0.1.0",
+    "query-string": "^1.0.0",
     "react": "^0.12.2",
     "react-touch-mixin": "^0.1.1",
+    "scriptload": "^0.1.0",
     "supports": "^0.1.1"
   },
   "browserify": {

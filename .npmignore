@@ -10,4 +10,4 @@ test-bundle.js
 .npmignore
 gulpfile.js
 testem.json
-tests.js
+test
