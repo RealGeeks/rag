@@ -123,12 +123,12 @@ var mapComponent = {
     }
 
     var center = props.center;
-    if (!_.isEqual(center, state.center)) {
+    if (center && !_.isEqual(center, state.center)) {
       map.panTo(center);
     }
 
     var zoom = props.zoom;
-    if (zoom != state.zoom) {
+    if (zoom && zoom != state.zoom) {
       map.setZoom(zoom);
     }
 
