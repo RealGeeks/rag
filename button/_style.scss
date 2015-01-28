@@ -125,13 +125,18 @@ $button-icon-size: 24px !default;
 }
 
 .rag-button-overlay {
-  background-color: $gray;
-  background-color: rgba($black, .4);
-  border-color: transparent;
-  color: $text-color-inverted;
+  background-color: $white;
+  background-clip: padding-box;
+  border-color: rgba($black, .2);
 
   &:hover {
-    background-color: rgba($black, .45);
+    background-color: darken($white, 2%);
+  }
+
+  &.active, &:active {
+    background-color: $button-active-color;
+    border-color: rgba($black, .2);
+    color: $text-color-inverted;
   }
 }
 
