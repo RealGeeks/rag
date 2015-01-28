@@ -19,6 +19,9 @@
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQIHWNgCAUAAFgAVjI6nJgAAAAASUVORK5CYII=");
 }
 
+/**
+ * 1. Without a z-index set some content overflows in Webkit.
+ */
 .rag-modal-window {
   @extend %panel;
 
@@ -27,6 +30,7 @@
   min-height: $button-size-large;
   max-width: 100%;
   max-height: 100%;
+  z-index: 0; /* 1 */
 }
 
 .rag-modal-close {
