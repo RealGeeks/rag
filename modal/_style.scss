@@ -7,14 +7,6 @@
   z-index: 1;
 }
 
-/**
- * 1. On iOS, elements positioned on top of iframes don’t receive
- *    touch events without this.
- */
-.rag-modal .rag-modal-close {
-  z-index: 1; /* 1 */
-}
-
 .rag-modal-backdrop {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQIHWNgCAUAAFgAVjI6nJgAAAAASUVORK5CYII=");
 }
@@ -33,6 +25,10 @@
   z-index: 0; /* 1 */
 }
 
+/**
+ * 1. On iOS, elements positioned on top of iframes don’t receive
+ *    touch events without this.
+ */
 .rag-modal-close {
   $close-icon-size: 24px;
 
@@ -44,4 +40,5 @@
   height: $close-icon-size;
   padding: 5px 5px 15px 15px;
   background-position: 15px 5px;
+  z-index: 1; /* 1 */
 }
