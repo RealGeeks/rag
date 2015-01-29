@@ -18,7 +18,7 @@ var componentSpec = {
     var value = props.defaultValue;
 
     return {
-      value: value && formatPhoneNumber(value, props.limit)
+      value: value && formatPhoneNumber(value, props.limit) || ''
     };
   },
 
