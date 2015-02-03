@@ -37,7 +37,7 @@ var buttonSpec = {
       }
 
       if (children) {
-        classes.push(namespace + '-icon-' + iconPosition);
+        classes.push('icon-' + iconPosition);
       }
     }
 

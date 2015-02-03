@@ -145,17 +145,3 @@ $button-icon-size: 24px !default;
   max-width: (320px - 2 * $padding-content);
   margin: auto;
 }
-
-.rag-button-icon-left {
-  padding-left: $button-icon-size + $button-padding;
-  background-position: $button-padding center;
-}
-
-/**
- * 1. IE8 fallback
- */
-.rag-button-icon-right {
-  padding-right: $button-icon-size;
-  background-position: right center; /* 1 */
-  background-position: right $button-padding center;
-}

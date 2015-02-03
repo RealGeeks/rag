@@ -8,3 +8,15 @@
   height: 100%;
   vertical-align: top;
 }
+
+.icon-left {
+  background-position: $padding-content center;
+}
+
+/**
+ * 1. IE8 fallback
+ */
+.icon-right {
+  background-position: 94% center; /* 1 */
+  background-position: right $padding-content center;
+}
