@@ -1,8 +1,5 @@
 'use strict';
 
-var path = require('path');
-var join = path.join;
-
 var gulp = require('gulp');
 
 var notify = require('gulp-notify');
@@ -31,7 +28,7 @@ var scssVars = require('./lib/js/scss-vars');
 
 var pkg = require('./package.json');
 
-var tmpPath = '.tmp';
+var generatedPath = 'generated';
 
 // Browserify needs a leading './'
 var indexPath = './lib/js/client.js';
@@ -48,9 +45,8 @@ var src = {
     'test/**/*.js',
     indexPath
   ],
-  styles: ['style.scss', join(tmpPath, 'scss/*.scss')],
-  svg: 'images/*.svg',
-  includes: ['node_modules', 'lib/scss', join(tmpPath, 'scss')]
+  styles: ['style.scss'],
+  svg: 'images/*.svg'
 };
 var outputPath = 'output';
 
@@ -88,13 +84,17 @@ var serve = function (done) {
   }, done);
 };
 
-gulp.task('clean', function (done) {
-  del([outputPath, tmpPath], done);
+gulp.task('cleanOutput', function (done) {
+  del([outputPath], done);
+});
+
+gulp.task('cleanGenerated', function (done) {
+  del([generatedPath], done);
 });
 
 gulp.task('checkJs', checkJs.bind(null, undefined));
 
-gulp.task('js', ['clean', 'checkJs'], function () {
+gulp.task('js', ['cleanOutput', 'checkJs'], function () {
   return browserify(indexPath)
     .transform({global: true}, 'uglifyify')
     .bundle()
@@ -104,17 +104,16 @@ gulp.task('js', ['clean', 'checkJs'], function () {
     .pipe(gulp.dest(outputPath));
 });
 
-gulp.task('vars', ['clean'], function () {
+gulp.task('vars', ['cleanGenerated'], function () {
   return file('_variables.scss', scssVars(vars), {src: true})
-    .pipe(gulp.dest(join(tmpPath, 'scss')));
+    .pipe(gulp.dest(generatedPath));
 });
 
-gulp.task('css',  ['vars', 'images'], function () {
+gulp.task('scss', ['vars', 'images']);
+
+gulp.task('css', ['cleanOutput'], function () {
   return gulp.src(src.styles)
-    .pipe(sass({
-      outputStyle: 'nested',
-      includePaths: src.includes
-    }))
+    .pipe(sass({outputStyle: 'nested'}))
     .pipe(autoprefixer(['last 2 versions', 'Android 4', 'IE 8']))
     .pipe(csso())
     .pipe(gulp.dest(outputPath));
@@ -124,20 +123,20 @@ function images(done) {
   svgcss({
 
     source: src.svg,
-    destination: tmpPath + '/scss/_images.scss',
-    fallback: outputPath + '/png.css',
+    destination: generatedPath + '/_images.scss',
+    fallback: generatedPath + '/png.css',
     process: imageToCss.bind(undefined, vars)
   }, done);
 }
 
-gulp.task('images', ['clean'], images);
+gulp.task('images', ['cleanGenerated'], images);
 
-gulp.task('html', ['clean'], function () {
+gulp.task('html', ['cleanOutput'], function () {
   return file('index.html', doc(), {src: true})
     .pipe(gulp.dest(outputPath));
 });
 
-gulp.task('watchify', ['clean'], function () {
+gulp.task('watchify', ['cleanOutput'], function () {
   var bundler = watchify(browserify(indexPath, watchify.args));
 
   var bundle = function (paths) {
@@ -164,7 +163,6 @@ gulp.task('watch', ['watchify'], function () {
     return gulp.src(src.styles)
       .pipe(sass({
         outputStyle: 'nested',
-        includePaths: src.includes,
         onError: errorNotifier
       }))
       .on('error', errorNotifier)

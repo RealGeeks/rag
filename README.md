@@ -2,16 +2,24 @@
 
 Real Geeks UI Kit.
 
-Every folder except _lib_ is a UI component.
+Every folder except _lib_ and _generated_ is a UI component.
 
 ## Available commands
 
+### `npm run scss`
+
+Create _generated/_variables.scss_ from _lib/js/variables.js_ and inline _svg_ files into _generated/_images.scss_ while also creating _generated/png.css_ as fallback for IE8.
+
 ### `npm run css`
 
-Generate the UI stylesheet by compiling _style.scss_ using the variables defined at _lib/js/variables.js_ and inlining _svg_ files found under _images/_.
+Generate the UI stylesheet by compiling _style.scss_.
 
 ## Components
 
 ### Surface
 
 A _surface_ is an element that has interactions enabled (touch/mouse).
+
+## Development
+
+Make sure to execute `npm run scss` whenever changes are made to _lib/js/variables.js_ or any of the _svg_ files, and commit the generated files.
