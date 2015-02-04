@@ -89,7 +89,7 @@ var mapComponent = {
     var component = this;
     var props = component.props;
 
-    require('./load-gmaps')().then(function (mapsApi) {
+    require('load-gmaps')().then(function (mapsApi) {
       var map = component.map = new mapsApi.Map(
         component.getDOMNode(),
         component.createMapOptions(props, mapsApi)

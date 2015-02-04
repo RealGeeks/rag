@@ -28,10 +28,5 @@
     }
   };
 
-  if (!window.mapScriptLoadCount) {
-    window.mapScriptLoadCount = 0;
-  }
-
-  window.mapScriptLoadCount++;
   window.mapLoaded();
 })();

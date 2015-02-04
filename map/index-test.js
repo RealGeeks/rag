@@ -9,7 +9,7 @@ var react = require('react/addons');
 var map = react.createFactory(require('./'));
 var TestUtils = react.addons.TestUtils;
 
-var loadGMaps = require('./load-gmaps');
+var loadGMaps = require('load-gmaps');
 
 // Use our stubbed Google Maps script.
 loadGMaps.url = 'test/fixtures/google-maps.js';
