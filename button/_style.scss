@@ -9,8 +9,10 @@ $button-icon-size: 24px !default;
 
 .hitarea {
   cursor: pointer;
-  user-select: none;
-
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   &.disabled {
     cursor: default;
     pointer-events: none;
