@@ -76,6 +76,13 @@ var mapComponent = {
     props.onChange(state);
   },
 
+  onZoom: function () {
+    var component = this;
+    if (component.map.getZoom() != component.state.zoom) {
+      component.updateBounds();
+    }
+  },
+
   render: function () {
     var props = this.props;
 
@@ -95,13 +102,12 @@ var mapComponent = {
         component.createMapOptions(props, mapsApi)
       );
       var newState = {};
-      var debouncedUpdateBounds = _.debounce(component.updateBounds, 500);
 
       component.api = mapsApi;
 
       component.addListener('dragend', component.updateBounds);
-      component.addListener('resize', debouncedUpdateBounds);
-      component.addListener('zoom_changed', debouncedUpdateBounds);
+      component.addListener('resize', _.debounce(component.updateBounds, 500));
+      component.addListener('zoom_changed', _.debounce(component.onZoom, 500));
 
       if (props.center) {
         newState.center = props.center;

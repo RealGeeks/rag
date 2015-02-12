@@ -15,7 +15,7 @@ var loadGMaps = require('load-gmaps');
 loadGMaps.url = 'test/fixtures/google-maps.js';
 
 test('Map', function (assert) {
-  assert.plan(7);
+  assert.plan(11);
 
   var component = TestUtils.renderIntoDocument(map({
     ready: function (map, api) {
@@ -83,6 +83,34 @@ test('Map', function (assert) {
           position: 3
         }
       }, 'options');
+
+      component.setProps({
+        zoom: 4
+      }, function () {
+        assert.equal(component.state.zoom, 4, 'should set zoom state');
+
+        component.map.getZoom = sinon.spy(_.constant(4));
+        component.updateBounds = sinon.spy();
+        component.onZoom();
+
+        assert.ok(
+          component.map.getZoom.called,
+          'getZoom should be called when map zoom changes'
+        );
+        assert.ok(
+          !component.updateBounds.called,
+          'updateBounds should not be triggered when zoom change comes from app'
+        );
+
+        component.map.getZoom = sinon.spy(_.constant(5));
+        component.onZoom();
+
+        assert.ok(
+          component.updateBounds.called,
+          'updateBounds should be called when user changes zoom'
+        );
+      });
+
     }
   }));
 
