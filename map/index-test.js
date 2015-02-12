@@ -15,7 +15,7 @@ var loadGMaps = require('load-gmaps');
 loadGMaps.url = 'test/fixtures/google-maps.js';
 
 test('Map', function (assert) {
-  assert.plan(11);
+  assert.plan(12);
 
   var component = TestUtils.renderIntoDocument(map({
     ready: function (map, api) {
@@ -87,6 +87,14 @@ test('Map', function (assert) {
       component.setProps({
         zoom: 4
       }, function () {
+        assert.deepEqual(
+          component.state.center,
+          {
+            lat: 0,
+            lng: 0
+          },
+          'unchanged prop should not change state'
+        );
         assert.equal(component.state.zoom, 4, 'should set zoom state');
 
         component.map.getZoom = sinon.spy(_.constant(4));

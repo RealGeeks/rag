@@ -131,20 +131,21 @@ var mapComponent = {
       return;
     }
 
+    var newState = {};
+
     var center = props.center;
     if (center && !_.isEqual(center, state.center)) {
       map.panTo(center);
+      newState.center = center;
     }
 
     var zoom = props.zoom;
     if (zoom && zoom != state.zoom) {
       map.setZoom(zoom);
+      newState.zoom = zoom;
     }
 
-    component.setState({
-      center: center,
-      zoom: zoom
-    });
+    component.setState(newState);
   },
 
   // As the map DOM is handled by the Google Maps lib, React never needs
