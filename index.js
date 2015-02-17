@@ -1,6 +1,7 @@
 'use strict';
 
 exports.button = require('./button');
+exports.buttonGroup = require('./button-group');
 exports.modal = require('./modal');
 exports.tel = require('./tel');
 exports.map = require('./map');
