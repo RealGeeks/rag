@@ -43,7 +43,10 @@ var buttonSpec = {
 
     classes.push(props.className, state);
 
-    return dom[props.href ? 'a' : 'span']({
+    return dom.a({
+      /* jshint -W107 */
+      href: props.href || 'javascript:;',
+      /* jshint +W107 */
       className: joinClasses.apply(undefined, classes)
     },
       children
