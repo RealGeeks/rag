@@ -47,7 +47,12 @@ var buttonSpec = {
       /* jshint -W107 */
       href: props.href || 'javascript:;',
       /* jshint +W107 */
-      className: joinClasses.apply(undefined, classes)
+      className: joinClasses.apply(undefined, classes),
+      onKeyUp: props.onTap && function (event) {
+        if (event.which == 13) {
+          props.onTap();
+        }
+      }
     },
       children
     );
