@@ -37,6 +37,7 @@ $button-icon-size: 24px !default;
   border: $button-border-width solid $button-border-color;
   border-radius: $button-border-radius;
   vertical-align: middle;
+  outline-offset: -4px;
 
   // span {
   //   @extend %align-middle; /* 1 */
