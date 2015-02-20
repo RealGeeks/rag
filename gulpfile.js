@@ -158,7 +158,7 @@ gulp.task('watchify', ['cleanOutput'], function () {
   return bundle();
 });
 
-gulp.task('watch', ['watchify'], function () {
+gulp.task('watch', ['watchify', 'html'], function () {
   var stylesTask = function () {
     return gulp.src(src.styles)
       .pipe(sass({
@@ -183,8 +183,7 @@ gulp.task('watch', ['watchify'], function () {
   gulp.watch(src.styles).on('change', stylesTask);
   gulp.watch(src.svg).on('change', imagesTask);
 
-  // TODO: iconsTask needs to initially run before stylesTask.
-  return merge(checkJs(), stylesTask(), imagesTask());
+  return merge(checkJs(), stylesTask());
 });
 
 gulp.task('serve', serve);
