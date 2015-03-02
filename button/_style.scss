@@ -1,11 +1,11 @@
-$button-size: 34px;
-$button-size-large: 44px;
-$button-border-width: 1px !default;
-$button-border-color: $gray-lighter !default;
-$button-border-radius: $border-radius !default;
-$button-padding: $padding-content !default;
-$button-active-color: $color-primary !default;
-$button-icon-size: 24px !default;
+$rag-button-size: 34px;
+$rag-button-size-large: 44px;
+$rag-button-border-width: 1px !default;
+$rag-button-border-color: $gray-lighter !default;
+$rag-button-border-radius: $border-radius !default;
+$rag-button-padding: $padding-content !default;
+$rag-button-active-color: $color-primary !default;
+$rag-button-icon-size: 24px !default;
 
 .hitarea {
   cursor: pointer;
@@ -28,14 +28,14 @@ $button-icon-size: 24px !default;
 
   position: relative;
   display: inline-block;
-  height: $button-size;
-  min-width: $button-size;
-  padding: 0 $button-padding;
-  line-height: ($button-size - 2 * $button-border-width);
+  height: $rag-button-size;
+  min-width: $rag-button-size;
+  padding: 0 $rag-button-padding;
+  line-height: ($rag-button-size - 2 * $rag-button-border-width);
   font-weight: 500;
   text-align: center;
-  border: $button-border-width solid $button-border-color;
-  border-radius: $button-border-radius;
+  border: $rag-button-border-width solid $rag-button-border-color;
+  border-radius: $rag-button-border-radius;
   vertical-align: middle;
 
   // span {
@@ -49,7 +49,7 @@ $button-icon-size: 24px !default;
 
   &.active, &:active {
     z-index: 1;
-    background-color: $button-active-color;
+    background-color: $rag-button-active-color;
     border-color: transparent;
     color: $text-color-inverted;
   }
@@ -75,8 +75,8 @@ $button-icon-size: 24px !default;
 }
 
 .rag-button-large {
-  height: $button-size-large;
-  line-height: ($button-size-large - 2 * $button-border-width);
+  height: $rag-button-size-large;
+  line-height: ($rag-button-size-large - 2 * $rag-button-border-width);
 }
 
 .rag-button-basic {
@@ -136,7 +136,7 @@ $button-icon-size: 24px !default;
   }
 
   &.active, &:active {
-    background-color: $button-active-color;
+    background-color: $rag-button-active-color;
     border-color: rgba($black, .2);
     color: $text-color-inverted;
   }
