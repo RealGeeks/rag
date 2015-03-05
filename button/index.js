@@ -1,66 +1,62 @@
 'use strict';
 
+var defaults = require('lodash/object/defaults');
 var react = require('react/addons');
-var joinClasses = require('react/lib/joinClasses');
+var styles = require('./styles')();
 var dom = react.DOM;
 
-var HITAREA = 'hitarea';
-var namespace = 'rag-button';
+var prototype = Button.prototype;
 
-var buttonSpec = {
-  mixins: [require('react-touch-mixin'), react.addons.PureRenderMixin],
+function Button(props, context) {
+  this.props = props;
+  this.context = context;
+  this.state = {};
+}
 
-  render: function () {
-    var props = this.props;
-    var state = props.disabled && 'disabled' || props.active && 'active';
-    var type = props.type;
-    var classes = type == HITAREA ? [HITAREA] : [namespace];
-    var icon = props.icon;
-    var iconPosition = props.iconPosition || 'left';
-    var children = props.children;
+Button.defaultProps = {
+  type: 'base'
+};
 
-    if (type) {
-      if (Array.isArray(type)) {
-        type.forEach(function (kind) {
-          classes.push(namespace + '-' + kind);
-        });
-      } else if (type != HITAREA) {
-        classes.push(namespace + '-' + type);
-      }
-    }
+prototype.render = function () {
+  var component = this;
+  var props = component.props;
+  var state = component.state;
+  var href = props.href;
+  var disabled = state.disabled;
+  var buttonProps = component.getHandlers();
+  var tag;
 
-    if (icon) {
-      classes.push('icon', 'icon-' + icon);
+  buttonProps.style = styles[props.type][
+    disabled && 'disabled' ||
+      state.active && 'active' ||
+      state.hover && 'hover' ||
+      state.keyboardFocus && 'focus' ||
+      'normal'
+  ];
 
-      if (state) {
-        classes.push('icon-' + icon + '-' + state);
-      }
-
-      if (children) {
-        classes.push('icon-' + iconPosition);
-      }
-    }
-
-    classes.push(props.className, state);
-
-    return dom.a({
-      /* jshint -W107 */
-      href: props.href || 'javascript:;',
-      /* jshint +W107 */
-      className: joinClasses.apply(undefined, classes),
-      onKeyUp: props.onTap && function (event) {
-        if (event.which == 13) {
-          props.onTap();
-        }
-      }
-    },
-      children
-    );
+  if (href) {
+    tag = 'a';
+    buttonProps.href = href;
+  } else {
+    tag = 'button';
+    buttonProps.disabled = disabled;
   }
+
+  return dom[tag](buttonProps, props.label || props.children);
 };
 
 if (process.env.NODE_ENV != 'production') {
-  buttonSpec.displayName = 'Button';
+  Button.displayName = 'Button';
+
+  Button.propTypes = {
+    label: react.PropTypes.string,
+    type: react.PropTypes.string,
+    href: react.PropTypes.string,
+    active: react.PropTypes.bool,
+    disabled: react.PropTypes.bool
+  };
 }
 
-module.exports = react.createClass(buttonSpec);
+defaults(prototype, require('../hitarea').prototype);
+
+module.exports = Button;

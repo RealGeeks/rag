@@ -15,26 +15,10 @@ html {
   font-size: $font-size-base;
   line-height: $line-height;
   color: $text-color;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
 }
 
 body {
   height: 100%;
-  margin: 0;
-}
-
-button::-moz-focus-inner,
-input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-
-/**
- * Remove the gray background color from active links in IE 10.
- */
-a {
-  background-color: transparent;
 }
 
 p {

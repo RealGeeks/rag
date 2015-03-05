@@ -2,6 +2,10 @@
 
 Real Geeks UI Kit.
 
+## Usage
+
+It is recommended that you include [Normalize.css](http://necolas.github.io/normalize.css/) and ideally from a [CDN](https://cdnjs.com/libraries/normalize).
+
 Every folder except _lib_ and _generated_ is a UI component.
 
 ## Available commands

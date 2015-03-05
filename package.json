@@ -8,9 +8,8 @@
   },
   "scripts": {
     "test": "testem ci",
-    "prepublish": "gulp scss",
-    "build": "gulp build",
-    "css": "gulp css"
+    "watch": "gulp",
+    "build": "gulp build"
   },
   "author": "Sorin Iclanzan <sorin@iclanzan.com> (http://iclanzan.com/)",
   "bugs": {
@@ -48,10 +47,10 @@
     "es6-promise": "^2.0.1",
     "inner": "^0.2.0",
     "load-gmaps": "^0.1.0",
-    "lodash": "^2.4.1",
+    "lodash": "^3.3.1",
     "prevent-overscroll": "^0.1.0",
     "query-string": "^1.0.0",
-    "react": "^0.12.2",
+    "react": "^0.13.0-rc1",
     "react-touch-mixin": "^0.1.1",
     "scriptload": "^0.1.0",
     "supports": "^0.1.1"
