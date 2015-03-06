@@ -81,10 +81,10 @@ function Hitarea(props, context) {
   this.props = props;
   this.context = context;
   this.state = {
-    disabled: false,
-    focus: false,
-    hover: false,
-    active: false
+    disabled: props.disabled,
+    focus: props.focus,
+    hover: props.hover,
+    active: props.active
   };
 }
 
