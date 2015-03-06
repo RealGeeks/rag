@@ -54,8 +54,9 @@ var onMouseUp = function () {
 var onKeyDown = function (event) {
   if (!this.state.disabled) {
     // this.setState(keyboardFocusState);
+    var keyCode = event.which;
 
-    if (event.which == 13) {
+    if (keyCode == 13 || keyCode == 32) {
       this.setState(activeState);
     }
   }
@@ -64,9 +65,10 @@ var onKeyDown = function (event) {
 var onKeyUp = function (event) {
   var component = this;
   var action = component.props.action;
+  var keyCode = event.which;
 
   // Enter key
-  if (!component.state.disabled && event.which == 13) {
+  if (!component.state.disabled && (keyCode == 13 || keyCode == 32)) {
     component.setState(inactiveState);
 
     if (action) {
