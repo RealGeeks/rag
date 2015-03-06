@@ -64,16 +64,11 @@ var onKeyDown = function (event) {
 
 var onKeyUp = function (event) {
   var component = this;
-  var action = component.props.action;
   var keyCode = event.which;
 
   // Enter key
   if (!component.state.disabled && (keyCode == 13 || keyCode == 32)) {
     component.setState(inactiveState);
-
-    if (action) {
-      action();
-    }
   }
 };
 
@@ -123,7 +118,8 @@ prototype.getHandlers = function () {
     onMouseDown: onMouseDown.bind(component),
     onMouseUp: onMouseUp.bind(component),
     onKeyDown: onKeyDown.bind(component),
-    onKeyUp: onKeyUp.bind(component)
+    onKeyUp: onKeyUp.bind(component),
+    onClick: component.props.action
   };
 
   return handlers;
