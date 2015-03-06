@@ -2,15 +2,14 @@
 
 var defaults = require('lodash/object/defaults');
 var react = require('react/addons');
+var Hitarea = require('../hitarea');
 var styles = require('./styles')();
 var dom = react.DOM;
 
 var prototype = Button.prototype;
 
 function Button(props, context) {
-  this.props = props;
-  this.context = context;
-  this.state = {};
+  Hitarea.call(this, props, context);
 }
 
 Button.defaultProps = {
@@ -57,6 +56,6 @@ if (process.env.NODE_ENV != 'production') {
   };
 }
 
-defaults(prototype, require('../hitarea').prototype);
+defaults(prototype, Hitarea.prototype);
 
 module.exports = Button;
