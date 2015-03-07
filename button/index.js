@@ -17,7 +17,7 @@ prototype.render = function () {
   var props = component.props;
   var state = component.state;
   var href = props.href;
-  var disabled = state.disabled;
+  var disabled = props.disabled;
   var buttonProps = component.getHandlers();
   var tag;
 
@@ -28,12 +28,15 @@ prototype.render = function () {
   }
 
   var buttonState = disabled && 'disabled' ||
-    state.active && 'active' ||
-    state.hover && 'hover' ||
-    state.keyboardFocus && 'focus';
+    (props.active || state.active) && 'active' ||
+    state.hover && 'hover';
 
   if (buttonState) {
     args.push(buttonState);
+  }
+
+  if (state.keyboardFocus) {
+    args.push('focus');
   }
 
   buttonProps.style = styles(args);
