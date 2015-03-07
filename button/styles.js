@@ -72,7 +72,7 @@ module.exports = function () {
 
     current.color = current.backgroundColor;
     current.backgroundColor = temp;
-    current.borderColor = 'transparent';
+    current.borderColor = temp == '#ffffff' ? current.color : 'transparent';
     current.zIndex = 1;
   });
 
