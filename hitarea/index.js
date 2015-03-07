@@ -78,10 +78,10 @@ function Hitarea(props, context) {
   this.props = props;
   this.context = context;
   this.state = {
-    disabled: props.disabled,
-    focus: props.focus,
-    hover: props.hover,
-    active: props.active
+    focus: false,
+    keyboardFocus: false,
+    hover: false,
+    active: false
   };
 }
 
@@ -91,7 +91,7 @@ prototype.render = function () {
   var component = this;
   var props = component.props;
   var state = component.state;
-  var disabled = state.disabled;
+  var disabled = props.disabled;
   var hitareaProps = component.getHandlers();
 
   hitareaProps.style = styles[
@@ -125,19 +125,6 @@ prototype.getHandlers = function () {
   return handlers;
 };
 
-prototype.componentDidMount = function () {
-};
-
-prototype.componentWillReceiveProps = function (nextProps) {
-
-  this.setState({
-    disabled: nextProps.disabled || this.state.disabled,
-    active: nextProps.active || this.state.active,
-    hover: nextProps.hover || this.state.hover,
-    focus: nextProps.focus || this.state.focus
-  });
-};
-
 prototype.focus = function () {
   findDOMNode(this).focus();
 };
@@ -147,9 +134,7 @@ if (process.env.NODE_ENV != 'production') {
 
   Hitarea.propTypes = {
     tag: react.PropTypes.string,
-    action: react.PropTypes.func,
-    disabled: react.PropTypes.bool,
-    active: react.PropTypes.bool
+    action: react.PropTypes.func
   };
 }
 
