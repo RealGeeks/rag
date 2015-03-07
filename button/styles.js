@@ -56,7 +56,15 @@ module.exports = function () {
   });
 
   styles.add('disabled', function (current) {
-    assign(current, hitarea.disabled, {color: '#888'});
+    var backgroundColor = shade(current.backgroundColor, 0.8);
+    assign(
+      current,
+      hitarea.disabled,
+      {
+        color: shade(backgroundColor, -0.4),
+        backgroundColor: backgroundColor
+      }
+    );
   });
 
   styles.add('active', function (current) {
