@@ -59,6 +59,7 @@ if (process.env.NODE_ENV != 'production') {
       react.PropTypes.array
     ]),
     href: react.PropTypes.string,
+    action: react.PropTypes.func,
     active: react.PropTypes.bool,
     disabled: react.PropTypes.bool
   };
