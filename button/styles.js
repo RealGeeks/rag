@@ -1,104 +1,105 @@
 'use strict';
 
-var defaults = require('lodash/object/defaults');
-var theme = require('../theme');
+var combi = require('../lib/combi');
+var assign = require('lodash/object/assign');
+var themeStyles = require('../theme');
+var shade = require('../lib/shade');
 var hitareaStyles = require('../hitarea/styles');
 var abstractions = require('../lib/abstractions');
 
-var size = 34;
-var borderWidth = 1;
-
 module.exports = function () {
-  var config = theme();
+  var theme = themeStyles();
+  var colors = theme.colors;
   var hitarea = hitareaStyles();
-  var backgroundColor = config.colors.background;
-  var accentColor = config.colors.accent;
+  var styles = combi({
+    size: 34,
+    maxWidth: 320 - 2 * theme.padding,
+    fontSize: theme.fontSize,
+    padding: theme.padding,
+    foregroundColor: colors.foreground,
+    backgroundColor: colors.background,
+    borderWidth: 1,
+    borderRadius: theme.borderRadius
+  });
 
-  var baseNormal = defaults(
-    {
-      position: 'relative',
-      display: 'inline-block',
-      boxSizing: 'border-box',
-      height: size,
-      minWidth: size,
-      padding: '0 ' + config.padding + 'px',
-      lineHeight: (size - 2 * borderWidth) / config.fontSize,
-      fontWeight: 500,
-      color: config.colors.foreground,
-      textAlign: 'center',
-      textDecoration: 'none',
-      backgroundColor: backgroundColor,
-      borderWidth: borderWidth,
-      borderStyle: 'solid',
-      borderColor: '#eee',
-      borderRadius: config.borderRadius,
-      verticalAlign: 'middle'
-    },
-    hitarea.normal,
-    undefined && abstractions.truncate
-  );
+  styles.add('base', function (current, config) {
+    assign(
+      current,
+      hitarea.normal,
+      abstractions.truncate,
+      {
+        position: 'relative',
+        display: 'inline-block',
+        boxSizing: 'border-box',
+        height: config.size,
+        minWidth: config.size,
+        padding: '0 ' + config.padding + 'px',
+        lineHeight: (config.size - 2 * config.borderWidth) / config.fontSize,
+        fontWeight: 500,
+        color: config.foregroundColor,
+        textAlign: 'center',
+        textDecoration: 'none',
+        backgroundColor: config.backgroundColor,
+        borderWidth: config.borderWidth,
+        borderStyle: 'solid',
+        borderColor: '#eee',
+        borderRadius: config.borderRadius,
+        verticalAlign: 'middle'
+      }
+    );
+  });
 
-  var baseDisabled = defaults(
-    {color: '#888'},
-    hitarea.disabled,
-    baseNormal
-  );
+  ['accent', 'success', 'warning', 'danger'].forEach(function (variation) {
+    styles.add(variation, function (current) {
+      current.color = colors[variation];
+    });
+  });
 
-  var baseActive = defaults(
-    {
-      zIndex: 1,
-      backgroundColor: accentColor,
-      borderColor: 'transparent',
-      color: backgroundColor
-    },
-    baseNormal
-  );
+  styles.add('disabled', function (current) {
+    assign(current, hitarea.disabled, {color: '#888'});
+  });
 
-  var overlay = {
-    backgroundClip: 'padding-box',
-    borderColor: 'rgba(0,0,0,.2)'
-  };
+  styles.add('active', function (current) {
+    var temp = current.color;
 
-  var block = {
-    display: 'block',
-    marginRight: 'auto',
-    marginLeft: 'auto',
-    maxWidth: 320 - 2 * config.padding
-  };
+    current.color = current.backgroundColor;
+    current.backgroundColor = temp;
+    current.borderColor = 'transparent';
+    current.zIndex = 1;
+  });
 
-  var prominent = {
-    backgroundColor: accentColor,
-    borderColor: 'transparent',
-    color: backgroundColor
-  };
+  styles.add('focus', function (current) {
+    assign(current, hitarea.focus);
+  });
 
-  return {
-    base: {
-      normal: baseNormal,
-      disabled: baseDisabled,
-      active: baseActive,
-      focus: defaults({}, hitarea.focus, baseNormal),
-      hover: defaults({backgroundColor: '#fafafa'}, baseNormal)
-    },
+  styles.add('hover', function (current) {
+    current.backgroundColor = shade(
+      current.backgroundColor, -0.02
+    );
+  });
 
-    overlay: {
-      enabled: defaults({}, overlay, baseNormal),
-      disabled: defaults({}, overlay, baseDisabled),
-      active: defaults({}, overlay, baseActive)
-    },
+  styles.add('overlay', function (current) {
+    current.backgroundClip = 'padding-box';
+    current.borderColor = 'rgba(0,0,0,.2)';
+  });
 
-    block: {
-      enabled: defaults({}, block, baseNormal),
-      disabled: defaults({}, block, baseDisabled),
-      active: defaults({}, block, baseActive)
-    },
+  styles.add('prominent', function (current) {
+    var temp = current.color;
 
-    prominent: {
-      enabled: defaults({}, prominent, baseNormal),
-      disabled: defaults({}, prominent, baseDisabled),
-      active: defaults({}, prominent, baseActive)
-    }
-  };
+    current.color = current.backgroundColor;
+    current.backgroundColor = temp;
+    current.borderColor = 'transparent';
+  });
+
+  styles.add('block', function (current, config) {
+    current.display = 'block';
+    current.marginRight = 'auto';
+    current.marginLeft = 'auto';
+    current.width = '100%';
+    current.maxWidth = config.maxWidth;
+  });
+
+  return styles.get;
 };
 
 // .rag-button-large {

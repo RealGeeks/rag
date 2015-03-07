@@ -2,12 +2,12 @@
 
 module.exports = require('./lib/configurable')({
   colors: {
-    accent: '#09c',
-    success: '#690',
-    warning: '#f80',
-    danger: '#f44',
-    background: '#fff',
-    foreground: '#333'
+    accent: '#0099cc',
+    success: '#669900',
+    warning: '#ff8800',
+    danger: '#ff4444',
+    background: '#ffffff',
+    foreground: '#333333'
   },
   padding: 10,
   borderRadius: 2,
