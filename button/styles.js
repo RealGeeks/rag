@@ -111,6 +111,30 @@ module.exports = function () {
     current.maxWidth = config.maxWidth;
   });
 
+  styles.add('left', function (current) {
+    current.borderTopRightRadius =
+    current.borderBottomRightRadius =
+      0;
+  });
+
+  styles.add('right', function (current) {
+    current.borderTopLeftRadius =
+    current.borderBottomLeftRadius =
+      0;
+    current.marginLeft = -current.borderWidth;
+  });
+
+  styles.add('center', function (current) {
+    current.borderRadius = 0;
+    current.marginLeft = -current.borderWidth;
+  });
+
+  styles.add('flex', function (current) {
+    current.WebkitFlex =
+    current.flex =
+      1;
+  });
+
   return styles.get;
 };
 
