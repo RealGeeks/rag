@@ -99,6 +99,10 @@ module.exports = function () {
     current.borderColor = 'transparent';
   });
 
+  styles.add('basic', function (current) {
+    current.borderColor = 'transparent';
+  });
+
   styles.add('block', function (current, config) {
     current.display = 'block';
     current.marginRight = 'auto';
