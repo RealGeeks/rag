@@ -27,3 +27,7 @@ A _surface_ is an element that has interactions enabled (touch/mouse).
 ## Development
 
 Make sure to execute `npm run scss` whenever changes are made to _lib/js/variables.js_ or any of the _svg_ files, and commit the generated files.
+
+## Known Issues
+
+Because css vendor prefixing is done on the client, the rendered markup is different than the one returned by the server, making them incompatible.
