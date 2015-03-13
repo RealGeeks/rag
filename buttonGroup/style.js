@@ -1,6 +1,7 @@
 'use strict';
 
 var defaults = require('lodash/object/defaults');
+var prefixValue = require('../lib/prefix').value;
 
 module.exports = function () {
   var basic = {
@@ -11,7 +12,7 @@ module.exports = function () {
   return {
     basic: basic,
     flex: defaults({
-      display: 'flex'
+      display: prefixValue('display', 'flex')
     }, basic)
   };
 };

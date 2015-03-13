@@ -1,14 +1,14 @@
 'use strict';
 
 var defaults = require('lodash/object/defaults');
+var prefixProp = require('../lib/prefix').prop;
 
 var normal = {
   cursor: 'pointer',
-  WebkitUserSelect: 'none',
-  MozUserSelect: 'none',
-  msUserSelect: 'none',
   outline: 0
 };
+
+normal[prefixProp('userSelect')] = 'none';
 
 module.exports = require('react/lib/emptyFunction').thatReturns({
   normal: normal,

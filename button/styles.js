@@ -4,6 +4,7 @@ var combi = require('../lib/combi');
 var assign = require('lodash/object/assign');
 var themeStyles = require('../theme');
 var shade = require('../lib/shade');
+var prefixProp = require('../lib/prefix').prop;
 var hitareaStyles = require('../hitarea/styles');
 var abstractions = require('../lib/abstractions');
 
@@ -130,9 +131,7 @@ module.exports = function () {
   });
 
   styles.add('flex', function (current) {
-    current.WebkitFlex =
-    current.flex =
-      1;
+    current[prefixProp('flex')] = 1;
   });
 
   return styles.get;
