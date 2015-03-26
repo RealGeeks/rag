@@ -13,7 +13,7 @@ module.exports = require('./lib/configurable')({
   borderRadius: 2,
   fontSize: 16,
   fontFamily: '"Helvetica Neue", Helvetica, Ubuntu, "Segoe UI", Arial, sans-serif',
-  lineHeight: 1.4,
+  lineHeight: 1.375,
   screen: {
     small: 568,
     medium: 1024,
