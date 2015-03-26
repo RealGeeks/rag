@@ -14,22 +14,20 @@ function Input(props, context) {
 
 prototype.render = function () {
   var component = this;
-  var props = component.props;
-  var state = component.state;
-  var inputProps = defaults(component.getHandlers(), props);
+  var props = defaults(component.getHandlers(), component.props);
 
   var args = [props.type || 'text'];
 
-  var inputState = props.disabled && 'disabled' ||
-    state.focus && 'focus';
+  var state = props.disabled && 'disabled' ||
+    component.state.focus && 'focus';
 
-  if (inputState) {
-    args.push(inputState);
+  if (state) {
+    args.push(state);
   }
 
-  inputProps.style = styles(args);
+  props.style = styles(args);
 
-  return dom[props.type == 'textarea' ? 'textarea' : 'input'](inputProps);
+  return dom[props.type == 'textarea' ? 'textarea' : 'input'](props);
 };
 
 if (process.env.NODE_ENV != 'production') {
