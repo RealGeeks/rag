@@ -15,6 +15,7 @@ module.exports = function () {
     size: 34,
     maxWidth: 320 - 2 * theme.padding,
     fontSize: theme.fontSize,
+    lineHeight: theme.lineHeight * theme.fontSize,
     padding: theme.padding,
     foregroundColor: colors.foreground,
     backgroundColor: colors.background,
@@ -27,11 +28,11 @@ module.exports = function () {
     current.display = 'inline-block';
     current.boxSizing = 'border-box';
     current.width = '100%';
-    current.height = config.size;
     current.minWidth = config.size;
-    current.padding = '0 ' + config.padding + 'px';
-    current.lineHeight =
-      (config.size - 2 * config.borderWidth) / config.fontSize;
+    current.padding =
+      ((config.size - config.lineHeight) / 2 - config.borderWidth) + 'px ' +
+      config.padding + 'px';
+    current.lineHeight = config.lineHeight + 'px';
     current.color = config.foregroundColor;
     current.backgroundColor = config.backgroundColor;
     current.borderWidth = config.borderWidth;
@@ -46,6 +47,13 @@ module.exports = function () {
   ['text', 'password', 'email', 'tel', 'url'].forEach(function (type) {
       styles.add(type, textInput);
     });
+
+  styles.add('textarea', function (current, config) {
+    textInput(current, config);
+
+    current.height = config.lineHeight * 3 + (config.size - config.lineHeight);
+    current.resize = 'none';
+  });
 
   ['accent', 'success', 'warning', 'danger'].forEach(function (variation) {
     styles.add(variation, function (current) {
