@@ -74,10 +74,6 @@ module.exports = function () {
     );
   });
 
-  styles.add('focus', function (current) {
-    current.cursor = 'text';
-  });
-
   styles.add('left', function (current) {
     current.borderTopRightRadius =
     current.borderBottomRightRadius =
