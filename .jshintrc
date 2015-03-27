@@ -2,6 +2,7 @@
   "browser": true,
   "node": true,
   "curly": true,
+  "funcscope": true,
   "immed": true,
   "indent": 2,
   "latedef": false,
