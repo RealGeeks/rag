@@ -12,7 +12,7 @@ module.exports = function () {
   var colors = theme.colors;
   var hitarea = hitareaStyles();
   var styles = combi({
-    size: 34,
+    size: theme.controlSize,
     maxWidth: 320 - 2 * theme.padding,
     fontSize: theme.fontSize,
     lineHeight: theme.lineHeight * theme.fontSize,
