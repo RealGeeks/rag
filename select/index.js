@@ -11,12 +11,25 @@ var mapOption = function (option, index) {
   if (typeof option == 'object') {
     var value = option.value;
     var label = option.label || value;
+    var disabled = option.disabled;
+
+    if (option.options) {
+      return dom.optgroup(
+        {
+          label: label,
+          disabled: disabled,
+          key: index
+        },
+        option.options.map(mapOption)
+      );
+    }
   } else {
     value = label = option;
   }
 
   return dom.option({
     value: value,
+    disabled: disabled,
     key: index
   }, label);
 };
@@ -61,6 +74,17 @@ if (process.env.NODE_ENV != 'production') {
       types.shape({
         value: types.oneOfType([types.string, types.number]).isRequired,
         label: types.oneOfType([types.string, types.number])
+      }),
+      types.shape({
+        label: types.oneOfType([types.string, types.number]).isRequired,
+        options: types.arrayOf(types.oneOfType([
+          types.string,
+          types.number,
+          types.shape({
+            value: types.oneOfType([types.string, types.number]).isRequired,
+            label: types.oneOfType([types.string, types.number])
+          })
+        ]))
       })
     ]))
   };
