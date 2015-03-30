@@ -8,7 +8,7 @@ module.exports = function () {
   var disabled = inputStyles(['text', 'disabled']);
 
   normal.cursor = disabled.cursor = 'pointer';
-  normal.width = disabled.width = '';
+  normal.width = disabled.width = '100%';
   normal.paddingRight = disabled.paddingRight =
     2 * theme.padding + theme.iconSize;
 
@@ -19,6 +19,11 @@ module.exports = function () {
     wrapper: {
       position: 'relative',
       display: 'inline-block'
+    },
+    block: {
+      position: 'relative',
+      display: 'block',
+      width: '100%'
     },
     icon: {
       position: 'absolute',

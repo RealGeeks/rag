@@ -52,7 +52,7 @@ prototype.render = function () {
   ];
 
   return dom.div(
-    {style: styles.wrapper},
+    {style: styles[props.block ? 'block' : 'wrapper']},
     dom.select(props, options),
     icon({
       color: props.style.color,
