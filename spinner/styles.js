@@ -1,28 +1,30 @@
 'use strict';
 
-var theme = require('../theme')();
-
 var trackSize = 4;
 var elementSize = trackSize - 2;
 var elementOffset = (trackSize - elementSize) / 2;
 
 module.exports = function () {
-  var size = theme.controlSize;
-
   return {
-    spinner: {
+    small: {
       position: 'relative',
-      display: 'inline-block'
+      display: 'inline-block',
+      fontSize: 16
+    },
+    large: {
+      position: 'relative',
+      display: 'inline-block',
+      fontSize: 32
     },
     track: {
       display: 'block',
       boxSizing: 'border-box',
-      width: size,
-      height: size,
+      width: '1em',
+      height: '1em',
       borderWidth: trackSize,
       borderStyle: 'solid',
       borderColor: 'rgba(0,0,0,.2)',
-      borderRadius: size
+      borderRadius: '50%'
     },
     element: {
       position: 'absolute',
@@ -36,7 +38,7 @@ module.exports = function () {
       borderRightColor: 'transparent',
       borderBottomColor: '#fff',
       borderLeftColor: 'transparent',
-      borderRadius: size
+      borderRadius: '50%'
     }
   };
 };

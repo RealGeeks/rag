@@ -32,7 +32,10 @@ var Spinner = function (props, context) {
 var prototype = Spinner.prototype;
 
 // Speed is measured in revolutions per second.
-Spinner.defaultProps = {speed: 1.2};
+Spinner.defaultProps = {
+  speed: 1.2,
+  size: 'large'
+};
 
 prototype.render = function () {
   var transform = {};
@@ -40,7 +43,7 @@ prototype.render = function () {
   transform[prefixProp('transform')] = 'rotate(' + this.state.rotation + 'deg)';
 
   return span(
-    {style: styles.spinner},
+    {style: styles[this.props.size]},
     span({style: styles.track}),
     span({style: defaults(transform, styles.element)})
   );
