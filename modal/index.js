@@ -15,7 +15,8 @@ var componentSpec = {
 
   getDefaultProps: constant({
     backdrop: true,
-    locked: false
+    closeOnBackdropClick: true,
+    closeButton: true
   }),
 
   getInitialState: function () {
@@ -27,7 +28,6 @@ var componentSpec = {
   render: function () {
     var component = this;
     var props = component.props;
-    var canClose = !props.locked;
 
     if (!component.state.open) {
       return null;
@@ -39,11 +39,11 @@ var componentSpec = {
           namespace,
           props.backdrop && namespace + '-backdrop'
         ),
-        onTap: canClose && component.onTap
+        onTap: props.closeOnBackdropClick && component.onTap
       },
       scroller(
         {className: joinClasses(namespace + '-window', props.className)},
-        canClose && button({
+        props.closeButton && button({
           className: namespace + '-close',
           type: ['hitarea'],
           icon: 'x',
