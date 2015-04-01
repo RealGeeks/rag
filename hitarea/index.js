@@ -100,6 +100,10 @@ prototype.render = function () {
       'normal'
   ];
 
+  if (props.style) {
+    hitareaProps.style = defaults({}, props.style, hitareaProps.style);
+  }
+
   if (!disabled && props.action) {
     hitareaProps.tabIndex = 0;
   }

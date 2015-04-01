@@ -1,80 +1,81 @@
 'use strict';
 
-var constant = require('lodash').constant;
+var assign = require('lodash/object/assign');
 var react = require('react/addons');
-var joinClasses = require('react/lib/joinClasses');
+var styles = require('./styles')();
 var createFactory = react.createFactory;
-var surface = createFactory(require('../surface'));
+var hitarea = createFactory(require('../hitarea'));
 var scroller = createFactory(require('../scroll-view'));
-var button = createFactory(require('../button'));
+var closeIcon = createFactory(require('./close'));
 
-var namespace = 'rag-modal';
+var Modal = function (props, context) {
+  var component = this;
 
-var componentSpec = {
-  mixins: [react.addons.PureRenderMixin],
+  component.props = props;
+  component.context = context;
+  component.state = {open: props.open};
 
-  getDefaultProps: constant({
-    backdrop: true,
-    closeOnBackdropClick: true,
-    closeButton: true
-  }),
-
-  getInitialState: function () {
-    return {
-      open: this.props.open
-    };
-  },
-
-  render: function () {
-    var component = this;
-    var props = component.props;
-
-    if (!component.state.open) {
-      return null;
+  component.onTap = function (event) {
+    if (event.target == react.findDOMNode(component)) {
+      component.close();
     }
+  };
 
-    return surface(
-      {
-        className: joinClasses(
-          namespace,
-          props.backdrop && namespace + '-backdrop'
-        ),
-        onTap: props.closeOnBackdropClick && component.onTap
-      },
-      scroller(
-        {className: joinClasses(namespace + '-window', props.className)},
-        props.closeButton && button({
-          className: namespace + '-close',
-          type: ['hitarea'],
-          icon: 'x',
-          onTap: component.close
-        }),
-        props.children
-      )
-    );
-  },
+  component.open = function () {
+    component.setState({open: true}, component.props.didOpen);
+  };
 
-  onTap: function (event) {
-    if (event.target == this.getDOMNode()) {
-      this.close();
-    }
-  },
+  component.close = function () {
+    component.setState({open: false}, component.props.didClose);
+  };
+};
 
-  isOpen: function () {
-    return this.state.open;
-  },
+var prototype = assign(
+  Modal.prototype,
+  react.Component.prototype,
+  react.addons.PureRenderMixin
+);
 
-  open: function () {
-    this.setState({open: true}, this.props.didOpen);
-  },
+Modal.defaultProps = {
+  backdrop: true,
+  closeOnBackdropClick: true,
+  closeButton: true
+};
 
-  close: function () {
-    this.setState({open: false}, this.props.didClose);
+prototype.render = function () {
+  var component = this;
+  var props = component.props;
+
+  if (!component.state.open) {
+    return null;
   }
+
+  return hitarea(
+    {
+      tag: 'div',
+      style: styles[props.backdrop ? 'backdrop' : 'container'],
+      action: props.closeOnBackdropClick && component.onTap
+    },
+    scroller(
+      {style: styles.window},
+      props.closeButton && hitarea(
+        {
+          style: styles.close,
+          action: component.close
+        },
+        closeIcon({style: styles.icon})
+      ),
+      props.children
+    )
+  );
+};
+
+prototype.isOpen = function () {
+  return this.state.open;
 };
 
 if (process.env.NODE_ENV != 'production') {
-  componentSpec.displayName = 'Modal';
+  Modal.displayName = 'Modal';
 }
 
-module.exports = react.createClass(componentSpec);
+module.exports = Modal;
