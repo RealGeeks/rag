@@ -2,7 +2,7 @@
 
 var defaults = require('lodash/object/defaults');
 var react = require('react');
-var icon = react.createFactory(require('./icon'));
+var icon = react.createFactory(require('../icons/chevron-up-down'));
 var Hitarea = require('../hitarea');
 var styles = require('./styles')();
 var dom = react.DOM;
@@ -55,8 +55,7 @@ prototype.render = function () {
     {style: styles[props.block ? 'block' : 'wrapper']},
     dom.select(props, options),
     icon({
-      color: props.style.color,
-      style: styles.icon
+      style: defaults({color: props.style.color}, styles.icon)
     })
   );
 };

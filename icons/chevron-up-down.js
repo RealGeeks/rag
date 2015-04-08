@@ -13,7 +13,6 @@ var SelectIcon = function (props, context) {
 var prototype = assign(SelectIcon.prototype, react.addons.PureRenderMixin);
 
 SelectIcon.defaultProps = {
-  color: theme.colors.foreground,
   size: theme.iconSize
 };
 
@@ -29,7 +28,7 @@ prototype.render = function () {
     },
     dom.path({
       d: 'm4 6 4-4 4 4m0 4-4 4-4-4',
-      stroke: props.color,
+      stroke: 'currentColor',
       strokeWidth: 2,
       fill: 'none'
     })
