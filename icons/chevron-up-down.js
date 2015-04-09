@@ -1,7 +1,7 @@
 'use strict';
 
 var assign = require('react/lib/Object.assign');
-var theme = require('../theme')();
+var iconSize = require('../theme')().iconSize;
 var react = require('react/addons');
 var dom = react.DOM;
 
@@ -13,7 +13,8 @@ var SelectIcon = function (props, context) {
 var prototype = assign(SelectIcon.prototype, react.addons.PureRenderMixin);
 
 SelectIcon.defaultProps = {
-  size: theme.iconSize
+  width: iconSize * 10 / 16,
+  height: iconSize
 };
 
 prototype.render = function () {
@@ -21,13 +22,13 @@ prototype.render = function () {
 
   return dom.svg(
     {
-      viewBox: '0 0 16 16',
-      width: props.size,
-      height: props.size,
+      viewBox: '0 0 10 16',
+      width: props.width,
+      height: props.height,
       style: props.style
     },
     dom.path({
-      d: 'm4 6 4-4 4 4m0 4-4 4-4-4',
+      d: 'm1 6 4-4 4 4m0 4-4 4-4-4',
       stroke: 'currentColor',
       strokeWidth: 2,
       fill: 'none'

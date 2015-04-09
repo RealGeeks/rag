@@ -1,7 +1,7 @@
 'use strict';
 
 var defaults = require('lodash/object/defaults');
-var theme = require('../theme')();
+var iconSize = require('../theme')().iconSize;
 var react = require('react');
 var dom = react.DOM;
 
@@ -16,7 +16,8 @@ var prototype = defaults(
 );
 
 X.defaultProps = {
-  size: theme.iconSize
+  width: iconSize * 10 / 16,
+  height: iconSize
 };
 
 prototype.render = function () {
@@ -24,13 +25,13 @@ prototype.render = function () {
 
   return dom.svg(
     {
-      viewBox: '0 0 16 16',
-      width: props.size,
-      height: props.size,
+      viewBox: '0 0 10 16',
+      width: props.width,
+      height: props.height,
       style: props.style
     },
     dom.path({
-      d: 'm4 4 8 8m0-8-8 8',
+      d: 'm1 4 8 8m0-8-8 8',
       stroke: 'currentColor',
       strokeWidth: 2,
       fill: 'none'
