@@ -29,12 +29,6 @@ prototype.render = function () {
       height: props.size,
       style: props.style
     },
-    // dom.path({
-    //   d: 'm4 6 4-4 4 4m0 4-4 4-4-4',
-    //   stroke: 'currentColor',
-    //   strokeWidth: 2,
-    //   fill: 'none'
-    // }),
     dom.path({
       d: 'm4 4 8 8m0-8-8 8',
       stroke: 'currentColor',
