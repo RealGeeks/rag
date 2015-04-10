@@ -21,11 +21,15 @@ prototype.render = function () {
   var state = props.disabled && 'disabled' ||
     component.state.focus && 'focus';
 
+  var style;
+
   if (state) {
     args.push(state);
   }
 
-  props.style = styles(args);
+  style = styles(args);
+
+  props.style = props.style ? defaults(props.style, style) : style;
 
   return dom[props.type == 'textarea' ? 'textarea' : 'input'](props);
 };
