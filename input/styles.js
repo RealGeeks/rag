@@ -32,6 +32,7 @@ module.exports = function () {
     current.padding =
       ((config.size - config.lineHeight) / 2 - config.borderWidth) + 'px ' +
       config.padding + 'px';
+    current.fontSize = config.fontSize;
     current.lineHeight = config.lineHeight + 'px';
     current.color = config.foregroundColor;
     current.backgroundColor = config.backgroundColor;
