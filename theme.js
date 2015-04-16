@@ -15,6 +15,7 @@ module.exports = require('./lib/configurable')({
   fontFamily: '"Helvetica Neue", Helvetica, Ubuntu, "Segoe UI", Arial, sans-serif',
   lineHeight: 1.375,
   iconSize: 16,
+  strokeWidth: 2,
   controlSize: 34,
   screen: {
     small: 568,
