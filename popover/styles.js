@@ -1,8 +1,10 @@
 'use strict';
 
 var defaults = require('lodash/object/defaults');
+var getTheme = require('../theme');
 
 module.exports = function () {
+  var theme = getTheme();
   var width = 200;
   var arrowSize = 12;
 
@@ -32,6 +34,7 @@ module.exports = function () {
       overflow: 'hidden'
     },
 
-    arrowSize: arrowSize
+    arrowSize: arrowSize,
+    borderRadius: theme.borderRadius
   };
 };

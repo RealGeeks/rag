@@ -2,10 +2,12 @@
 
 var styles = require('./styles')();
 var defaults = require('lodash/object/defaults');
+var clamp = require('clamp');
 var react = require('react');
 var findDomNode = react.findDOMNode;
 var div = react.DOM.div;
 var bubble = react.createFactory(require('./bubble.js'));
+var minArrowLeft = styles.borderRadius + styles.arrowSize;
 
 var initialState = {
   visibility: 'hidden',
@@ -88,7 +90,9 @@ var computePosition = function (props) {
     top: top,
     left: left,
     placement: placement,
-    arrowLeft: arrowLeft
+
+    // Make sure arrow doesn’t stick outside popover
+    arrowLeft: clamp(arrowLeft, minArrowLeft, nodeWidth - minArrowLeft)
   });
 };
 

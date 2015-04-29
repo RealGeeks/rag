@@ -2,8 +2,7 @@
 
 var fill = require('../lib/abstractions').fill;
 var styles = require('./styles')();
-var theme = require('../theme')();
-var borderRadius = theme.borderRadius;
+var borderRadius = styles.borderRadius;
 var arrowSize = styles.arrowSize;
 var defaults = require('lodash/object/defaults');
 var svg = require('../lib/svg');
