@@ -2,8 +2,10 @@
 
 var styles = require('./styles')();
 var defaults = require('lodash/object/defaults');
-var findDomNode = require('react/lib/findDOMNode');
-var div = require('react/lib/ReactDOM').div;
+var react = require('react');
+var findDomNode = react.findDOMNode;
+var div = react.DOM.div;
+var bubble = react.createFactory(require('./bubble.js'));
 
 var initialState = {
   visibility: 'hidden',
@@ -112,8 +114,9 @@ prototype.render = function () {
         left: state.left
       }, styles[placement][state.visibility])
     },
-    div({
-      style: defaults({left: state.arrowLeft}, styles[placement].arrow)
+    bubble({
+      placement: placement,
+      left: state.arrowLeft
     }),
     div(
       {style: styles.content},
