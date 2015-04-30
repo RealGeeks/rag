@@ -43,6 +43,7 @@
     "watchify": "^2.2.1"
   },
   "dependencies": {
+    "clamp": "^1.0.1",
     "envify": "^3.2.0",
     "es6-promise": "^2.0.1",
     "inner": "^0.2.0",
