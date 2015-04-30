@@ -6,7 +6,7 @@ var getTheme = require('../theme');
 module.exports = function () {
   var theme = getTheme();
   var width = 200;
-  var arrowSize = 12;
+  var arrowSize = 10;
 
   var wrapperTop = {
     position: 'absolute',
