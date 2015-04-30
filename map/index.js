@@ -45,6 +45,7 @@ var mapComponent = {
     [
     [['mapTypeId'], 'MapTypeId'],
     [['mapTypeControlOptions', 'style'], 'MapTypeControlStyle'],
+    [['mapTypeControlOptions', 'position'], 'ControlPosition'],
     [['streetViewControlOptions', 'position'], 'ControlPosition'],
     [['zoomControlOptions', 'style'], 'ZoomControlStyle'],
     [['zoomControlOptions', 'position'], 'ControlPosition']
