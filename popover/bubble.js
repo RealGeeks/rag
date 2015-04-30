@@ -4,6 +4,7 @@ var fill = require('../lib/abstractions').fill;
 var styles = require('./styles')();
 var borderRadius = styles.borderRadius;
 var arrowSize = styles.arrowSize;
+var backgroundColor = '#fff';
 var defaults = require('lodash/object/defaults');
 var svg = require('../lib/svg');
 
@@ -40,6 +41,16 @@ var blurProps = {
 
 var groupProps = {filter: 'url(#s)'};
 
+var rectProps = {
+  x: 0,
+  y: 0,
+  width: '100%',
+  height: '100%',
+  rx: borderRadius,
+  ry: borderRadius,
+  fill: backgroundColor
+};
+
 var inSourceGraphic = {in: 'SourceGraphic'};
 
 var Bubble = function (props, context) {
@@ -75,15 +86,7 @@ prototype.render = function () {
     ),
     svg.g(
       groupProps,
-      svg.rect({
-        x: 0,
-        y: 0,
-        width: '100%',
-        height: '100%',
-        rx: borderRadius,
-        ry: borderRadius,
-        fill: '#fff'
-      }),
+      svg.rect(rectProps),
       svg.svg(
         {
           style: {overflow: 'visible'},
@@ -98,7 +101,7 @@ prototype.render = function () {
             (isTop ? arrowSize : 0) +
           ')',
           d: isTop ? arrowBottomPathDescription : arrowTopPathDescription,
-          fill: '#fff'
+          fill: backgroundColor
         })
       )
     )
