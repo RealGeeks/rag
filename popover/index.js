@@ -12,7 +12,7 @@ var initialState = {
   placement: 'top',
   top: 0,
   left: 0,
-  arrowLeft: 0
+  arrowOffset: 0
 };
 
 var Popover = function (props, context) {
@@ -52,7 +52,7 @@ var computePosition = function (props) {
   var placement = 'top';
   var top = anchorTop - nodeHeight - styles.arrowSize;
   var left = anchorLeft - nodeWidth / 2;
-  var arrowLeft = nodeWidth / 2;
+  var arrowOffset = nodeWidth / 2;
 
   var leftDelta;
   var rightDelta;
@@ -70,7 +70,7 @@ var computePosition = function (props) {
     ) > 0
   ) {
     left += leftDelta;
-    arrowLeft -= leftDelta;
+    arrowOffset -= leftDelta;
   // overflow right
   } else if (
     (
@@ -80,7 +80,7 @@ var computePosition = function (props) {
     ) > 0
   ) {
     left -= rightDelta;
-    arrowLeft += rightDelta;
+    arrowOffset += rightDelta;
   }
 
   popover.setState({
@@ -90,7 +90,7 @@ var computePosition = function (props) {
     width: nodeWidth,
     height: nodeHeight,
     placement: placement,
-    arrowLeft: arrowLeft
+    arrowOffset: arrowOffset
   });
 };
 
@@ -120,7 +120,7 @@ prototype.render = function () {
       width: state.width,
       height: state.height,
       placement: placement,
-      arrowOffset: state.arrowLeft
+      arrowOffset: state.arrowOffset
     }),
     div(
       {style: styles.content},
