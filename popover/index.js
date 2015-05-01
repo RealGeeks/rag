@@ -116,12 +116,7 @@ prototype.render = function () {
         left: state.left
       }, styles[placement][state.visibility])
     },
-    bubble({
-      width: state.width,
-      height: state.height,
-      placement: placement,
-      arrowOffset: state.arrowOffset
-    }),
+    bubble(state),
     div(
       {style: styles.content},
       props.children
