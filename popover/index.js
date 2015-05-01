@@ -40,6 +40,7 @@ var computePosition = function (props) {
 
   var anchorTop = props.top;
   var anchorLeft = props.left;
+  var padding = props.padding;
 
   var node = findDomNode(popover);
   var nodeWidth = node.offsetWidth;
@@ -57,7 +58,7 @@ var computePosition = function (props) {
   var leftDelta;
   var rightDelta;
 
-  if (parentBounds.top + top < viewportBounds.top + props.offsetTop) {
+  if (parentBounds.top + top < viewportBounds.top + padding) {
     placement = 'bottom';
     top = anchorTop;
   }
@@ -66,7 +67,7 @@ var computePosition = function (props) {
   if (
     (
       leftDelta =
-        viewportBounds.left - parentBounds.left - left + props.offsetLeft
+        viewportBounds.left - parentBounds.left - left + padding
     ) > 0
   ) {
     left += leftDelta;
@@ -75,8 +76,7 @@ var computePosition = function (props) {
   } else if (
     (
       rightDelta =
-        parentBounds.left + left + nodeWidth - viewportBounds.right +
-        props.offsetRight
+        parentBounds.left + left + nodeWidth - viewportBounds.right + padding
     ) > 0
   ) {
     left -= rightDelta;
@@ -98,9 +98,7 @@ Popover.defaultProps = {
   visible: false,
   top: 0,
   left: 0,
-  offsetTop: 0,
-  offsetRight: 0,
-  offsetLeft: 0
+  padding: 0
 };
 
 prototype.render = function () {
@@ -129,6 +127,9 @@ prototype.componentWillUpdate = computePosition;
 
 if (process.env.NODE_ENV != 'production') {
   Popover.displayName = 'Popover';
+  Popover.propTypes = {
+    padding: react.PropTypes.number
+  };
 }
 
 module.exports = Popover;
