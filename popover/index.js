@@ -65,20 +65,21 @@ var computePosition = function (props) {
 
   if (placement == 'auto') {
     var unusableSpace = borderRadius + arrowSize;
+    var topOrBottom =
+      anchorTop - nodeHeight - arrowSize >= minTop && 'top' ||
+      anchorTop + nodeHeight + arrowSize <= maxTop && 'bottom';
+    var rightOrLeft =
+      anchorLeft + nodeWidth + arrowSize <= maxLeft && 'right' ||
+      anchorLeft - nodeWidth - arrowSize >= minLeft && 'left';
 
     placement = nodeWidth <= maxLeft - minLeft &&
       anchorLeft >= minLeft + unusableSpace &&
-      anchorLeft <= maxLeft - unusableSpace ?
-        anchorTop - nodeHeight - arrowSize >= minTop && 'top' ||
-        anchorTop + nodeHeight + arrowSize <= maxTop && 'bottom'
-        : (
+      anchorLeft <= maxLeft - unusableSpace &&
+        topOrBottom ||
           nodeHeight <= maxTop - minTop &&
           anchorTop >= minTop + unusableSpace &&
-          anchorTop <= maxTop - unusableSpace ?
-            anchorLeft + nodeWidth + arrowSize <= maxLeft && 'right' ||
-            anchorLeft - nodeWidth - arrowSize >= minLeft && 'left'
-            : 'bottom'
-        );
+          anchorTop <= maxTop - unusableSpace &&
+            rightOrLeft || topOrBottom || rightOrLeft;
   }
 
   if (placement == 'top' || placement == 'bottom') {
