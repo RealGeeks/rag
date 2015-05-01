@@ -144,6 +144,8 @@ if (process.env.NODE_ENV != 'production') {
     placement: react.PropTypes.oneOf(
       ['auto', 'top', 'right', 'bottom', 'left']
     ),
+    top: react.PropTypes.number,
+    left: react.PropTypes.number,
     padding: react.PropTypes.number
   };
 }
