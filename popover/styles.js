@@ -13,17 +13,30 @@ module.exports = function () {
     width: width
   };
 
+  var hiddenWrapperTop = defaults({visibility: 'hidden'}, wrapperTop);
+
   var wrapperBottom = defaults({marginTop: arrowSize}, wrapperTop);
+  var wrapperRight = defaults({marginLeft: arrowSize}, wrapperTop);
 
   return {
     top: {
       visible: wrapperTop,
-      hidden: defaults({visibility: 'hidden'}, wrapperTop)
+      hidden: hiddenWrapperTop
     },
 
     bottom: {
       visible: wrapperBottom,
       hidden: defaults({visibility: 'hidden'}, wrapperBottom)
+    },
+
+    left: {
+      visible: wrapperTop,
+      hidden: hiddenWrapperTop
+    },
+
+    right: {
+      visible: wrapperRight,
+      hidden: defaults({visibility: 'hidden'}, wrapperRight)
     },
 
     content: {

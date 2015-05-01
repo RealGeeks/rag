@@ -1,6 +1,9 @@
 'use strict';
 
 var styles = require('./styles')();
+var arrowSize = styles.arrowSize;
+var borderRadius = styles.borderRadius;
+var clamp = require('clamp');
 var defaults = require('lodash/object/defaults');
 var react = require('react');
 var findDomNode = react.findDOMNode;
@@ -41,6 +44,7 @@ var computePosition = function (props) {
   var anchorTop = props.top;
   var anchorLeft = props.left;
   var padding = props.padding;
+  var placement = props.placement;
 
   var node = findDomNode(popover);
   var nodeWidth = node.offsetWidth;
@@ -50,37 +54,43 @@ var computePosition = function (props) {
   var viewportBounds = props.viewport ?
     getNodeBounds(props.viewport) : parentBounds;
 
-  var placement = 'top';
-  var top = anchorTop - nodeHeight - styles.arrowSize;
-  var left = anchorLeft - nodeWidth / 2;
-  var arrowOffset = nodeWidth / 2;
+  var minTop = viewportBounds.top + padding - parentBounds.top;
+  var maxTop = viewportBounds.bottom - padding - parentBounds.top;
+  var minLeft = viewportBounds.left + padding - parentBounds.left;
+  var maxLeft = viewportBounds.right - padding - parentBounds.left;
 
-  var leftDelta;
-  var rightDelta;
+  var top;
+  var left;
+  var arrowOffset;
 
-  if (parentBounds.top + top < viewportBounds.top + padding) {
-    placement = 'bottom';
-    top = anchorTop;
+  if (placement == 'auto') {
+    var unusableSpace = borderRadius + arrowSize;
+
+    placement = nodeWidth <= maxLeft - minLeft &&
+      anchorLeft >= minLeft + unusableSpace &&
+      anchorLeft <= maxLeft - unusableSpace ?
+        anchorTop - nodeHeight - arrowSize >= minTop && 'top' ||
+        anchorTop + nodeHeight + arrowSize <= maxTop && 'bottom'
+        : (
+          nodeHeight <= maxTop - minTop &&
+          anchorTop >= minTop + unusableSpace &&
+          anchorTop <= maxTop - unusableSpace ?
+            anchorLeft + nodeWidth + arrowSize <= maxLeft && 'right' ||
+            anchorLeft - nodeWidth - arrowSize >= minLeft && 'left'
+            : 'bottom'
+        );
   }
 
-  // overflow left
-  if (
-    (
-      leftDelta =
-        viewportBounds.left - parentBounds.left - left + padding
-    ) > 0
-  ) {
-    left += leftDelta;
-    arrowOffset -= leftDelta;
-  // overflow right
-  } else if (
-    (
-      rightDelta =
-        parentBounds.left + left + nodeWidth - viewportBounds.right + padding
-    ) > 0
-  ) {
-    left -= rightDelta;
-    arrowOffset += rightDelta;
+  if (placement == 'top' || placement == 'bottom') {
+    top = placement == 'top' ?
+      anchorTop - nodeHeight - arrowSize : anchorTop;
+    left = clamp(anchorLeft - nodeWidth / 2, 0, maxLeft - nodeWidth);
+    arrowOffset = anchorLeft - left;
+  } else {
+    top = clamp(anchorTop - nodeHeight / 2, 0, maxTop - nodeHeight);
+    left = placement == 'left' ?
+      anchorLeft - nodeWidth - arrowSize : anchorLeft;
+    arrowOffset = anchorTop - top;
   }
 
   popover.setState({
@@ -96,6 +106,7 @@ var computePosition = function (props) {
 
 Popover.defaultProps = {
   visible: false,
+  placement: 'auto',
   top: 0,
   left: 0,
   padding: 0
@@ -129,6 +140,9 @@ prototype.componentWillUpdate = computePosition;
 if (process.env.NODE_ENV != 'production') {
   Popover.displayName = 'Popover';
   Popover.propTypes = {
+    placement: react.PropTypes.oneOf(
+      ['auto', 'top', 'right', 'bottom', 'left']
+    ),
     padding: react.PropTypes.number
   };
 }
