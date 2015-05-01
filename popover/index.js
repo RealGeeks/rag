@@ -2,12 +2,10 @@
 
 var styles = require('./styles')();
 var defaults = require('lodash/object/defaults');
-var clamp = require('clamp');
 var react = require('react');
 var findDomNode = react.findDOMNode;
 var div = react.DOM.div;
 var bubble = react.createFactory(require('./bubble.js'));
-var minArrowLeft = styles.borderRadius + styles.arrowSize;
 
 var initialState = {
   visibility: 'hidden',
@@ -45,14 +43,14 @@ var computePosition = function (props) {
 
   var node = findDomNode(popover);
   var nodeWidth = node.offsetWidth;
-  var nodeHeight = node.offsetHeight + styles.arrowSize;
+  var nodeHeight = node.offsetHeight;
 
   var parentBounds = getNodeBounds(node.offsetParent);
   var viewportBounds = props.viewport ?
     getNodeBounds(props.viewport) : parentBounds;
 
   var placement = 'top';
-  var top = anchorTop - nodeHeight;
+  var top = anchorTop - nodeHeight - styles.arrowSize;
   var left = anchorLeft - nodeWidth / 2;
   var arrowLeft = nodeWidth / 2;
 
@@ -89,10 +87,10 @@ var computePosition = function (props) {
     visibility: props.visible ? 'visible' : 'hidden',
     top: top,
     left: left,
+    width: nodeWidth,
+    height: nodeHeight,
     placement: placement,
-
-    // Make sure arrow doesn’t stick outside popover
-    arrowLeft: clamp(arrowLeft, minArrowLeft, nodeWidth - minArrowLeft)
+    arrowLeft: arrowLeft
   });
 };
 
@@ -119,8 +117,10 @@ prototype.render = function () {
       }, styles[placement][state.visibility])
     },
     bubble({
+      width: state.width,
+      height: state.height,
       placement: placement,
-      left: state.arrowLeft
+      arrowOffset: state.arrowLeft
     }),
     div(
       {style: styles.content},

@@ -4,51 +4,17 @@ var fill = require('../lib/abstractions').fill;
 var styles = require('./styles')();
 var borderRadius = styles.borderRadius;
 var arrowSize = styles.arrowSize;
-var backgroundColor = '#fff';
 var defaults = require('lodash/object/defaults');
+var bubblePath = require('./bubblePath');
 var svg = require('../lib/svg');
 
-var arrowTopPathDescription = [
-  'm0',
-  0,
-  arrowSize,
-  -arrowSize,
-  arrowSize,
-  arrowSize
-].join();
-
-var arrowBottomPathDescription = [
-  'm0',
-  0,
-  arrowSize,
-  arrowSize,
-  arrowSize,
-  -arrowSize
-].join();
-
-var wrapperProps = {
-  style: defaults({overflow: 'visible'}, fill),
-  width: '100%',
-  height: '100%'
-};
+var wrapperStyle = defaults({overflow: 'visible'}, fill);
 
 var filterProps = {id: 's'};
 
 var blurProps = {
   in: 'SourceAlpha',
   stdDeviation: 0.5
-};
-
-var groupProps = {filter: 'url(#s)'};
-
-var rectProps = {
-  x: 0,
-  y: 0,
-  width: '100%',
-  height: '100%',
-  rx: borderRadius,
-  ry: borderRadius,
-  fill: backgroundColor
 };
 
 var inSourceGraphic = {in: 'SourceGraphic'};
@@ -65,17 +31,26 @@ var prototype = defaults(
 
 Bubble.defaultProps = {
   placement: 'top',
-  left: 0
+  width: 300,
+  height: 200,
+  borderRadius: borderRadius,
+  arrowSize: arrowSize,
+  arrowOffset: 150,
+  backgroundColor: '#fff',
+  dropShadow: true
 };
 
 prototype.render = function () {
-  var bubble = this;
-  var props = bubble.props;
-  var isTop = props.placement == 'top';
+  var props = this.props;
+  var dropShadow = props.dropShadow;
 
   return svg.svg(
-    wrapperProps,
-    svg.filter(
+    {
+      style: wrapperStyle,
+      width: props.width,
+      height: props.height
+    },
+    dropShadow && svg.filter(
       filterProps,
       svg.feGaussianBlur(blurProps),
       svg.feMerge(
@@ -84,32 +59,27 @@ prototype.render = function () {
         svg.feMergeNode(inSourceGraphic)
       )
     ),
-    svg.g(
-      groupProps,
-      svg.rect(rectProps),
-      svg.svg(
-        {
-          style: {overflow: 'visible'},
-          viewBox: '0 0 ' + (arrowSize * 2) + ' ' + arrowSize,
-          width: arrowSize * 2,
-          height: '100%',
-          preserveAspectRatio: isTop ? 'xMinYMax' : 'xMinYMin'
-        },
-        svg.path({
-          transform: 'translate(' +
-            (props.left - arrowSize) + ',' +
-            (isTop ? arrowSize : 0) +
-          ')',
-          d: isTop ? arrowBottomPathDescription : arrowTopPathDescription,
-          fill: backgroundColor
-        })
-      )
-    )
+    svg.path({
+      d: bubblePath(props),
+      fill: props.backgroundColor,
+      filter: dropShadow && 'url(#s)'
+    })
   );
 };
 
 if (process.env.NODE_ENV != 'production') {
+  var propTypes = require('react').PropTypes;
   Bubble.displayName = 'Bubble';
+  Bubble.propTypes = {
+    placement: propTypes.oneOf(['top', 'bottom', 'left', 'right']),
+    width: propTypes.number,
+    height: propTypes.number,
+    borderRadius: propTypes.number,
+    arrowSize: propTypes.number,
+    arrowOffset: propTypes.number,
+    backgroundColor: propTypes.string,
+    dropShadow: propTypes.bool
+  };
 }
 
 module.exports = Bubble;
