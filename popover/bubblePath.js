@@ -100,5 +100,7 @@ module.exports = function (options) {
     push(arrowOffset - arrowSizePlusBorderRadius, 0);
   }
 
+  push('z');
+
   return description.join(' ');
 };
