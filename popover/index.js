@@ -85,10 +85,10 @@ var computePosition = function (props) {
   if (placement == 'top' || placement == 'bottom') {
     top = placement == 'top' ?
       anchorTop - nodeHeight - arrowSize : anchorTop;
-    left = clamp(anchorLeft - nodeWidth / 2, 0, maxLeft - nodeWidth);
+    left = clamp(anchorLeft - nodeWidth / 2, minLeft, maxLeft - nodeWidth);
     arrowOffset = anchorLeft - left;
   } else {
-    top = clamp(anchorTop - nodeHeight / 2, 0, maxTop - nodeHeight);
+    top = clamp(anchorTop - nodeHeight / 2, minTop, maxTop - nodeHeight);
     left = placement == 'left' ?
       anchorLeft - nodeWidth - arrowSize : anchorLeft;
     arrowOffset = anchorTop - top;
