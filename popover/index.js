@@ -106,15 +106,16 @@ prototype.render = function () {
   var props = popover.props;
   var state = popover.state;
   var placement = state.placement;
+  var visibility = state.visibility;
 
   return div(
     {
       style: defaults({
         top: state.top,
         left: state.left
-      }, styles[placement][state.visibility])
+      }, styles[placement][visibility])
     },
-    bubble(state),
+    visibility == 'visible' && bubble(state),
     div(
       {style: styles.content},
       props.children
