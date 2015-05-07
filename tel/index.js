@@ -20,17 +20,17 @@ var Tel = function (props, context) {
 
   tel.onChange = function (event) {
     var target = event.target;
-    var newState = formatPhone(keepDigits({
+    var newState = keepDigits({
       value: target.value,
       cursor: target.selectionStart,
       limit: tel.props.limit
-    }));
+    });
     var onChangeProp = tel.props.onChange;
 
     onChangeProp && onChangeProp(newState);
 
     if (tel.props.value == null) {
-      tel.setState(newState);
+      tel.setState(formatPhone(newState));
     }
   };
 };
