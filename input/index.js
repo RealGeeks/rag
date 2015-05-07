@@ -29,7 +29,7 @@ prototype.render = function () {
 
   style = styles(args);
 
-  props.style = props.style ? defaults(props.style, style) : style;
+  props.style = props.style ? defaults({}, props.style, style) : style;
 
   return dom[props.type == 'textarea' ? 'textarea' : 'input'](props);
 };
