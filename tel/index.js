@@ -1,93 +1,95 @@
 'use strict';
 
-var _ = require('lodash');
-var constant = _.constant;
-var omit = _.omit;
-var react = require('react/addons');
+var defaults = require('lodash/object/defaults');
+var react = require('react');
+var format = require('./format');
+var keepDigits = format.digits;
+var formatPhone = format.phone;
+var input = react.createFactory(require('../input'));
 
-var propsToOmit = ['className', 'limit'];
-var matchNonDigit = /\D/g;
+var Tel = function (props, context) {
+  var tel = this;
 
-var componentSpec = {
-  mixins: [react.addons.PureRenderMixin],
+  tel.props = props;
+  tel.context = context;
+  tel.state = formatPhone(keepDigits({
+    value: props.value || props.defaultValue || '',
+    cursor: 0,
+    limit: props.limit
+  }));
 
-  getDefaultProps: constant({limit: 10}),
-
-  getInitialState: function () {
-    var props = this.props;
-    var value = props.defaultValue;
-
-    return {
-      value: value && formatPhoneNumber(value, props.limit) || ''
-    };
-  },
-
-  render: function () {
-    var component = this;
-    var props = component.props;
-    var className = props.className;
-
-    props = omit(props, propsToOmit);
-    props.type = 'tel';
-    props.className = 'rag-tel' + (className ? ' ' + className : '');
-    props.value = component.state.value;
-    props.onChange = component.onChange;
-
-    return react.DOM.input(props);
-  },
-
-  onChange: function (event) {
+  tel.onChange = function (event) {
     var target = event.target;
-    var value = target.value;
-    var phone = formatPhoneNumber(value, this.props.limit);
-    var caretPosition;
+    var newState = formatPhone(keepDigits({
+      value: target.value,
+      cursor: target.selectionStart,
+      limit: tel.props.limit
+    }));
 
-    caretPosition = target.selectionStart -
-      (value.length - phone.length);
-
-    this.setState({value: phone}, function () {
-      target.setSelectionRange(caretPosition, caretPosition);
+    tel.setState(newState, function () {
+      var onChangeProp = tel.props.onChange;
+      onChangeProp && onChangeProp(newState);
+      setTimeout(function () {
+        tel.componentDidUpdate();
+      }, 0);
     });
-  },
+  };
+};
 
-  value: function () {
-    return this.state.value.replace(matchNonDigit, '');
+var prototype = defaults(
+  Tel.prototype,
+  react.Component.prototype,
+  require('react/lib/ReactComponentWithPureRenderMixin')
+);
+
+Tel.defaultProps = {limit: 10};
+
+prototype.render = function () {
+  var tel = this;
+  var props = tel.props;
+
+  return input(defaults({
+    type: 'tel',
+    value: tel.state.value,
+    onChange: tel.onChange
+  }, props));
+};
+
+prototype.componentDidMount = function () {
+  this.node = react.findDOMNode(this);
+};
+
+prototype.componentWillReceiveProps = function (props) {
+  var tel = this;
+  var value = props.value;
+  var limit = props.limit;
+
+  if (value != tel.props.value || limit != tel.props.limit) {
+    tel.setState(formatPhone(keepDigits({
+      value: value != null ? value : tel.state.value,
+      cursor: tel.state.cursor,
+      limit: limit
+    })));
   }
 };
 
+prototype.componentDidUpdate = function () {
+  var cursor = this.state.cursor;
+  this.node.setSelectionRange(cursor, cursor);
+};
+
+prototype.value = function () {
+  var value = this.props.value;
+
+  return value != null ? value : keepDigits(this.state.value);
+};
+
 if (process.env.NODE_ENV != 'production') {
-  componentSpec.displayName = 'Tel Input';
+  Tel.displayName = 'Tel Input';
+  Tel.propTypes = {
+    value: react.PropTypes.string,
+    limit: react.PropTypes.number
+  };
 }
 
-function formatPhoneNumber(phone, limit) {
-  phone = phone.replace(matchNonDigit, '');
-
-  if (limit) {
-    phone = phone.substr(0, limit);
-  }
-
-  var length = phone.length;
-
-  if (length < 4 || length > 11) {
-    return phone;
-  }
-
-  if (length == 11) {
-    if (phone[0] == 1) {
-      return '+' + phone[0] + ' (' + phone.substr(1, 3) + ') ' +
-        phone.substr(4, 3) + '-' + phone.substr(7);
-    }
-
-    return phone;
-  }
-
-  if (length > 6) {
-    return '(' + phone.substr(0, 3) + ') ' +
-      phone.substr(3, 3) + '-' + phone.substr(6);
-  }
-
-  // At this point length >= 4 && length <= 6
-  return '(' + phone.substr(0, 3) + ') ' + phone.substr(3);
-}
-
-module.exports = react.createClass(componentSpec);
+module.exports = Tel;
