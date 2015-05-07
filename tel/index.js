@@ -25,14 +25,13 @@ var Tel = function (props, context) {
       cursor: target.selectionStart,
       limit: tel.props.limit
     }));
+    var onChangeProp = tel.props.onChange;
 
-    tel.setState(newState, function () {
-      var onChangeProp = tel.props.onChange;
-      onChangeProp && onChangeProp(newState);
-      setTimeout(function () {
-        tel.componentDidUpdate();
-      }, 0);
-    });
+    onChangeProp && onChangeProp(newState);
+
+    if (tel.props.value == null) {
+      tel.setState(newState);
+    }
   };
 };
 
