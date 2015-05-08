@@ -7,30 +7,45 @@ var keepDigits = format.digits;
 var formatPhone = format.phone;
 var input = react.createFactory(require('../input'));
 
+var adjustCursor = function (cursor, string) {
+  var index = 0;
+  var char;
+
+  while (index <= cursor) {
+    char = string[index];
+
+    if (char < '0' || char > '9') {
+      cursor++;
+    }
+
+    index++;
+  }
+
+  return cursor;
+};
+
 var Tel = function (props, context) {
   var tel = this;
 
   tel.props = props;
   tel.context = context;
-  tel.state = formatPhone(keepDigits({
-    value: props.value || props.defaultValue || '',
-    cursor: 0,
-    limit: props.limit
-  }));
+  tel.state = {
+    value: keepDigits(props.value || props.defaultValue || ''),
+    cursor: 0
+  };
 
   tel.onChange = function (event) {
     var target = event.target;
-    var newState = keepDigits({
-      value: target.value,
-      cursor: target.selectionStart,
-      limit: tel.props.limit
-    });
+    var newState = {
+      value: keepDigits(target.value),
+      cursor: keepDigits(target.value, target.selectionStart).length
+    };
     var onChangeProp = tel.props.onChange;
 
     onChangeProp && onChangeProp(newState);
 
     if (tel.props.value == null) {
-      tel.setState(formatPhone(newState));
+      tel.setState(newState);
     }
   };
 };
@@ -49,7 +64,7 @@ prototype.render = function () {
 
   return input(defaults({
     type: 'tel',
-    value: tel.state.value,
+    value: formatPhone(tel.state.value.substr(0, props.limit)),
     onChange: tel.onChange
   }, props));
 };
@@ -61,20 +76,21 @@ prototype.componentDidMount = function () {
 prototype.componentWillReceiveProps = function (props) {
   var tel = this;
   var value = props.value;
-  var limit = props.limit;
+  var node = tel.node;
 
-  if (value != tel.props.value || limit != tel.props.limit) {
-    tel.setState(formatPhone(keepDigits({
-      value: value != null ? value : tel.state.value,
-      cursor: tel.state.cursor,
-      limit: limit
-    })));
+  if (value != tel.props.value) {
+    tel.setState({
+      value: value != null ? keepDigits(value) : tel.state.value,
+      cursor: keepDigits(node.value, node.selectionStart).length
+    });
   }
 };
 
 prototype.componentDidUpdate = function () {
-  var cursor = this.state.cursor;
-  this.node.setSelectionRange(cursor, cursor);
+  var node = this.node;
+  var cursor = adjustCursor(this.state.cursor, node.value);
+
+  node.setSelectionRange(cursor, cursor);
 };
 
 prototype.value = function () {
@@ -86,8 +102,10 @@ prototype.value = function () {
 if (process.env.NODE_ENV != 'production') {
   Tel.displayName = 'Tel Input';
   Tel.propTypes = {
+    defaultValue: react.PropTypes.string,
     value: react.PropTypes.string,
-    limit: react.PropTypes.number
+    limit: react.PropTypes.number,
+    onChange: react.PropTypes.func
   };
 }
 
