@@ -19,19 +19,33 @@ var Tel = function (props, context) {
     cursor: 0
   };
 
+  tel.componentDidUpdate = function () {
+    var node = tel.node;
+    var cursor = adjustCursor(tel.state.cursor, node.value);
+
+    node.setSelectionRange(cursor, cursor);
+  };
+
   tel.onChange = function (event) {
     var target = event.target;
     var props = tel.props;
-    var newState = {
-      value: keepDigits(target.value, props.limit),
-      cursor: countDigits(target.value, target.selectionStart)
-    };
+    var value = keepDigits(target.value, props.limit);
+    var cursor = countDigits(target.value, target.selectionStart);
     var onChangeProp = props.onChange;
 
-    onChangeProp && onChangeProp(newState);
+    if (value != tel.state.value) {
+      onChangeProp && onChangeProp({value: value});
+    } else {
+      // If the value didn’t change the cursor will always end up at the end
+      // of the input because React re-sets the value on the DOM.
+      // This is a hacky way to work around this limitation.
+      setTimeout(tel.componentDidUpdate, 0);
+    }
+
+    tel.setState({cursor: cursor});
 
     if (props.value == null) {
-      tel.setState(newState);
+      tel.setState({value: value});
     }
   };
 };
@@ -70,13 +84,6 @@ prototype.componentWillReceiveProps = function (props) {
       cursor: countDigits(node.value, node.selectionStart)
     });
   }
-};
-
-prototype.componentDidUpdate = function () {
-  var node = this.node;
-  var cursor = adjustCursor(this.state.cursor, node.value);
-
-  node.setSelectionRange(cursor, cursor);
 };
 
 prototype.value = function () {
