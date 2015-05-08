@@ -5,7 +5,7 @@ var react = require('react');
 var util = require('./util');
 var keepDigits = util.keepDigits;
 var countDigits = util.countDigits;
-var formatPhone = util.phone;
+var formatPhone = util.formatPhone;
 var input = react.createFactory(require('../input'));
 
 var adjustCursor = function (cursor, string) {

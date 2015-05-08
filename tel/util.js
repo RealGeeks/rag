@@ -49,7 +49,7 @@ exports.countDigits = function (string, end) {
   return count;
 };
 
-exports.phone = function (phone) {
+exports.formatPhone = function (phone) {
   var length = phone.length;
 
   if (length < 4 || length > 11) {
