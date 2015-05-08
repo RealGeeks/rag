@@ -5,25 +5,9 @@ var react = require('react');
 var util = require('./util');
 var keepDigits = util.keepDigits;
 var countDigits = util.countDigits;
+var adjustCursor = util.adjustCursor;
 var formatPhone = util.formatPhone;
 var input = react.createFactory(require('../input'));
-
-var adjustCursor = function (cursor, string) {
-  var index = 0;
-  var char;
-
-  while (index <= cursor) {
-    char = string[index];
-
-    if (char < '0' || char > '9') {
-      cursor++;
-    }
-
-    index++;
-  }
-
-  return cursor;
-};
 
 var Tel = function (props, context) {
   var tel = this;

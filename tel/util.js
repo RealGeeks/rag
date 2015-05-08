@@ -49,6 +49,20 @@ exports.countDigits = function (string, end) {
   return count;
 };
 
+exports.adjustCursor = function (cursor, string) {
+  var index = 0;
+
+  while (index <= cursor) {
+    if (!isDigit(string[index])) {
+      cursor++;
+    }
+
+    index++;
+  }
+
+  return cursor;
+};
+
 exports.formatPhone = function (phone) {
   var length = phone.length;
 

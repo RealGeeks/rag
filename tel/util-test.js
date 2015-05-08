@@ -44,6 +44,22 @@ test('countDigits', function (assert) {
   );
 });
 
+test('adjustCursor', function (assert) {
+  assert.plan(2);
+
+  assert.equal(
+    util.adjustCursor(3, '*(32) 190'),
+    7,
+    'returns cursor position taking non-digits into account'
+  );
+
+  assert.equal(
+    util.adjustCursor(0, '*(32) 190'),
+    2,
+    'works for cursor position of 0'
+  );
+});
+
 test('formatPhone', function (assert) {
   assert.plan(8);
 
