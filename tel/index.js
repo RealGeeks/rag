@@ -2,10 +2,10 @@
 
 var defaults = require('lodash/object/defaults');
 var react = require('react');
-var format = require('./format');
-var keepDigits = format.keepDigits;
-var countDigits = format.countDigits;
-var formatPhone = format.phone;
+var util = require('./util');
+var keepDigits = util.keepDigits;
+var countDigits = util.countDigits;
+var formatPhone = util.phone;
 var input = react.createFactory(require('../input'));
 
 var adjustCursor = function (cursor, string) {
