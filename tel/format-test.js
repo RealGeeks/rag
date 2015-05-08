@@ -3,19 +3,44 @@
 var test = require('tape');
 var format = require('./format');
 
-test('Format digits', function (assert) {
+test('isDigit', function (assert) {
+  assert.plan(4);
+
+  assert.ok(format.isDigit('0'), 'returns true for “0”');
+  assert.ok(format.isDigit('5'), 'returns true for “5”');
+  assert.ok(format.isDigit('9'), 'returns true for “9”');
+  assert.ok(!format.isDigit('a'), 'returns false for “a”');
+});
+
+test('keepDigits', function (assert) {
   assert.plan(2);
 
   assert.deepEqual(
-    format.digits('f24t456y6:1'),
+    format.keepDigits('f24t456y6:1'),
     '2445661',
     'removes non-digits'
   );
 
   assert.deepEqual(
-    format.digits('f24t456y6:1', 3),
-    '24',
-    'returns digits up to limit'
+    format.keepDigits('f24t456y6:1', 3),
+    '244',
+    'returns up to given limit of digits'
+  );
+});
+
+test('countDigits', function (assert) {
+  assert.plan(2);
+
+  assert.deepEqual(
+    format.countDigits('f24t456y6:1'),
+    7,
+    'returns the number of digits in a string'
+  );
+
+  assert.deepEqual(
+    format.countDigits('f24t456y6:1', 3),
+    2,
+    'counts up to given index'
   );
 });
 

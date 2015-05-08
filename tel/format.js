@@ -1,6 +1,10 @@
 'use strict';
 
-exports.digits = function (string, limit) {
+var isDigit = exports.isDigit = function (char) {
+  return char >= '0' && char <= '9';
+};
+
+exports.keepDigits = function (string, limit) {
   var result = '';
   var index = 0;
   var char;
@@ -9,16 +13,40 @@ exports.digits = function (string, limit) {
     return result;
   }
 
-  while (index < string.length && !limit || index < limit) {
+  while (index < string.length) {
     char = string[index];
-    if (char >= '0' && char <= '9') {
+
+    if (isDigit(char)) {
       result += char;
+
+      if (limit == result.length) {
+        break;
+      }
     }
 
     index++;
   }
 
   return result;
+};
+
+exports.countDigits = function (string, end) {
+  if (end === 0) {
+    return 0;
+  }
+
+  var count = 0;
+  var index = 0;
+
+  while (index < string.length && !end || index < end) {
+    if (isDigit(string[index])) {
+      count++;
+    }
+
+    index++;
+  }
+
+  return count;
 };
 
 exports.phone = function (phone) {

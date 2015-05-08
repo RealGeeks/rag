@@ -3,7 +3,8 @@
 var defaults = require('lodash/object/defaults');
 var react = require('react');
 var format = require('./format');
-var keepDigits = format.digits;
+var keepDigits = format.keepDigits;
+var countDigits = format.countDigits;
 var formatPhone = format.phone;
 var input = react.createFactory(require('../input'));
 
@@ -30,21 +31,22 @@ var Tel = function (props, context) {
   tel.props = props;
   tel.context = context;
   tel.state = {
-    value: keepDigits(props.value || props.defaultValue || ''),
+    value: keepDigits(props.value || props.defaultValue || '', props.limit),
     cursor: 0
   };
 
   tel.onChange = function (event) {
     var target = event.target;
+    var props = tel.props;
     var newState = {
-      value: keepDigits(target.value),
-      cursor: keepDigits(target.value, target.selectionStart).length
+      value: keepDigits(target.value, props.limit),
+      cursor: countDigits(target.value, target.selectionStart)
     };
-    var onChangeProp = tel.props.onChange;
+    var onChangeProp = props.onChange;
 
     onChangeProp && onChangeProp(newState);
 
-    if (tel.props.value == null) {
+    if (props.value == null) {
       tel.setState(newState);
     }
   };
@@ -64,7 +66,7 @@ prototype.render = function () {
 
   return input(defaults({
     type: 'tel',
-    value: formatPhone(tel.state.value.substr(0, props.limit)),
+    value: formatPhone(tel.state.value),
     onChange: tel.onChange
   }, props));
 };
@@ -80,8 +82,8 @@ prototype.componentWillReceiveProps = function (props) {
 
   if (value != tel.props.value) {
     tel.setState({
-      value: value != null ? keepDigits(value) : tel.state.value,
-      cursor: keepDigits(node.value, node.selectionStart).length
+      value: value != null ? keepDigits(value, props.limit) : tel.state.value,
+      cursor: countDigits(node.value, node.selectionStart)
     });
   }
 };
