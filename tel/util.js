@@ -51,9 +51,11 @@ exports.countDigits = function (string, end) {
 
 exports.adjustCursor = function (cursor, string) {
   var index = 0;
+  var char;
 
   while (index <= cursor) {
-    if (!isDigit(string[index])) {
+    char = string[index];
+    if (char && !isDigit(char)) {
       cursor++;
     }
 

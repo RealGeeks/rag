@@ -45,7 +45,7 @@ test('countDigits', function (assert) {
 });
 
 test('adjustCursor', function (assert) {
-  assert.plan(2);
+  assert.plan(3);
 
   assert.equal(
     util.adjustCursor(3, '*(32) 190'),
@@ -57,6 +57,12 @@ test('adjustCursor', function (assert) {
     util.adjustCursor(0, '*(32) 190'),
     2,
     'works for cursor position of 0'
+  );
+
+  assert.equal(
+    util.adjustCursor(0, ''),
+    0,
+    'works for empty string'
   );
 });
 
