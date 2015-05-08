@@ -96,9 +96,7 @@ prototype.componentDidUpdate = function () {
 };
 
 prototype.value = function () {
-  var value = this.props.value;
-
-  return value != null ? value : keepDigits(this.state.value);
+  return this.state.value;
 };
 
 if (process.env.NODE_ENV != 'production') {
