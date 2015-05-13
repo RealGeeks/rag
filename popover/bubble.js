@@ -5,6 +5,7 @@ var styles = require('./styles')();
 var borderRadius = styles.borderRadius;
 var arrowSize = styles.arrowSize;
 var defaults = require('lodash/object/defaults');
+var uniqueId = require('lodash/utility/uniqueId');
 var bubblePath = require('./bubblePath');
 var svg = require('../lib/svg');
 
@@ -13,6 +14,7 @@ var wrapperStyle = defaults({overflow: 'visible'}, fill);
 var inSourceGraphic = {in: 'SourceGraphic'};
 
 var Bubble = function (props, context) {
+  this.id = 'rag-' + uniqueId();
   this.props = props;
   this.context = context;
 };
@@ -34,6 +36,7 @@ Bubble.defaultProps = {
 };
 
 prototype.render = function () {
+  var id = this.id;
   var props = this.props;
   var dropShadow = props.dropShadow;
 
@@ -45,7 +48,7 @@ prototype.render = function () {
     },
     dropShadow && svg.filter(
       {
-        id: 's',
+        id: id,
         x: '-100%',
         width: '300%',
         y: '-100%',
@@ -86,7 +89,7 @@ prototype.render = function () {
     svg.path({
       d: bubblePath(props),
       fill: props.backgroundColor,
-      filter: dropShadow && 'url(#s)'
+      filter: dropShadow && 'url(#' + id + ')'
     })
   );
 };
