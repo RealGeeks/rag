@@ -13,32 +13,21 @@ var Modal = function (props, context) {
 
   component.props = props;
   component.context = context;
-  component.state = {open: props.open};
 
-  component.onTap = function (event) {
+  component.handleBackdropClick = function (event) {
     if (event.target == react.findDOMNode(component)) {
-      component.close();
+      component.props.onBackdropClick();
     }
-  };
-
-  component.open = function () {
-    component.setState({open: true}, component.props.didOpen);
-  };
-
-  component.close = function () {
-    component.setState({open: false}, component.props.didClose);
   };
 };
 
 var prototype = assign(
   Modal.prototype,
-  react.Component.prototype,
   react.addons.PureRenderMixin
 );
 
 Modal.defaultProps = {
   backdrop: true,
-  closeOnBackdropClick: true,
   closeButton: true
 };
 
@@ -46,22 +35,18 @@ prototype.render = function () {
   var component = this;
   var props = component.props;
 
-  if (!component.state.open) {
-    return null;
-  }
-
   return hitarea(
     {
       tag: 'div',
       style: styles[props.backdrop ? 'backdrop' : 'container'],
-      action: props.closeOnBackdropClick && component.onTap
+      action: props.onBackdropClick && component.handleBackdropClick
     },
     scroller(
       {style: styles.window},
       props.closeButton && hitarea(
         {
           style: styles.close,
-          action: component.close
+          action: props.onCloseButtonClick
         },
         closeIcon({style: styles.icon})
       ),
@@ -70,12 +55,12 @@ prototype.render = function () {
   );
 };
 
-prototype.isOpen = function () {
-  return this.state.open;
-};
-
 if (process.env.NODE_ENV != 'production') {
   Modal.displayName = 'Modal';
+  Modal.propTypes = {
+    onBackdropClick: react.PropTypes.func,
+    onCloseButtonClick: react.PropTypes.func
+  };
 }
 
 module.exports = Modal;
