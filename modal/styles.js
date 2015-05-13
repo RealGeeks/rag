@@ -28,6 +28,8 @@ module.exports = function () {
       position: 'relative',
       maxWidth: '100%',
       maxHeight: '100%',
+      overflow: 'auto',
+      WebkitOverflowScrolling: 'touch',
       // Without a z-index set some content overflows in Webkit.
       zIndex: 0
     }, panel.indented),
