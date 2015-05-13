@@ -10,13 +10,6 @@ var svg = require('../lib/svg');
 
 var wrapperStyle = defaults({overflow: 'visible'}, fill);
 
-var filterProps = {id: 's'};
-
-var blurProps = {
-  in: 'SourceAlpha',
-  stdDeviation: 0.5
-};
-
 var inSourceGraphic = {in: 'SourceGraphic'};
 
 var Bubble = function (props, context) {
@@ -51,11 +44,42 @@ prototype.render = function () {
       height: props.height
     },
     dropShadow && svg.filter(
-      filterProps,
-      svg.feGaussianBlur(blurProps),
+      {
+        id: 's',
+        x: '-100%',
+        width: '300%',
+        y: '-100%',
+        height: '300%'
+      },
+      svg.feGaussianBlur({
+        in: 'SourceAlpha',
+        stdDeviation: 1
+      }),
+      svg.feComponentTransfer(
+        {
+          result: 's'
+        },
+        svg.feFuncA({
+          type: 'table',
+          tableValues: '0 0 .1 .3 .3 .3 .3 .3 .3'
+        })
+      ),
+      svg.feGaussianBlur({
+        in: 'SourceAlpha',
+        stdDeviation: 5
+      }),
+      svg.feOffset({dy: 5}),
+      svg.feComponentTransfer(
+        undefined,
+        svg.feFuncA({
+          type: 'linear',
+          slope: '.15'
+        })
+      ),
       svg.feMerge(
         undefined,
         svg.feMergeNode(),
+        svg.feMergeNode({in: 's'}),
         svg.feMergeNode(inSourceGraphic)
       )
     ),
