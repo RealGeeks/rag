@@ -14,12 +14,9 @@ function Button(props, context) {
 
 prototype.render = function () {
   var component = this;
-  var props = component.props;
   var state = component.state;
-  var href = props.href;
-  var disabled = props.disabled;
-  var buttonProps = component.getHandlers();
-  var tag;
+  var props = defaults(component.getHandlers(), component.props);
+  var style;
 
   var args = ['base'];
 
@@ -27,7 +24,7 @@ prototype.render = function () {
     args = args.concat(props.kind);
   }
 
-  var buttonState = disabled && 'disabled' ||
+  var buttonState = props.disabled && 'disabled' ||
     (props.active || state.active) && 'active' ||
     state.hover && 'hover';
 
@@ -39,17 +36,10 @@ prototype.render = function () {
     args.push('focus');
   }
 
-  buttonProps.style = styles(args);
+  style = styles(args);
+  props.style = props.style ? defaults({}, props.style, style) : style;
 
-  if (href) {
-    tag = 'a';
-    buttonProps.href = href;
-  } else {
-    tag = 'button';
-    buttonProps.disabled = disabled;
-  }
-
-  return dom[tag](buttonProps, props.label || props.children);
+  return dom[props.href ? 'a' : 'button'](props, props.label || props.children);
 };
 
 if (process.env.NODE_ENV != 'production') {

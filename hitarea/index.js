@@ -89,26 +89,23 @@ Hitarea.defaultProps = {tag: 'span'};
 
 prototype.render = function () {
   var component = this;
-  var props = component.props;
   var state = component.state;
+  var props = defaults(component.getHandlers(), component.props);
   var disabled = props.disabled;
-  var hitareaProps = component.getHandlers();
 
-  hitareaProps.style = styles[
+  var style = styles[
     disabled && 'disabled' ||
       state.keyboardFocus && 'focus' ||
       'normal'
   ];
 
-  if (props.style) {
-    hitareaProps.style = defaults({}, props.style, hitareaProps.style);
-  }
+  props.style = props.style ? defaults({}, props.style, style) : style;
 
   if (!disabled && props.action) {
-    hitareaProps.tabIndex = 0;
+    props.tabIndex = 0;
   }
 
-  return dom[props.tag](hitareaProps, props.children);
+  return dom[props.tag](props, props.children);
 };
 
 prototype.getHandlers = function () {
