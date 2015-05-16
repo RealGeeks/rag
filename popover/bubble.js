@@ -54,19 +54,12 @@ prototype.render = function () {
         y: '-100%',
         height: '300%'
       },
-      svg.feGaussianBlur({
+      svg.feConvolveMatrix({
         in: 'SourceAlpha',
-        stdDeviation: 1
+        result: 's',
+        order: '3 3',
+        kernelMatrix: '1 2 1 2 4 2 1 2 1'
       }),
-      svg.feComponentTransfer(
-        {
-          result: 's'
-        },
-        svg.feFuncA({
-          type: 'table',
-          tableValues: '0 0 .1 .3 .3 .3 .3 .3 .3'
-        })
-      ),
       svg.feGaussianBlur({
         in: 'SourceAlpha',
         stdDeviation: 5
