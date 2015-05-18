@@ -6,9 +6,11 @@ var borderRadius = styles.borderRadius;
 var clamp = require('clamp');
 var defaults = require('lodash/object/defaults');
 var react = require('react');
+var createFactory = react.createFactory;
 var findDomNode = react.findDOMNode;
 var div = react.DOM.div;
-var bubble = react.createFactory(require('./bubble.js'));
+var bubble = createFactory(require('./bubble.js'));
+var outsideClickable = createFactory(require('../outsideClickable'));
 
 var initialState = {
   visibility: 'hidden',
@@ -120,8 +122,9 @@ prototype.render = function () {
   var placement = state.placement;
   var visibility = state.visibility;
 
-  return div(
+  return outsideClickable(
     {
+      onClickOutside: props.onClickOutside,
       style: defaults({
         top: state.top,
         left: state.left
@@ -146,7 +149,8 @@ if (process.env.NODE_ENV != 'production') {
     ),
     top: react.PropTypes.number,
     left: react.PropTypes.number,
-    padding: react.PropTypes.number
+    padding: react.PropTypes.number,
+    onClickOutside: react.PropTypes.func
   };
 }
 
