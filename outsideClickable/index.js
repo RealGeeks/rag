@@ -58,10 +58,10 @@ prototype.componentWillUnmount = function () {
   document.addEventListener('mousedown', this, false);
 };
 
-prototype.handleEvent = function () {
+prototype.handleEvent = function (event) {
   var handler = this.props.onClickOutside;
   if (handler && !this.block) {
-    handler();
+    handler(event);
   }
 };
 
