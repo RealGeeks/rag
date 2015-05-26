@@ -11,6 +11,10 @@ var spec = {
     component: 'div'
   },
 
+  init: function (component) {
+    component.state = {style: component.props.style};
+  },
+
   transition: function (state, done) {
     var component = this;
     var node = findDOMNode(component);
@@ -34,7 +38,7 @@ var spec = {
 
   render: function (props, state) {
     var style = props.style ?
-      defaults({}, state && state.style, props.style) : state.style;
+      defaults({}, state.style, props.style) : state.style;
 
     return react.createElement(
       props.component,
