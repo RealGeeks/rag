@@ -54,8 +54,8 @@ prototype.componentDidMount = function () {
 };
 
 prototype.componentWillUnmount = function () {
-  hasTouch && document.addEventListener('touchstart', this, false);
-  document.addEventListener('mousedown', this, false);
+  hasTouch && document.removeEventListener('touchstart', this, false);
+  document.removeEventListener('mousedown', this, false);
 };
 
 prototype.handleEvent = function (event) {
