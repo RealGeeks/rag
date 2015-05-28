@@ -1,7 +1,7 @@
 'use strict';
 
 var react = require('react');
-var dom = react.DOM;
+var createElement = react.createElement;
 
 var hasTouch = require('supports/touch');
 var defaults = require('lodash/object/defaults');
@@ -40,12 +40,12 @@ var prototype = defaults(
 );
 
 OutsideClickable.defaultProps = {
-  tag: 'div'
+  component: 'div'
 };
 
 prototype.render = function () {
   var props = this.props;
-  return dom[props.tag](defaults({}, this.wrapperProps, props));
+  return createElement(props.component, defaults({}, this.wrapperProps, props));
 };
 
 prototype.componentDidMount = function () {
