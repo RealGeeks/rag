@@ -1,5 +1,6 @@
 'use strict';
 
+var defaults = require('lodash/object/defaults');
 var touchTracker = require('../touchTracker');
 var div = require('react/lib/ReactDOM').div;
 
@@ -12,6 +13,8 @@ var strip = div({
 });
 
 var spec = {
+  styles: require('./hueStyles'),
+
   init: function (component) {
     component.trackerProps = {
       onChange: function (percentage) {
@@ -23,31 +26,18 @@ var spec = {
   },
   render: function (props) {
     var component = this;
+    var getStyle = component.getStyle;
 
     return touchTracker(
       component.trackerProps,
       div(
-        {
-          style: {
-            position: 'relative',
-            height: 44,
-            overflow: 'hidden'
-          }
-        },
+        {style: getStyle('slider')},
         strip,
         div({
-          style: {
-            position: 'absolute',
-            top: 0,
-            left: props.value / 360 * 100 + '%',
-            width: 10,
-            height: '100%',
-            marginLeft: -5,
-            boxSizing: 'border-box',
-            borderWidth: '10px 5px',
-            borderStyle: 'solid',
-            borderColor: '#000 transparent'
-          }
+          style: defaults(
+            {left: props.value / 3.6 + '%'},
+            getStyle('needle')
+          )
         })
       )
     );

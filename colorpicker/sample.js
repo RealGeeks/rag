@@ -44,7 +44,7 @@ var spec = {
         color: 'currentColor',
         textAlign: 'center',
         fontFamily: 'monospace',
-        lineHeight: '32px',
+        // lineHeight: '32px',
         borderWidth: 0,
         borderRadius: 0,
         outline: 0

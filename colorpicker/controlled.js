@@ -8,11 +8,14 @@ var shade = require('./shade');
 var hue = require('./hue');
 var div = react.DOM.div;
 
+var light = ['wrapper'];
+var dark = ['wrapper', 'dark'];
+
 var spec = {
   styles: require('./styles'),
 
   init: function (component) {
-    component.shadeHandler = function (hsv) {
+    component.changeHandler = function (hsv) {
       var callback = component.props.onChange;
 
       callback && callback(hsv);
@@ -31,22 +34,18 @@ var spec = {
     var component = this;
     var hsv = props.hsv;
 
+    var sharedProps = {
+      hsv: hsv,
+      onChange: component.changeHandler
+    };
+
     return div(
-      {
-        style: {
-          width: 320,
-          height: 320,
-          color: luminance(toRgb(hsv)) < 0.5 ? '#fff' : '#000'
-        }
-      },
-      sample({
-        hsv: hsv,
-        onChange: component.shadeHandler
-      }),
-      shade({
-        hsv: hsv,
-        onChange: component.shadeHandler
-      }),
+      {style: component.getStyle(luminance(toRgb(hsv)) < 0.5 ? dark : light)},
+      sample(sharedProps),
+      div(
+        {style: component.getStyle('shade')},
+        shade(sharedProps)
+      ),
       hue({
         value: hsv[0],
         onChange: component.hueHandler
