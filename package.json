@@ -45,8 +45,10 @@
   "dependencies": {
     "clamp": "^1.0.1",
     "colr-convert": "^1.0.4",
+    "empty": "^0.10.0",
     "envify": "^3.2.0",
     "es6-promise": "^2.0.1",
+    "eventemitter3": "^1.1.0",
     "inner": "^0.2.0",
     "load-gmaps": "^0.1.0",
     "lodash": "^3.3.1",
