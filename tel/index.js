@@ -51,7 +51,10 @@ var componentSpec = {
   },
 
   value: function () {
-    return this.state.value.replace(matchNonDigit, '');
+    // IE8 does not (usually) fire change events, in which case just
+    // return the value from the dom node.
+    return (this.state.value || this.getDOMNode().value)
+      .replace(matchNonDigit, '');
   }
 };
 
