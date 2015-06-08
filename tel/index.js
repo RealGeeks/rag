@@ -110,7 +110,7 @@ var Tel = function (props, context) {
     value = backspace(oldValue, value, cursor);
     cursor -= length - value.length;
 
-    cursor = countDigits(value, cursor - length + value.length);
+    cursor = countDigits(value, cursor);
     value = keepDigits(value, props.limit);
 
     if (propValue == null) {
