@@ -1,96 +1,218 @@
 'use strict';
-
 var _ = require('lodash');
-var constant = _.constant;
+var defaults = _.defaults;
 var omit = _.omit;
-var react = require('react/addons');
+var react = require('react');
+var util = require('./util');
+var keepDigits = util.keepDigits;
+var countDigits = util.countDigits;
+var adjustCursor = util.adjustCursor;
+var formatPhone = util.formatPhone;
+var backspace = util.backspace;
+var input = react.DOM.input;
 
-var propsToOmit = ['className', 'limit'];
-var matchNonDigit = /\D/g;
+var getInputSelection = function (input) {
+  var start = 0;
+  var end = 0;
+  var normalizedValue;
+  var range;
+  var textInputRange;
+  var len;
+  var endRange;
 
-var componentSpec = {
-  mixins: [react.addons.PureRenderMixin],
+  if (typeof input.selectionStart == 'number') {
+    start = input.selectionStart;
+    end = input.selectionEnd;
+  } else {
+    range = document.selection.createRange();
 
-  getDefaultProps: constant({limit: 10}),
+    if (range && range.parentElement() == input) {
+      len = input.value.length;
+      normalizedValue = input.value.replace(/\r\n/g, '\n');
 
-  getInitialState: function () {
-    var props = this.props;
-    var value = props.defaultValue;
+      // Create a working TextRange that lives only in the input
+      textInputRange = input.createTextRange();
+      textInputRange.moveToBookmark(range.getBookmark());
 
-    return {
-      value: value && formatPhoneNumber(value, props.limit) || ''
-    };
-  },
+      // Check if the start and end of the selection are at the very end
+      // of the input, since moveStart/moveEnd doesn't return what we want
+      // in those cases
+      endRange = input.createTextRange();
+      endRange.collapse(false);
 
-  render: function () {
-    var component = this;
-    var props = component.props;
-    var className = props.className;
+      if (textInputRange.compareEndPoints('StartToEnd', endRange) > -1) {
+        start = end = len;
+      } else {
+        start = -textInputRange.moveStart('character', -len);
+        start += normalizedValue.slice(0, start).split('\n').length - 1;
 
-    props = omit(props, propsToOmit);
-    props.type = 'tel';
-    props.className = 'rag-tel' + (className ? ' ' + className : '');
-    props.value = component.state.value;
-    props.onChange = component.onChange;
+        if (textInputRange.compareEndPoints('EndToEnd', endRange) > -1) {
+          end = len;
+        } else {
+          end = -textInputRange.moveEnd('character', -len);
+          end += normalizedValue.slice(0, end).split('\n').length - 1;
+        }
+      }
+    }
+  }
 
-    return react.DOM.input(props);
-  },
+  return {
+    start: start,
+    end: end
+  };
+};
 
-  onChange: function (event) {
-    var target = event.target;
-    var value = target.value;
-    var phone = formatPhoneNumber(value, this.props.limit);
-    var caretPosition;
-
-    caretPosition = target.selectionStart -
-      (value.length - phone.length);
-
-    this.setState({value: phone}, function () {
-      target.setSelectionRange(caretPosition, caretPosition);
-    });
-  },
-
-  value: function () {
-    // IE8 does not (usually) fire change events, in which case just
-    // return the value from the dom node.
-    return (this.state.value || this.getDOMNode().value)
-      .replace(matchNonDigit, '');
+var setInputSelection = function (input, selectionStart, selectionEnd) {
+  if (input.setSelectionRange) {
+    input.setSelectionRange(selectionStart, selectionStart);
+  } else if (input.createTextRange) {
+    var range = input.createTextRange();
+    range.collapse(true);
+    range.moveEnd('character', selectionEnd);
+    range.moveStart('character', selectionStart);
+    range.select();
   }
 };
 
-if (process.env.NODE_ENV != 'production') {
-  componentSpec.displayName = 'Tel Input';
-}
+var propsToOmit = ['className', 'limit', 'value', 'cursor', 'onChange'];
 
-function formatPhoneNumber(phone, limit) {
-  phone = phone.replace(matchNonDigit, '');
+var Tel = function (props, context) {
+  var tel = this;
 
-  if (limit) {
-    phone = phone.substr(0, limit);
+  tel.props = props;
+  tel.context = context;
+
+  if (props.value == null) {
+    tel.val = keepDigits(props.defaultValue, props.limit);
   }
 
-  var length = phone.length;
+  tel.update = function () {
+    tel.scheduled = 0;
 
-  if (length < 4 || length > 11) {
-    return phone;
-  }
+    var target = tel.node;
+    var props = tel.props;
+    var cursor = getInputSelection(target).start;
+    var propValue = props.value;
+    var oldUnformattedValue = propValue == null ? tel.val : propValue;
+    var oldValue = formatPhone(oldUnformattedValue);
+    var value = target.value;
+    var length;
+    var adjustedCursor;
 
-  if (length == 11) {
-    if (phone[0] == 1) {
-      return '+' + phone[0] + ' (' + phone.substr(1, 3) + ') ' +
-        phone.substr(4, 3) + '-' + phone.substr(7);
+    // If the text hasn’t changed bail here to allow text selection.
+    if (value == oldValue) {
+      return;
     }
 
-    return phone;
-  }
+    length = value.length;
 
-  if (length > 6) {
-    return '(' + phone.substr(0, 3) + ') ' +
-      phone.substr(3, 3) + '-' + phone.substr(6);
-  }
+    // If the user backspaced a non-digit, backspace until a digit is removed.
+    value = backspace(oldValue, value, cursor);
+    cursor -= length - value.length;
 
-  // At this point length >= 4 && length <= 6
-  return '(' + phone.substr(0, 3) + ') ' + phone.substr(3);
+    cursor = countDigits(value, cursor - length + value.length);
+    value = keepDigits(value, props.limit);
+
+    if (propValue == null) {
+      oldValue = target.value = formatPhone(value);
+    } else {
+      target.value = oldValue;
+    }
+
+    adjustedCursor = adjustCursor(cursor, oldValue);
+    setInputSelection(target, adjustedCursor, adjustedCursor);
+
+    if (value != oldUnformattedValue) {
+      propValue == null && (tel.val = value);
+
+      props.onChange && props.onChange({
+        value: value,
+        cursor: cursor
+      });
+    }
+  };
+
+  tel.scheduleUpdate = function () {
+    if (!tel.scheduled) {
+      tel.scheduled = setTimeout(tel.update);
+    }
+  };
+};
+
+var prototype = defaults(
+  Tel.prototype,
+  react.Component.prototype,
+  require('react/lib/ReactComponentWithPureRenderMixin')
+);
+
+Tel.defaultProps = {
+  defaultValue: '',
+  limit: 10
+};
+
+prototype.render = function () {
+  var tel = this;
+  var props = tel.props;
+  var className = props.className;
+
+  props = omit(props, propsToOmit);
+  props.type = 'tel';
+  props.className = 'rag-tel' + (className ? ' ' + className : '');
+
+  return input(props);
+};
+
+prototype.componentDidMount = function () {
+  var tel = this;
+  var value = tel.props.value;
+  var node = tel.node = react.findDOMNode(tel);
+  var scheduleUpdate = tel.scheduleUpdate;
+
+  node.value = formatPhone(value != null ? value : tel.val);
+
+  node.addEventListener('keydown', scheduleUpdate);
+  node.addEventListener('keypress', scheduleUpdate);
+  node.addEventListener('paste', scheduleUpdate);
+};
+
+prototype.componentDidUpdate = function () {
+  // this.scheduleUpdate();
+  var tel = this;
+  var props = tel.props;
+  var value = props.value;
+
+  if (value != null) {
+    var node = tel.node;
+    var cursor = props.cursor;
+
+    node.value = formatPhone(value);
+
+    if (cursor != null) {
+      setInputSelection(node, cursor, cursor);
+    }
+  }
+};
+
+prototype.componentWillUnmount = function () {
+  if (this.scheduled) {
+    clearTimeout(this.scheduled);
+  }
+};
+
+prototype.value = function () {
+  var propValue = this.props.value;
+
+  return propValue == null ? this.val : propValue;
+};
+
+if (process.env.NODE_ENV != 'production') {
+  Tel.displayName = 'Tel Input';
+  Tel.propTypes = {
+    defaultValue: react.PropTypes.string,
+    value: react.PropTypes.string,
+    limit: react.PropTypes.number,
+    onChange: react.PropTypes.func
+  };
 }
 
-module.exports = react.createClass(componentSpec);
+module.exports = Tel;
