@@ -67,8 +67,9 @@ exports.adjustCursor = function (cursor, string) {
 
 exports.formatPhone = function (phone) {
   var length = phone.length;
+  var result;
 
-  if (length < 4 || length > 11) {
+  if (length < 1 || length > 11) {
     return phone;
   }
 
@@ -81,13 +82,17 @@ exports.formatPhone = function (phone) {
     return phone;
   }
 
-  if (length > 6) {
-    return '(' + phone.substr(0, 3) + ') ' +
-      phone.substr(3, 3) + '-' + phone.substr(6);
+  result = '(' + phone.substr(0, 3);
+
+  if (length > 2) {
+    result += ') ' + phone.substr(3, 3);
+
+    if (length > 5) {
+      result += '-' + phone.substr(6);
+    }
   }
 
-  // At this point length >= 4 && length <= 6
-  return '(' + phone.substr(0, 3) + ') ' + phone.substr(3);
+  return result;
 };
 
 // Backspace until a digit is removed.
