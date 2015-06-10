@@ -106,6 +106,10 @@ prototype.render = function () {
     props.tabIndex = 0;
   }
 
+  // Don’t pass action prop as it will get added as an attribute
+  // on the underlying DOM element.
+  delete props.action;
+
   return dom[props.tag](props, props.children);
 };
 
