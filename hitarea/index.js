@@ -26,6 +26,12 @@ var activeMouseFocusState = {
   keyboardFocus: false
 };
 var inactiveState = {active: false};
+var initialState = {
+  focus: false,
+  keyboardFocus: false,
+  hover: false,
+  active: false
+};
 
 var onFocus = function () {
   this.setState(this.state.active ? focusState : keyboardFocusState);
@@ -77,12 +83,7 @@ var prototype = Hitarea.prototype;
 function Hitarea(props, context) {
   this.props = props;
   this.context = context;
-  this.state = {
-    focus: false,
-    keyboardFocus: false,
-    hover: false,
-    active: false
-  };
+  this.state = initialState;
 }
 
 Hitarea.defaultProps = {tag: 'span'};
