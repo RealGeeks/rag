@@ -12,16 +12,17 @@ var backspace = util.backspace;
 var input = react.DOM.input;
 
 var ua = navigator.userAgent;
-var crappyBrowser =
-  // IE < 10
-  ('documentMode' in document && document.documentMode < 10) ||
-  // Andorid Dolphin
-  (
-    ~ua.indexOf('Mozilla/5.0') &&
-    ~ua.indexOf('Android') &&
-    ~ua.indexOf('AppleWebKit') &&
-    ~ua.indexOf('Version')
-  );
+
+// IE < 10
+var ie = 'documentMode' in document && document.documentMode < 10;
+
+// Andorid Dolphin
+var android = (
+  ~ua.indexOf('Mozilla/5.0') &&
+  ~ua.indexOf('Android') &&
+  ~ua.indexOf('AppleWebKit') &&
+  ~ua.indexOf('Version')
+);
 
 var getInputSelection = function (input) {
   var start = 0;
@@ -171,6 +172,12 @@ prototype.render = function () {
   props.type = 'tel';
   props.className = 'rag-tel' + (className ? ' ' + className : '');
 
+  // Android Dolphin renders two inputs and this seems to fix it.
+  if (android) {
+    var style = props.style || (props.style = {});
+    style.WebkitUserModify = 'read-write';
+  }
+
   return input(props);
 };
 
@@ -185,7 +192,7 @@ prototype.componentDidMount = function () {
   // IE8 does not support input event;
   // IE9 support for input event is buggy;
   // Android Dolphin browser has the cursor position all wrong.
-  if (crappyBrowser) {
+  if (ie || android) {
     node.addEventListener('keydown', scheduleUpdate);
     node.addEventListener('keypress', scheduleUpdate);
     node.addEventListener('paste', scheduleUpdate);
