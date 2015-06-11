@@ -11,6 +11,18 @@ var formatPhone = util.formatPhone;
 var backspace = util.backspace;
 var input = react.DOM.input;
 
+var ua = navigator.userAgent;
+var crappyBrowser =
+  // IE < 10
+  ('documentMode' in document && document.documentMode < 10) ||
+  // Andorid Dolphin
+  (
+    ~ua.indexOf('Mozilla/5.0') &&
+    ~ua.indexOf('Android') &&
+    ~ua.indexOf('AppleWebKit') &&
+    ~ua.indexOf('Version')
+  );
+
 var getInputSelection = function (input) {
   var start = 0;
   var end = 0;
@@ -170,9 +182,17 @@ prototype.componentDidMount = function () {
 
   node.value = formatPhone(value != null ? value : tel.val);
 
-  node.addEventListener('keydown', scheduleUpdate);
-  node.addEventListener('keypress', scheduleUpdate);
-  node.addEventListener('paste', scheduleUpdate);
+  // IE8 does not support input event;
+  // IE9 support for input event is buggy;
+  // Android Dolphin browser has the cursor position all wrong.
+  if (crappyBrowser) {
+    node.addEventListener('keydown', scheduleUpdate);
+    node.addEventListener('keypress', scheduleUpdate);
+    node.addEventListener('paste', scheduleUpdate);
+  } else {
+    node.addEventListener('input', tel.update);
+  }
+
 };
 
 prototype.componentDidUpdate = function () {
