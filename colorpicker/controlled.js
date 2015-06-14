@@ -1,7 +1,8 @@
 'use strict';
 
-var luminance = require('../lib/luminance');
-var toRgb = require('colr-convert').hsv.rgb;
+var convert = require('colr-convert');
+var luminance = convert.rgb.grayscale;
+var toRgb = convert.hsv.rgb;
 var react = require('react');
 var sample = require('./sample');
 var shade = require('./shade');
@@ -40,7 +41,7 @@ var spec = {
     };
 
     return div(
-      {style: component.getStyle(luminance(toRgb(hsv)) < 0.5 ? dark : light)},
+      {style: component.getStyle(luminance(toRgb(hsv)) < 128 ? dark : light)},
       sample(sharedProps),
       div(
         {style: component.getStyle('shade')},
