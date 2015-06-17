@@ -51,7 +51,7 @@ prototype.render = function () {
     'normal'
   ];
 
-  return dom.div(
+  return dom.span(
     {style: styles[props.block ? 'block' : 'wrapper']},
     dom.select(props, options),
     icon({
