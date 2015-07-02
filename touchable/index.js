@@ -9,7 +9,6 @@ var build = function (oldProps) {
   var oldHandler = oldProps && oldProps.onTouch;
   var newHandler = component.props.onTouch;
   if (newHandler != oldHandler) {
-    console.log('different!');
     if (oldHandler) {
       mallet.off('input', oldHandler);
     }

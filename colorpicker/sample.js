@@ -21,8 +21,6 @@ var spec = {
         .replace(nonHexRegex, '')
         .slice(0, 7);
 
-      console.log(value);
-
       if (callback && value[0] == '#' && value.length == 7) {
         callback(rgbToHsv(hexToRgb(value)));
         component.setState({value: ''});
