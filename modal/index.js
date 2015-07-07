@@ -4,9 +4,9 @@ var constant = require('lodash').constant;
 var react = require('react/addons');
 var joinClasses = require('react/lib/joinClasses');
 var createFactory = react.createFactory;
-var surface = createFactory(require('../surface'));
 var scroller = createFactory(require('../scroll-view'));
 var button = createFactory(require('../button'));
+var div = react.DOM.div;
 
 var namespace = 'rag-modal';
 
@@ -33,13 +33,14 @@ var componentSpec = {
       return null;
     }
 
-    return surface(
+    return div(
       {
         className: joinClasses(
           namespace,
           props.backdrop && namespace + '-backdrop'
         ),
-        onTap: props.closeOnBackdropClick && component.onTap
+        onClick: props.closeOnBackdropClick &&
+          (component.onClick || component.onTap)
       },
       scroller(
         {className: joinClasses(namespace + '-window', props.className)},
@@ -47,7 +48,7 @@ var componentSpec = {
           className: namespace + '-close',
           type: ['hitarea'],
           icon: 'x',
-          onTap: component.close
+          onClick: component.close
         }),
         props.children
       )

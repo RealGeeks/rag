@@ -44,7 +44,8 @@ var buttonSpec = {
     classes.push(props.className, state);
 
     return dom[props.href ? 'a' : 'span']({
-      className: joinClasses.apply(undefined, classes)
+      className: joinClasses.apply(undefined, classes),
+      onClick: props.onClick
     },
       children
     );
