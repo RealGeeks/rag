@@ -87,7 +87,7 @@ var setInputSelection = function (input, selectionStart, selectionEnd) {
   }
 };
 
-var propsToOmit = ['className', 'limit', 'value', 'cursor', 'onChange'];
+var propsToOmit = ['className', 'value', 'cursor', 'onChange'];
 
 var Tel = function (props, context) {
   var tel = this;
@@ -96,7 +96,7 @@ var Tel = function (props, context) {
   tel.context = context;
 
   if (props.value == null) {
-    tel.val = keepDigits(props.defaultValue, props.limit);
+    tel.val = keepDigits(props.defaultValue);
   }
 
   tel.update = function () {
@@ -124,7 +124,7 @@ var Tel = function (props, context) {
     cursor -= length - value.length;
 
     cursor = countDigits(value, cursor);
-    value = keepDigits(value, props.limit);
+    value = keepDigits(value);
 
     if (propValue == null) {
       oldValue = target.value = formatPhone(value);
@@ -159,8 +159,7 @@ var prototype = defaults(
 );
 
 Tel.defaultProps = {
-  defaultValue: '',
-  limit: 10
+  defaultValue: ''
 };
 
 prototype.render = function () {
@@ -237,7 +236,6 @@ if (process.env.NODE_ENV != 'production') {
   Tel.propTypes = {
     defaultValue: react.PropTypes.string,
     value: react.PropTypes.string,
-    limit: react.PropTypes.number,
     onChange: react.PropTypes.func
   };
 }

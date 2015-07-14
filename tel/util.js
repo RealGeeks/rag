@@ -4,13 +4,16 @@ var isDigit = exports.isDigit = function (char) {
   return char >= '0' && char <= '9';
 };
 
-exports.keepDigits = function (string, limit) {
+exports.keepDigits = function (string) {
   var result = '';
   var index = 0;
+  var limit = 10;
   var char;
 
-  if (limit === 0) {
-    return result;
+  if (string[0] == '+') {
+    result = '+';
+    index = 1;
+    limit = 16;
   }
 
   while (index < string.length) {
@@ -38,6 +41,10 @@ exports.countDigits = function (string, end) {
   var count = 0;
   var index = 0;
 
+  if (string[0] == '+') {
+    count = index = 1;
+  }
+
   while (index < string.length && !end || index < end) {
     if (isDigit(string[index])) {
       count++;
@@ -52,6 +59,10 @@ exports.countDigits = function (string, end) {
 exports.adjustCursor = function (cursor, string) {
   var index = 0;
   var char;
+
+  if (string[0] == '+') {
+    index = 1;
+  }
 
   while (index <= cursor) {
     char = string[index];
@@ -69,7 +80,7 @@ exports.formatPhone = function (phone) {
   var length = phone.length;
   var result;
 
-  if (length < 1 || length > 11) {
+  if (length < 1 || length > 11 || phone[0] == '+') {
     return phone;
   }
 
