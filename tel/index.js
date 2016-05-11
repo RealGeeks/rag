@@ -166,6 +166,17 @@ prototype.render = function () {
   var tel = this;
   var props = tel.props;
   var className = props.className;
+  var dom = react.DOM;
+  var allCountries = require('./country_data').allCountries;
+  var options = _.map(allCountries, function(c) {
+    return dom.option(
+      {
+        value: c.iso2,
+        key: c.iso2,
+        dialCode: c.dialCode
+      },
+      c.name + ' (+' + c.dialCode + ')');
+  });
 
   props = omit(props, propsToOmit);
   props.type = 'tel';
@@ -177,7 +188,25 @@ prototype.render = function () {
     style.WebkitUserModify = 'read-write';
   }
 
-  return input(props);
+  if (props.useIntlPhoneInput) {
+    props['ref'] = 'phoneInput';
+    return dom.div(
+      {
+        className: 'country'
+      },
+      dom.select(
+        {
+          ref: 'dialCode',
+          className: 'dial-code',
+          defaultValue: 'us'
+        },
+        options
+      ),
+      input(props)
+    );
+  } else {
+    return input(props);
+  }
 };
 
 prototype.componentDidMount = function () {
@@ -185,18 +214,33 @@ prototype.componentDidMount = function () {
   var value = tel.props.value;
   var node = tel.node = react.findDOMNode(tel);
   var scheduleUpdate = tel.scheduleUpdate;
+  var dialCodeRef;
 
   node.value = formatPhone(value != null ? value : tel.val);
 
-  // IE8 does not support input event;
-  // IE9 support for input event is buggy;
-  // Android Dolphin browser has the cursor position all wrong.
-  if (ie || android) {
-    node.addEventListener('keydown', scheduleUpdate);
-    node.addEventListener('keypress', scheduleUpdate);
-    node.addEventListener('paste', scheduleUpdate);
+  if (!tel.props.useIntlPhoneInput) {
+    // IE8 does not support input event;
+    // IE9 support for input event is buggy;
+    // Android Dolphin browser has the cursor position all wrong.
+    if (ie || android) {
+      node.addEventListener('keydown', scheduleUpdate);
+      node.addEventListener('keypress', scheduleUpdate);
+      node.addEventListener('paste', scheduleUpdate);
+    } else {
+      node.addEventListener('input', tel.update);
+    }
   } else {
-    node.addEventListener('input', tel.update);
+    dialCodeRef = tel.refs.dialCode;
+    node.addEventListener('input', function(event) {
+      var allCountries = require('./country_data').allCountries;
+      var countryCode = dialCodeRef.getDOMNode().value;
+      var phone = tel.refs.phoneInput.getDOMNode().value;
+      // Convert countryCode (us) to dialCode (1)
+      var country = _.find(allCountries, function(country) {
+        return country.iso2 === countryCode;
+      });
+      tel.props.value = '+' + country.dialCode + phone
+    });
   }
 
 };
