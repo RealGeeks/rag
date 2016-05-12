@@ -228,9 +228,8 @@ prototype.componentDidMount = function () {
       node.addEventListener('input', tel.update);
     }
   } else {
-    var dialCodeRef = tel.refs.dialCode;
     node.addEventListener('input', function(event) {
-      var countryCode = dialCodeRef.getDOMNode().value;
+      var countryCode = tel.refs.dialCode.getDOMNode().value;
       var phone = tel.refs.phoneInput.getDOMNode().value;
       tel.refs.phoneInput.value = phone;
       tel.refs.dialCode.value = countryCode;
