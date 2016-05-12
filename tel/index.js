@@ -172,8 +172,7 @@ prototype.render = function () {
     return dom.option(
       {
         value: c.iso2,
-        key: c.iso2,
-        dialCode: c.dialCode
+        key: c.iso2
       },
       c.name + ' (+' + c.dialCode + ')');
   });
@@ -214,7 +213,6 @@ prototype.componentDidMount = function () {
   var value = tel.props.value;
   var node = tel.node = react.findDOMNode(tel);
   var scheduleUpdate = tel.scheduleUpdate;
-  var dialCodeRef;
 
   node.value = formatPhone(value != null ? value : tel.val);
 
@@ -230,16 +228,12 @@ prototype.componentDidMount = function () {
       node.addEventListener('input', tel.update);
     }
   } else {
-    dialCodeRef = tel.refs.dialCode;
+    var dialCodeRef = tel.refs.dialCode;
     node.addEventListener('input', function(event) {
-      var allCountries = require('./country_data').allCountries;
       var countryCode = dialCodeRef.getDOMNode().value;
       var phone = tel.refs.phoneInput.getDOMNode().value;
-      // Convert countryCode (us) to dialCode (1)
-      var country = _.find(allCountries, function(country) {
-        return country.iso2 === countryCode;
-      });
-      tel.props.value = '+' + country.dialCode + phone
+      tel.refs.phoneInput.value = phone;
+      tel.refs.dialCode.value = countryCode;
     });
   }
 
@@ -270,9 +264,20 @@ prototype.componentWillUnmount = function () {
 };
 
 prototype.value = function () {
-  var propValue = this.props.value;
+  if (this.props.useIntlPhoneInput) {
+    var countryCode = this.refs.dialCode.getDOMNode().value;
+    var phone = this.refs.phoneInput.getDOMNode().value;
 
-  return propValue == null ? this.val : propValue;
+    // Convert countryCode (us) to dialCode (1)
+    var allCountries = require('./country_data').allCountries;
+    var country = _.find(allCountries, function(country) {
+      return country.iso2 === countryCode;
+    });
+    return '+' + country.dialCode + phone;
+  } else {
+    var propValue = this.props.value;
+    return propValue == null ? this.val : propValue;
+  }
 };
 
 if (process.env.NODE_ENV != 'production') {
