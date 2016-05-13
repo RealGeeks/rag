@@ -190,9 +190,7 @@ prototype.render = function () {
   if (props.useIntlPhoneInput) {
     props['ref'] = 'phoneInput';
     return dom.div(
-      {
-        className: 'country'
-      },
+      undefined,
       dom.select(
         {
           ref: 'dialCode',
