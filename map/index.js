@@ -96,8 +96,13 @@ var mapComponent = {
   componentDidMount: function () {
     var component = this;
     var props = component.props;
+    var loadGmaps = require('load-gmaps');
 
-    require('load-gmaps')().then(function (mapsApi) {
+    if (props.gmapsApiKey) {
+       loadGmaps.key = props.gmapsApiKey;
+    }
+
+    loadGmaps().then(function (mapsApi) {
       var map = component.map = new mapsApi.Map(
         component.getDOMNode(),
         component.createMapOptions(props, mapsApi)
