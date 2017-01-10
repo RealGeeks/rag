@@ -19,6 +19,7 @@
   "homepage": "https://github.com/RealGeeks/rag",
   "license": "MIT",
   "devDependencies": {
+    "@realgeeks/svgcss": "^1.0.0",
     "browser-sync": "^1.9.0",
     "browserify": "^8.1.1",
     "del": "^1.1.1",
@@ -35,7 +36,6 @@
     "merge-stream": "^0.1.7",
     "multipipe": "^0.1.2",
     "sinon": "^1.12.2",
-    "svgcss": "^0.3.0",
     "tape": "^3.4.0",
     "testem": "^0.6.33",
     "uglifyify": "^3.0.1",
