@@ -132,8 +132,10 @@ var Tel = function (props, context) {
       target.value = oldValue;
     }
 
-    adjustedCursor = adjustCursor(cursor, oldValue);
-    setInputSelection(target, adjustedCursor, adjustedCursor);
+    setTimeout(function () {
+      adjustedCursor = adjustCursor(cursor, oldValue);
+      setInputSelection(target, adjustedCursor, adjustedCursor);
+    }, 10);
 
     if (value != oldUnformattedValue) {
       propValue == null && (tel.val = value);
