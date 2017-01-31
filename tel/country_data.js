@@ -11,7 +11,7 @@
 // ]
 var allCountries = [
     [
-      'Afghanistan (‫افغانستان‬‎)',
+      'Afghanistan (‫افغانستان‬‎)', // jshint ignore:line
       'af',
       '93'
     ],
@@ -21,7 +21,7 @@ var allCountries = [
       '355'
     ],
     [
-      'Algeria (‫الجزائر‬‎)',
+      'Algeria (‫الجزائر‬‎)', // jshint ignore:line
       'dz',
       '213'
     ],
@@ -87,7 +87,7 @@ var allCountries = [
       '1242'
     ],
     [
-      'Bahrain (‫البحرين‬‎)',
+      'Bahrain (‫البحرين‬‎)', // jshint ignore:line
       'bh',
       '973'
     ],
@@ -244,7 +244,7 @@ var allCountries = [
       '57'
     ],
     [
-      'Comoros (‫جزر القمر‬‎)',
+      'Comoros (‫جزر القمر‬‎)', // jshint ignore:line
       'km',
       '269'
     ],
@@ -331,7 +331,7 @@ var allCountries = [
       '593'
     ],
     [
-      'Egypt (‫مصر‬‎)',
+      'Egypt (‫مصر‬‎)', // jshint ignore:line
       'eg',
       '20'
     ],
@@ -517,12 +517,12 @@ var allCountries = [
       '62'
     ],
     [
-      'Iran (‫ایران‬‎)',
+      'Iran (‫ایران‬‎)', // jshint ignore:line
       'ir',
       '98'
     ],
     [
-      'Iraq (‫العراق‬‎)',
+      'Iraq (‫العراق‬‎)', // jshint ignore:line
       'iq',
       '964'
     ],
@@ -533,7 +533,7 @@ var allCountries = [
       '+... .. .......'
     ],
     [
-      'Israel (‫ישראל‬‎)',
+      'Israel (‫ישראל‬‎)', // jshint ignore:line
       'il',
       '972'
     ],
@@ -556,7 +556,7 @@ var allCountries = [
       '+.. ... .. ....'
     ],
     [
-      'Jordan (‫الأردن‬‎)',
+      'Jordan (‫الأردن‬‎)', // jshint ignore:line
       'jo',
       '962'
     ],
@@ -578,7 +578,7 @@ var allCountries = [
       '686'
     ],
     [
-      'Kuwait (‫الكويت‬‎)',
+      'Kuwait (‫الكويت‬‎)', // jshint ignore:line
       'kw',
       '965'
     ],
@@ -598,7 +598,7 @@ var allCountries = [
       '371'
     ],
     [
-      'Lebanon (‫لبنان‬‎)',
+      'Lebanon (‫لبنان‬‎)', // jshint ignore:line
       'lb',
       '961'
     ],
@@ -613,7 +613,7 @@ var allCountries = [
       '231'
     ],
     [
-      'Libya (‫ليبيا‬‎)',
+      'Libya (‫ليبيا‬‎)', // jshint ignore:line
       'ly',
       '218'
     ],
@@ -684,7 +684,7 @@ var allCountries = [
       '596'
     ],
     [
-      'Mauritania (‫موريتانيا‬‎)',
+      'Mauritania (‫موريتانيا‬‎)', // jshint ignore:line
       'mr',
       '222'
     ],
@@ -729,7 +729,7 @@ var allCountries = [
       '1664'
     ],
     [
-      'Morocco (‫المغرب‬‎)',
+      'Morocco (‫المغرب‬‎)', // jshint ignore:line
       'ma',
       '212'
     ],
@@ -817,12 +817,12 @@ var allCountries = [
       '+.. ... .. ...'
     ],
     [
-      'Oman (‫عُمان‬‎)',
+      'Oman (‫عُمان‬‎)', // jshint ignore:line
       'om',
       '968'
     ],
     [
-      'Pakistan (‫پاکستان‬‎)',
+      'Pakistan (‫پاکستان‬‎)', // jshint ignore:line
       'pk',
       '92',
       '+.. ...-.......'
@@ -833,7 +833,7 @@ var allCountries = [
       '680'
     ],
     [
-      'Palestine (‫فلسطين‬‎)',
+      'Palestine (‫فلسطين‬‎)', // jshint ignore:line
       'ps',
       '970'
     ],
@@ -883,7 +883,7 @@ var allCountries = [
       ['787', '939']
     ],
     [
-      'Qatar (‫قطر‬‎)',
+      'Qatar (‫قطر‬‎)', // jshint ignore:line
       'qa',
       '974'
     ],
@@ -964,7 +964,7 @@ var allCountries = [
       '239'
     ],
     [
-      'Saudi Arabia (‫المملكة العربية السعودية‬‎)',
+      'Saudi Arabia (‫المملكة العربية السعودية‬‎)', // jshint ignore:line
       'sa',
       '966'
     ],
@@ -1030,7 +1030,7 @@ var allCountries = [
       '82'
     ],
     [
-      'South Sudan (‫جنوب السودان‬‎)',
+      'South Sudan (‫جنوب السودان‬‎)', // jshint ignore:line
       'ss',
       '211'
     ],
@@ -1041,12 +1041,12 @@ var allCountries = [
       '+.. ... ... ...'
     ],
     [
-      'Sri Lanka (ශ්‍රී ලංකාව)',
+      'Sri Lanka (ශ්‍රී ලංකාව)', // jshint ignore:line
       'lk',
       '94'
     ],
     [
-      'Sudan (‫السودان‬‎)',
+      'Sudan (‫السودان‬‎)', // jshint ignore:line
       'sd',
       '249'
     ],
@@ -1073,7 +1073,7 @@ var allCountries = [
       '+.. .. ... .. ..'
     ],
     [
-      'Syria (‫سوريا‬‎)',
+      'Syria (‫سوريا‬‎)', // jshint ignore:line
       'sy',
       '963'
     ],
@@ -1123,7 +1123,7 @@ var allCountries = [
       '1868'
     ],
     [
-      'Tunisia (‫تونس‬‎)',
+      'Tunisia (‫تونس‬‎)', // jshint ignore:line
       'tn',
       '216'
     ],
@@ -1164,7 +1164,7 @@ var allCountries = [
       '380'
     ],
     [
-      'United Arab Emirates (‫الإمارات العربية المتحدة‬‎)',
+      'United Arab Emirates (‫الإمارات العربية المتحدة‬‎)', // jshint ignore:line
       'ae',
       '971'
     ],
@@ -1219,7 +1219,7 @@ var allCountries = [
       '681'
     ],
     [
-      'Yemen (‫اليمن‬‎)',
+      'Yemen (‫اليمن‬‎)', // jshint ignore:line
       'ye',
       '967'
     ],
@@ -1237,7 +1237,7 @@ var allCountries = [
 
 // we will build this in the loop below
 var allCountryCodes = {};
-var addCountryCode = function(iso2, dialCode, priority) {
+var addCountryCode = function (iso2, dialCode, priority) {
   if (!(dialCode in allCountryCodes)) {
     allCountryCodes[dialCode] = [];
   }
@@ -1257,34 +1257,34 @@ var addCountryCode = function(iso2, dialCode, priority) {
 // });
 
 for (var i = 0; i < allCountries.length; i++) {
-    // countries
-    var c = allCountries[i];
-    allCountries[i] = {
-      name: c[0],
-      iso2: c[1],
-      dialCode: c[2],
-      priority: c[4] || 0
-    };
-    // format
-    if (c[3]) {
-      allCountries[i].format = c[3];
-    }
+  // countries
+  var c = allCountries[i];
+  allCountries[i] = {
+    name: c[0],
+    iso2: c[1],
+    dialCode: c[2],
+    priority: c[4] || 0
+  };
+  // format
+  if (c[3]) {
+    allCountries[i].format = c[3];
+  }
 
-    // area codes
-    if (c[5]) {
-        allCountries[i].hasAreaCodes = true;
-        for (var j = 0; j < c[5].length; j++) {
-            // full dial code is country code + dial code
-            var dialCode = c[2] + c[5][j];
-            addCountryCode(c[1], dialCode);
-        }
+  // area codes
+  if (c[5]) {
+    allCountries[i].hasAreaCodes = true;
+    for (var j = 0; j < c[5].length; j++) {
+      // full dial code is country code + dial code
+      var dialCode = c[2] + c[5][j];
+      addCountryCode(c[1], dialCode);
     }
+  }
 
-    // dial codes
-    addCountryCode(c[1], c[2], c[4]);
+  // dial codes
+  addCountryCode(c[1], c[2], c[4]);
 }
 
 module.exports = {
-            allCountries: allCountries,
-            allCountryCodes: allCountryCodes
-        };
+  allCountries: allCountries,
+  allCountryCodes: allCountryCodes
+};

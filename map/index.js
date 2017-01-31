@@ -99,7 +99,7 @@ var mapComponent = {
     var loadGmaps = require('load-gmaps');
 
     if (props.gmapsApiKey) {
-       loadGmaps.key = props.gmapsApiKey;
+      loadGmaps.key = props.gmapsApiKey;
     }
 
     loadGmaps().then(function (mapsApi) {

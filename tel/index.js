@@ -168,7 +168,7 @@ prototype.render = function () {
   var className = props.className;
   var dom = react.DOM;
   var allCountries = require('./country_data').allCountries;
-  var options = _.map(allCountries, function(c) {
+  var options = _.map(allCountries, function (c) {
     return dom.option(
       {
         value: c.iso2,
@@ -188,7 +188,7 @@ prototype.render = function () {
   }
 
   if (props.useIntlPhoneInput) {
-    props['ref'] = 'phoneInput';
+    props.ref = 'phoneInput';
     return dom.div(
       undefined,
       dom.select(
@@ -226,7 +226,7 @@ prototype.componentDidMount = function () {
       node.addEventListener('input', tel.update);
     }
   } else {
-    node.addEventListener('input', function(event) {
+    node.addEventListener('input', function () {
       var countryCode = tel.refs.dialCode.getDOMNode().value;
       var phone = tel.refs.phoneInput.getDOMNode().value;
       tel.refs.phoneInput.value = phone;
@@ -267,7 +267,7 @@ prototype.value = function () {
 
     // Convert countryCode (us) to dialCode (1)
     var allCountries = require('./country_data').allCountries;
-    var country = _.find(allCountries, function(country) {
+    var country = _.find(allCountries, function (country) {
       return country.iso2 === countryCode;
     });
     return '+' + country.dialCode + phone;
