@@ -1,11 +1,5 @@
 $map-min-height: 150px !default;
 
-/**
- * 1. Make sure the map creates a stacking context so that Google Maps nodes
- *    which have a z-index do not end up covering outside nodes. 
- */
 .rag-map {
-  position: relative;
-  z-index: 0; /* 1 */
   min-height: $map-min-height;
 }

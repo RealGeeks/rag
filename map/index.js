@@ -45,7 +45,6 @@ var mapComponent = {
     [
     [['mapTypeId'], 'MapTypeId'],
     [['mapTypeControlOptions', 'style'], 'MapTypeControlStyle'],
-    [['mapTypeControlOptions', 'position'], 'ControlPosition'],
     [['streetViewControlOptions', 'position'], 'ControlPosition'],
     [['zoomControlOptions', 'style'], 'ZoomControlStyle'],
     [['zoomControlOptions', 'position'], 'ControlPosition']
@@ -96,13 +95,8 @@ var mapComponent = {
   componentDidMount: function () {
     var component = this;
     var props = component.props;
-    var loadGmaps = require('load-gmaps');
 
-    if (props.gmapsApiKey) {
-      loadGmaps.key = props.gmapsApiKey;
-    }
-
-    loadGmaps().then(function (mapsApi) {
+    require('load-gmaps')().then(function (mapsApi) {
       var map = component.map = new mapsApi.Map(
         component.getDOMNode(),
         component.createMapOptions(props, mapsApi)

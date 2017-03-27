@@ -37,6 +37,7 @@ $rag-button-icon-size: 24px !default;
   border: $rag-button-border-width solid $rag-button-border-color;
   border-radius: $rag-button-border-radius;
   vertical-align: middle;
+  outline-offset: -4px;
 
   // span {
   //   @extend %align-middle; /* 1 */

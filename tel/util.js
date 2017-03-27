@@ -4,16 +4,13 @@ var isDigit = exports.isDigit = function (char) {
   return char >= '0' && char <= '9';
 };
 
-exports.keepDigits = function (string) {
+exports.keepDigits = function (string, limit) {
   var result = '';
   var index = 0;
-  var limit = 10;
   var char;
 
-  if (string[0] == '+') {
-    result = '+';
-    index = 1;
-    limit = 16;
+  if (limit === 0) {
+    return result;
   }
 
   while (index < string.length) {
@@ -41,10 +38,6 @@ exports.countDigits = function (string, end) {
   var count = 0;
   var index = 0;
 
-  if (string[0] == '+') {
-    count = index = 1;
-  }
-
   while (index < string.length && !end || index < end) {
     if (isDigit(string[index])) {
       count++;
@@ -60,10 +53,6 @@ exports.adjustCursor = function (cursor, string) {
   var index = 0;
   var char;
 
-  if (string[0] == '+') {
-    index = 1;
-  }
-
   while (index <= cursor) {
     char = string[index];
     if (char && !isDigit(char)) {
@@ -78,9 +67,8 @@ exports.adjustCursor = function (cursor, string) {
 
 exports.formatPhone = function (phone) {
   var length = phone.length;
-  var result;
 
-  if (length < 1 || length > 11 || phone[0] == '+') {
+  if (length < 4 || length > 11) {
     return phone;
   }
 
@@ -93,42 +81,11 @@ exports.formatPhone = function (phone) {
     return phone;
   }
 
-  result = '(' + phone.substr(0, 3);
-
-  if (length > 2) {
-    result += ') ' + phone.substr(3, 3);
-
-    if (length > 5) {
-      result += '-' + phone.substr(6);
-    }
+  if (length > 6) {
+    return '(' + phone.substr(0, 3) + ') ' +
+      phone.substr(3, 3) + '-' + phone.substr(6);
   }
 
-  return result;
-};
-
-// Backspace until a digit is removed.
-exports.backspace = function (oldString, newString, position) {
-  if (
-    // if the new string is shorter
-    newString.length < oldString.length &&
-
-    // and a character was removed at position
-    newString[position] != oldString[position] &&
-
-    // and the character removed is not a digit
-    !isDigit(oldString[position])
-  ) {
-    var i = position - 1;
-
-    // then backspace from position until a digit is removed
-    while (i > 0) {
-      if (isDigit(newString[i])) {
-        return newString.slice(0, i) + newString.slice(position);
-      }
-
-      i--;
-    }
-  }
-
-  return newString;
+  // At this point length >= 4 && length <= 6
+  return '(' + phone.substr(0, 3) + ') ' + phone.substr(3);
 };

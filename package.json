@@ -1,29 +1,83 @@
 {
-  "name": "rag",
-  "version": "0.8.16",
-  "description": "Real Geeks UI Kit.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/RealGeeks/rag.git"
+  "_args": [
+    [
+      {
+        "raw": "rag@^0.10.36",
+        "scope": null,
+        "escapedName": "rag",
+        "name": "rag",
+        "rawSpec": "^0.10.36",
+        "spec": ">=0.10.36 <0.11.0",
+        "type": "range"
+      },
+      "/Users/realgeeks-keithraymond/Apps/rook"
+    ]
+  ],
+  "_from": "rag@>=0.10.36 <0.11.0",
+  "_id": "rag@0.10.44",
+  "_inCache": true,
+  "_location": "/rag",
+  "_nodeVersion": "0.12.2",
+  "_npmUser": {
+    "name": "iclanzan",
+    "email": "sorin@iclanzan.com"
   },
-  "scripts": {
-    "test": "testem ci",
-    "prepublish": "gulp scss",
-    "build": "gulp build",
-    "css": "gulp css"
+  "_npmVersion": "3.1.2",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "rag@^0.10.36",
+    "scope": null,
+    "escapedName": "rag",
+    "name": "rag",
+    "rawSpec": "^0.10.36",
+    "spec": ">=0.10.36 <0.11.0",
+    "type": "range"
   },
-  "author": "Sorin Iclanzan <sorin@iclanzan.com> (http://iclanzan.com/)",
+  "_requiredBy": [
+    "/",
+    "/@realgeeks/rookery-messenger"
+  ],
+  "_resolved": "https://registry.npmjs.org/rag/-/rag-0.10.44.tgz",
+  "_shasum": "988980da5c4cbb7a04230cb0b3ca9404f3da2419",
+  "_shrinkwrap": null,
+  "_spec": "rag@^0.10.36",
+  "_where": "/Users/realgeeks-keithraymond/Apps/rook",
+  "author": {
+    "name": "Sorin Iclanzan",
+    "email": "sorin@iclanzan.com",
+    "url": "http://iclanzan.com/"
+  },
+  "browserify": {
+    "transform": [
+      "envify"
+    ]
+  },
   "bugs": {
     "url": "https://github.com/RealGeeks/rag/issues"
   },
-  "homepage": "https://github.com/RealGeeks/rag",
-  "license": "MIT",
+  "dependencies": {
+    "clamp": "^1.0.1",
+    "colr-convert": "^1.0.4",
+    "empty": "^0.10.0",
+    "envify": "^3.2.0",
+    "es6-promise": "^2.0.1",
+    "eventemitter3": "^1.1.0",
+    "inner": "^0.2.0",
+    "load-gmaps": "^0.1.0",
+    "lodash": "^3.3.1",
+    "mallet": "^0.2.0",
+    "prevent-overscroll": "^0.1.0",
+    "query-string": "^1.0.0",
+    "react": "^0.13.3",
+    "react-touch-mixin": "^0.1.1",
+    "supports": "^0.1.1"
+  },
+  "description": "Real Geeks UI Kit.",
   "devDependencies": {
-    "@realgeeks/svgcss": "^1.0.0",
     "browser-sync": "^1.9.0",
     "browserify": "^8.1.1",
     "del": "^1.1.1",
-    "gulp": "^3.8.10",
+    "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-csso": "^0.2.9",
     "gulp-file": "^0.2.0",
@@ -31,11 +85,12 @@
     "gulp-jscs": "^1.4.0",
     "gulp-jshint": "^1.9.0",
     "gulp-notify": "^2.1.0",
-    "gulp-sass": "^2.3.1",
+    "gulp-sass": "^1.3.2",
     "gulp-uglify": "^1.0.2",
     "merge-stream": "^0.1.7",
     "multipipe": "^0.1.2",
     "sinon": "^1.12.2",
+    "svgcss": "^0.3.0",
     "tape": "^3.4.0",
     "testem": "^0.6.33",
     "uglifyify": "^3.0.1",
@@ -43,22 +98,31 @@
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.2.1"
   },
-  "dependencies": {
-    "envify": "^3.2.0",
-    "es6-promise": "^2.0.1",
-    "inner": "^0.2.0",
-    "load-gmaps": "^0.1.0",
-    "lodash": "^2.4.1",
-    "prevent-overscroll": "^0.1.0",
-    "query-string": "^1.0.0",
-    "react": "^0.13.3",
-    "react-touch-mixin": "^0.1.1",
-    "scriptload": "^0.1.0",
-    "supports": "^0.1.1"
+  "directories": {},
+  "dist": {
+    "shasum": "988980da5c4cbb7a04230cb0b3ca9404f3da2419",
+    "tarball": "https://registry.npmjs.org/rag/-/rag-0.10.44.tgz"
   },
-  "browserify": {
-    "transform": [
-      "envify"
-    ]
-  }
+  "gitHead": "36a6e35685386d40c4ee0313c1fef3b8f62a66fb",
+  "homepage": "https://github.com/RealGeeks/rag",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "iclanzan",
+      "email": "sorin@iclanzan.com"
+    }
+  ],
+  "name": "rag",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RealGeeks/rag.git"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "test": "testem ci",
+    "watch": "gulp"
+  },
+  "version": "0.10.44"
 }

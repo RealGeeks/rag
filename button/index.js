@@ -1,59 +1,63 @@
 'use strict';
 
+var defaults = require('lodash/object/defaults');
 var react = require('react/addons');
-var joinClasses = require('react/lib/joinClasses');
+var Hitarea = require('../hitarea');
+var styles = require('./styles')();
 var dom = react.DOM;
 
-var HITAREA = 'hitarea';
-var namespace = 'rag-button';
+var prototype = Button.prototype;
 
-var buttonSpec = {
-  mixins: [require('react-touch-mixin'), react.addons.PureRenderMixin],
+function Button(props, context) {
+  Hitarea.call(this, props, context);
+}
 
-  render: function () {
-    var props = this.props;
-    var state = props.disabled && 'disabled' || props.active && 'active';
-    var type = props.type;
-    var classes = type == HITAREA ? [HITAREA] : [namespace];
-    var icon = props.icon;
-    var iconPosition = props.iconPosition || 'left';
-    var children = props.children;
+prototype.render = function () {
+  var component = this;
+  var state = component.state;
+  var props = defaults(component.getHandlers(), component.props);
+  var style;
 
-    if (type) {
-      if (Array.isArray(type)) {
-        type.forEach(function (kind) {
-          classes.push(namespace + '-' + kind);
-        });
-      } else if (type != HITAREA) {
-        classes.push(namespace + '-' + type);
-      }
-    }
+  var args = ['base'];
 
-    if (icon) {
-      classes.push('icon', 'icon-' + icon);
-
-      if (state) {
-        classes.push('icon-' + icon + '-' + state);
-      }
-
-      if (children) {
-        classes.push('icon-' + iconPosition);
-      }
-    }
-
-    classes.push(props.className, state);
-
-    return dom[props.href ? 'a' : 'span']({
-      className: joinClasses.apply(undefined, classes),
-      onClick: props.onClick
-    },
-      children
-    );
+  if (props.kind) {
+    args = args.concat(props.kind);
   }
+
+  var buttonState = props.disabled && 'disabled' ||
+    (props.active || state.active) && 'active' ||
+    state.hover && 'hover';
+
+  if (buttonState) {
+    args.push(buttonState);
+  }
+
+  if (state.keyboardFocus) {
+    args.push('focus');
+  }
+
+  style = styles(args);
+  props.style = props.style ? defaults({}, props.style, style) : style;
+
+  return dom[props.href ? 'a' : 'button'](props, props.label || props.children);
 };
 
 if (process.env.NODE_ENV != 'production') {
-  buttonSpec.displayName = 'Button';
+  Button.displayName = 'Button';
+
+  Button.propTypes = {
+    label: react.PropTypes.string,
+    kind: react.PropTypes.oneOfType([
+      react.PropTypes.string,
+      react.PropTypes.array
+    ]),
+    href: react.PropTypes.string,
+    action: react.PropTypes.func,
+    active: react.PropTypes.bool,
+    disabled: react.PropTypes.bool
+  };
 }
 
-module.exports = react.createClass(buttonSpec);
+defaults(prototype, Hitarea.prototype);
+
+module.exports = Button;
