@@ -2,14 +2,16 @@
   "name": "rag",
   "version": "0.10.16",
   "description": "Real Geeks UI Kit.",
+  "main": "./output/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/RealGeeks/rag.git"
   },
   "scripts": {
     "test": "testem ci",
-    "watch": "gulp",
-    "build": "gulp build"
+    "start": "webpack --watch",
+    "watch": "webpack --watch -p --config ./webpack.production.config.js --progress --profile --colors",
+    "build": "webpack -p --config ./webpack.production.config.js --progress --profile --colors"
   },
   "author": "Sorin Iclanzan <sorin@iclanzan.com> (http://iclanzan.com/)",
   "bugs": {
@@ -17,7 +19,6 @@
   },
   "homepage": "https://github.com/RealGeeks/rag",
   "license": "MIT",
-  "description": "Real Geeks UI Kit.",
   "peerDependencies": {
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
@@ -41,34 +42,18 @@
     "supports": "^0.1.1"
   },
   "devDependencies": {
-    "browser-sync": "^1.9.0",
-    "browserify": "^8.1.1",
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "browser-sync": "^2.18.8",
+    "browser-sync-webpack-plugin": "^1.1.4",
     "del": "^1.1.1",
-    "gulp": "^3.8.11",
-    "gulp-autoprefixer": "^2.1.0",
-    "gulp-csso": "^0.2.9",
-    "gulp-file": "^0.2.0",
-    "gulp-gh-pages": "^0.4.0",
-    "gulp-jscs": "^1.4.0",
-    "gulp-jshint": "^1.9.0",
-    "gulp-notify": "^2.1.0",
-    "gulp-sass": "^3.1.0",
-    "gulp-uglify": "^1.0.2",
-    "merge-stream": "^0.1.7",
-    "multipipe": "^0.1.2",
     "react-addons-test-utils": "^15.4.2",
     "sinon": "^1.12.2",
     "svgcss": "^0.3.0",
     "tape": "^3.4.0",
     "testem": "^0.6.33",
-    "uglifyify": "^3.0.1",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.0.0",
-    "watchify": "^2.2.1"
-  },
-  "browserify": {
-    "transform": [
-      "envify"
-    ]
+    "webpack": "^2.3.2"
   }
 }
