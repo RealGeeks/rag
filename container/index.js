@@ -1,7 +1,7 @@
 'use strict';
 
 var react = require('react');
-var style = require('./style')();
+var com_style = require('./style')();
 var div = require('react-dom').div;
 var containerStyle = require('./style')();
 var prototype;
@@ -19,7 +19,7 @@ prototype.render = function () {
   var style = containerStyle;
 
   if (styleProp) {
-    style = Object.assign({}, style, styleProp);
+    style = Object.assign({}, com_style, styleProp);
   }
 
   return div(
