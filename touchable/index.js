@@ -1,6 +1,6 @@
 'use strict';
 
-var findDOMNode = require('react/lib/findDOMNode');
+var ReactDom = require('react-dom');
 var Mallet;
 
 var build = function (oldProps) {
@@ -21,7 +21,7 @@ var build = function (oldProps) {
         }
 
         mallet = component.mallet =
-          new Mallet(findDOMNode(component), {recognizers: []});
+          new Mallet(ReactDom.findDOMNode(component), {recognizers: []});
       }
 
       mallet.on('input', newHandler);

@@ -1,17 +1,18 @@
 'use strict';
 
 var defaults = require('lodash/object/defaults');
-var react = require('react/addons');
-var button = react.createFactory(require('../button'));
+var React = require('react');
+var PureRenderMixin = require('react-addons-pure-render-mixin');
+var button = React.createFactory(require('../button'));
 var style = require('./style')();
-var span = react.DOM.span;
+var span = require('react-dom').span;
 
 var ButtonGroup = function (props, context) {
   this.props = props;
   this.context = context;
 };
 
-var prototype = defaults(ButtonGroup.prototype, react.addons.PureRenderMixin);
+var prototype = defaults(ButtonGroup.prototype, PureRenderMixin);
 
 prototype.render = function () {
   var props = this.props;
@@ -54,8 +55,8 @@ prototype.render = function () {
 if (process.env.NODE_ENV != 'production') {
   ButtonGroup.displayName = 'Button Group';
   ButtonGroup.propTypes = {
-    buttons: react.PropTypes.arrayOf(
-      react.PropTypes.object.isRequired
+    buttons: React.PropTypes.arrayOf(
+      React.PropTypes.object.isRequired
     ).isRequired
   };
 }

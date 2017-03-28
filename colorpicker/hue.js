@@ -2,7 +2,7 @@
 
 var defaults = require('lodash/object/defaults');
 var touchTracker = require('../touchTracker');
-var div = require('react/lib/ReactDOM').div;
+var div = require('react-dom').div;
 
 var strip = div({
   style: {

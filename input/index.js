@@ -1,10 +1,10 @@
 'use strict';
 
 var defaults = require('lodash/object/defaults');
-var react = require('react/addons');
+var React = require('react');
 var Hitarea = require('../hitarea');
 var styles = require('./styles')();
-var dom = react.DOM;
+var dom = require('react-dom');
 
 var prototype = Input.prototype;
 
@@ -38,7 +38,7 @@ if (process.env.NODE_ENV != 'production') {
   Input.displayName = 'Input';
 
   Input.propTypes = {
-    type: react.PropTypes.string
+    type: React.PropTypes.string
   };
 }
 

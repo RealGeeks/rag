@@ -8,10 +8,14 @@ var styles = require('./styles')();
 var dom = react.DOM;
 
 var mapOption = function (option, index) {
+  var value;
+  var label;
+  var disabled;
+
   if (typeof option == 'object') {
-    var value = option.value;
-    var label = option.label || value;
-    var disabled = option.disabled;
+    value = option.value;
+    label = option.label || value;
+    disabled = option.disabled;
 
     if (option.options) {
       return dom.optgroup(

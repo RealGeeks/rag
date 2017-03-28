@@ -1,10 +1,10 @@
 'use strict';
 
 var defaults = require('lodash/object/defaults');
-var react = require('react/addons');
+var React = require('react');
 var Hitarea = require('../hitarea');
 var styles = require('./styles')();
-var dom = react.DOM;
+var dom = React.DOM;
 
 var prototype = Button.prototype;
 
@@ -46,15 +46,15 @@ if (process.env.NODE_ENV != 'production') {
   Button.displayName = 'Button';
 
   Button.propTypes = {
-    label: react.PropTypes.string,
-    kind: react.PropTypes.oneOfType([
-      react.PropTypes.string,
-      react.PropTypes.array
+    label: React.PropTypes.string,
+    kind: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.array
     ]),
-    href: react.PropTypes.string,
-    action: react.PropTypes.func,
-    active: react.PropTypes.bool,
-    disabled: react.PropTypes.bool
+    href: React.PropTypes.string,
+    action: React.PropTypes.func,
+    active: React.PropTypes.bool,
+    disabled: React.PropTypes.bool
   };
 }
 

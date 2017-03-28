@@ -2,7 +2,7 @@
 
 var clamp = require('clamp');
 var touchable = require('../touchable');
-var findDOMNode = require('react/lib/findDOMNode');
+var ReactDom = require('react-dom');
 
 var spec = {
   init: function (component) {
@@ -24,7 +24,7 @@ var spec = {
   },
 
   componentDidMount: function () {
-    this.node = findDOMNode(this);
+    this.node = ReactDom.findDOMNode(this);
   },
 
   render: function (props) {

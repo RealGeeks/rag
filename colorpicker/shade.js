@@ -1,7 +1,7 @@
 'use strict';
 
 var touchTracker = require('../touchTracker');
-var div = require('react/lib/ReactDOM').div;
+var div = require('react-dom').div;
 
 var overlay = div({
   style: {

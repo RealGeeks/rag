@@ -10,13 +10,15 @@ var normal = {
 
 normal[prefixProp('userSelect')] = 'none';
 
-module.exports = require('react/lib/emptyFunction').thatReturns({
-  normal: normal,
+module.exports = function() {
+  return {
+    normal: normal,
 
-  focus: defaults({outline: ''}, normal),
+    focus: defaults({outline: ''}, normal),
 
-  disabled: {
-    cursor: 'default',
-    pointerEvents: 'none'
-  }
-});
+    disabled: {
+      cursor: 'default',
+      pointerEvents: 'none'
+    }
+  };
+};

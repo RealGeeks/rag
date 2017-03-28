@@ -1,15 +1,17 @@
 'use strict';
 
-var react = require('react/addons');
+var React = require('react');
+var PureRenderMixin = require('react-addons-pure-render-mixin');
+var dom = require('react-dom');
 
 var componentSpec = {
   mixins: [
     require('react-touch-mixin'),
-    react.addons.PureRenderMixin
+    PureRenderMixin
   ],
 
   render: function () {
-    return react.DOM.div(this.props);
+    return dom.div(this.props);
   }
 };
 
@@ -17,4 +19,4 @@ if (process.env.NODE_ENV != 'production') {
   componentSpec.displayName = 'Surface';
 }
 
-module.exports = react.createClass(componentSpec);
+module.exports = React.createClass(componentSpec);

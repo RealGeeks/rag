@@ -1,10 +1,10 @@
 'use strict';
 
 var defaults = require('lodash/object/defaults');
-var react = require('react/addons');
-var findDOMNode = react.findDOMNode;
+var React = require('react');
+var PureRenderMixin = require('react-addons-pure-render-mixin');
+var dom = require('react-dom');
 var styles = require('./styles')();
-var dom = react.DOM;
 
 var focusState = {focus: true};
 var keyboardFocusState = {
@@ -132,23 +132,23 @@ prototype.getHandlers = function () {
 };
 
 prototype.focus = function () {
-  findDOMNode(this).focus();
+  dom.findDOMNode(this).focus();
 };
 
 if (process.env.NODE_ENV != 'production') {
   Hitarea.displayName = 'Hitarea';
 
   Hitarea.propTypes = {
-    tag: react.PropTypes.string,
-    action: react.PropTypes.func
+    tag: React.PropTypes.string,
+    action: React.PropTypes.func
   };
 }
 
 defaults(
   Hitarea.prototype,
-  react.Component.prototype,
+  React.Component.prototype,
   // require('react-touch-mixin'),
-  react.addons.PureRenderMixin
+  PureRenderMixin
 );
 
 module.exports = Hitarea;

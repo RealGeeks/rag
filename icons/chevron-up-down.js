@@ -1,16 +1,15 @@
 'use strict';
 
-var assign = require('react/lib/Object.assign');
 var iconSize = require('../theme')().iconSize;
-var react = require('react/addons');
-var dom = react.DOM;
+var PureRenderMixin = require('react-addons-pure-render-mixin');
+var dom = require('react-dom');
 
 var SelectIcon = function (props, context) {
   this.props = props;
   this.context = context;
 };
 
-var prototype = assign(SelectIcon.prototype, react.addons.PureRenderMixin);
+var prototype = Object.assign(SelectIcon.prototype, PureRenderMixin);
 
 SelectIcon.defaultProps = {
   width: iconSize * 10 / 16,

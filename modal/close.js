@@ -1,16 +1,15 @@
 'use strict';
 
-var assign = require('react/lib/Object.assign');
 var theme = require('../theme')();
-var react = require('react/addons');
-var dom = react.DOM;
+var PureRenderMixin = require('react-addons-pure-render-mixin');
+var dom = require('react-dom');
 
 var CloseIcon = function (props, context) {
   this.props = props;
   this.context = context;
 };
 
-var prototype = assign(CloseIcon.prototype, react.addons.PureRenderMixin);
+var prototype = Object.assign(CloseIcon.prototype, PureRenderMixin);
 
 CloseIcon.defaultProps = {
   color: theme.colors.background,

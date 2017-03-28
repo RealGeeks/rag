@@ -5,9 +5,9 @@ require('es6-promise').polyfill();
 var test = require('tape');
 var sinon = require('sinon');
 var _ = require('lodash');
-var react = require('react/addons');
-var map = react.createFactory(require('./'));
-var TestUtils = react.addons.TestUtils;
+var React = require('react');
+var map = React.createFactory(require('./'));
+var TestUtils = require('react-addons-test-utils');
 
 var loadGMaps = require('load-gmaps');
 

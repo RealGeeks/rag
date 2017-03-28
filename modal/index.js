@@ -1,9 +1,10 @@
 'use strict';
 
 var assign = require('lodash/object/assign');
-var react = require('react/addons');
+var React = require('react');
+var PureRenderMixin = require('react-addons-pure-render-mixin');
 var styles = require('./styles')();
-var createFactory = react.createFactory;
+var createFactory = React.createFactory;
 var hitarea = createFactory(require('../hitarea'));
 var scroller = createFactory(require('../scroll-view'));
 var closeIcon = createFactory(require('./close'));
@@ -15,7 +16,7 @@ var Modal = function (props, context) {
   component.context = context;
 
   component.handleBackdropClick = function (event) {
-    if (event.target == react.findDOMNode(component)) {
+    if (event.target == React.findDOMNode(component)) {
       component.props.onBackdropClick();
     }
   };
@@ -23,7 +24,7 @@ var Modal = function (props, context) {
 
 var prototype = assign(
   Modal.prototype,
-  react.addons.PureRenderMixin
+  PureRenderMixin
 );
 
 Modal.defaultProps = {
@@ -58,8 +59,8 @@ prototype.render = function () {
 if (process.env.NODE_ENV != 'production') {
   Modal.displayName = 'Modal';
   Modal.propTypes = {
-    onBackdropClick: react.PropTypes.func,
-    onCloseButtonClick: react.PropTypes.func
+    onBackdropClick: React.PropTypes.func,
+    onCloseButtonClick: React.PropTypes.func
   };
 }
 
