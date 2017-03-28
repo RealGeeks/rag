@@ -109,8 +109,10 @@ prototype.render = function () {
   // Don’t pass action prop as it will get added as an attribute
   // on the underlying DOM element.
   delete props.action;
+  var tag = props.tag;
+  delete props.tag;
 
-  return dom[props.tag](props, props.children);
+  return React.createElement(tag, props, props.children)
 };
 
 prototype.getHandlers = function () {
