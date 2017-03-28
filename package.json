@@ -42,6 +42,10 @@
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.2.1"
   },
+  "peerDependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  },
   "dependencies": {
     "clamp": "^1.0.1",
     "colr-convert": "^1.0.4",
@@ -55,7 +59,6 @@
     "mallet": "^0.2.0",
     "prevent-overscroll": "^0.1.0",
     "query-string": "^1.0.0",
-    "react": "^0.13.3",
     "react-touch-mixin": "^0.1.1",
     "scriptload": "^0.1.0",
     "supports": "^0.1.1"
