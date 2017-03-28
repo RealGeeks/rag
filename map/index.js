@@ -3,7 +3,6 @@
 var _ = require('lodash');
 var inner = require('inner');
 var react = require('react');
-var joinClasses = require('react/lib/joinClasses');
 var dom = react.DOM;
 
 var mapComponent = {
@@ -85,9 +84,14 @@ var mapComponent = {
 
   render: function () {
     var props = this.props;
+    var klass = 'rag-map';
+
+    if(props.className != null) {
+      klass += " " + props.className;
+    }
 
     return dom.div({
-      className: joinClasses('rag-map', props.className),
+      className: klass,
       style: props.style
     });
   },

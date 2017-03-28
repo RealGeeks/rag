@@ -2,7 +2,11 @@
 
 var inputStyles = require('../input/styles')();
 var theme = require('../theme')();
-var icon = require('../icons/chevron-up-down').defaultProps;
+var iconSize = require('../theme')().iconSize;
+var icon = {
+  width: iconSize * 10 / 16,
+  height: iconSize
+};
 
 module.exports = function () {
   var normal = inputStyles(['text']);
