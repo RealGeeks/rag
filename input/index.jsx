@@ -7,10 +7,10 @@ var styles = require('./styles')();
 var dom = require('react-dom');
 
 
-class Input extends React.Component {
+class Input extends Hitarea {
   constructor(props, context) {
     super(props);
-    Hitarea.call(this, props, context);
+    // Hitarea.call(this, props, context);
   }
 
   render() {

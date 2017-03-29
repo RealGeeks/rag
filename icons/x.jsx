@@ -6,7 +6,6 @@ var React = require('react');
 var dom = require('react-dom');
 var PureRenderMixin = require('react-addons-pure-render-mixin');
 
-
 class X extends React.Component {
   constructor(props, context) {
     super(props);

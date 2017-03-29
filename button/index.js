@@ -6,11 +6,14 @@ var Hitarea = require('../hitarea');
 var styles = require('./styles')();
 var dom = React.DOM;
 
-var prototype = Button.prototype;
 
-function Button(props, context) {
-  Hitarea.call(this, props, context);
+class Button extends Hitarea {
+  constructor(props) {
+    super(props);
+  }
 }
+
+var prototype = Button.prototype;
 
 prototype.render = function () {
   var component = this;

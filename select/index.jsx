@@ -38,8 +38,11 @@ var mapOption = function (option, index) {
   }, label);
 };
 
-var Select = function (props, context) {
-  Hitarea.call(this, props, context);
+class Select extends Hitarea {
+  constructor(props) {
+    super(props);
+  }
+  // Hitarea.call(this, props, context);
 };
 
 var prototype = Select.prototype;
