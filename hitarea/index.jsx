@@ -57,7 +57,6 @@ class Hitarea extends React.Component {
     // on the underlying DOM element.
     delete props.action;
     delete props.tag;
-
     return React.createElement(tag, props, props.children)
   }
 

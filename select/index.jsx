@@ -51,12 +51,16 @@ prototype.render = function () {
   var component = this;
   var props = defaults(component.getHandlers(), component.props);
   var options = props.options && props.options.map(mapOption);
+  var block = props.block;
+  delete props.block;
+  delete props.options;
 
   props.style = styles[
     props.disabled && 'disabled' ||
     component.state.focus && 'focus' ||
     'normal'
   ];
+
 
   return dom.span(
     {style: styles[props.block ? 'block' : 'wrapper']},
