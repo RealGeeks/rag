@@ -45,6 +45,7 @@ class OutsideClickable extends React.Component {
   render() {
     var props = this.props,
         el = props.component || 'div';
+
     return React.createElement('div', defaults(this.wrapperProps, {style: props.style}), props.children);
   }
 
@@ -56,11 +57,11 @@ class OutsideClickable extends React.Component {
 
 // A mousedown event is triggered after a touchstart in touch supporting
 // devices. Make sure the handler is not triggered twice.
-if (hasTouch) {
-  prototype.handleEvent = throttle(prototype.handleEvent, 400, {
-    trailing: false
-  });
-}
+// if (hasTouch) {
+//   prototype.handleEvent = throttle(prototype.handleEvent, 400, {
+//     trailing: false
+//   });
+// }
 
 if (process.env.NODE_ENV != 'production') {
   OutsideClickable.displayName = 'Outside Clickable';

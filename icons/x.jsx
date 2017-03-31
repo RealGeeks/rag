@@ -17,7 +17,7 @@ class X extends React.Component {
   }
 
   render() {
-    var props = this.props;
+    var props = defaults(this.defaultProps, this.props);
     return <svg viewBox='0 0 10 16' width={props.width} height={props.height} style={props.style}>
       <path d='m1 4 8 8m0-8-8 8' stroke='currentColor' strokeWidth={2} fill='none' />
     </svg>
