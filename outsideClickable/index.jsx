@@ -10,15 +10,15 @@ class OutsideClickable extends React.Component {
   constructor(props, context) {
     super(props);
     this.wrapperProps = {
-      onMouseDown: this.block,
-      onMouseUp: this.unblock,
-      onMouseOut: this.unblock
+      onMouseDown: this.set_block.bind(this),
+      onMouseUp: this.set_unblock.bind(this),
+      onMouseOut: this.set_unblock.bind(this)
     };
 
     if (hasTouch) {
-      this.wrapperProps.onTouchStart = this.block;
-      this.wrapperProps.onTouchEnd = this.unblock;
-      this.wrapperProps.onTouchCancel = this.unblock;
+      this.wrapperProps.onTouchStart = this.set_block.bind(this);
+      this.wrapperProps.onTouchEnd = this.set_unblock.bind(this);
+      this.wrapperProps.onTouchCancel = this.set_unblock.bind(this);
 
       this.handleEvent = throttle(this.handleEvent, 400, {
         trailing: false
@@ -46,12 +46,12 @@ class OutsideClickable extends React.Component {
     var props = this.props,
         el = props.component || 'div';
 
-    return React.createElement('div', defaults(this.wrapperProps, {style: props.style}), props.children);
+    return React.createElement('div', defaults({}, this.wrapperProps, {style: props.style}), props.children);
   }
 
-  block() { this.block = true; }
+  set_block() { this.block = true; }
 
-  unblock() { this.block = false; }
+  set_unblock() { this.block = false; }
 
 };
 

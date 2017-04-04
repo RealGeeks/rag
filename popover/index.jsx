@@ -8,26 +8,24 @@ var defaults = require('lodash/object/defaults');
 var React = require('react');
 var ReactDom = require('react-dom');
 var createFactory = React.createFactory;
-var bubble = require('./bubble');
+var Bubble = require('./bubble');
 var OutsideClickable = require('../outsideClickable');
 
-var computePosition = function(props) {
-  props = props || this.props;
-
-  var anchorTop = props.top;
+var computePosition = function(props, pop) {
+  var anchorTop  = props.top;
   var anchorLeft = props.left;
-  var padding = props.padding;
-  var placement = props.placement;
+  var padding    = props.padding;
+  var placement  = props.placement;
 
-  var node = ReactDom.findDOMNode(this);
-  var nodeWidth = node.offsetWidth;
+  var node       = ReactDom.findDOMNode(pop);
+  var nodeWidth  = node.offsetWidth;
   var nodeHeight = node.offsetHeight;
 
-  var parentBounds = this.getNodeBounds(node.offsetParent);
-  var viewportBounds = props.viewport ? getNodeBounds(props.viewport) : parentBounds;
+  var parentBounds   = pop.getNodeBounds(node.offsetParent);
+  var viewportBounds = props.viewport ? pop.getNodeBounds(props.viewport) : parentBounds;
 
-  var minTop = viewportBounds.top + padding - parentBounds.top;
-  var maxTop = viewportBounds.bottom - padding - parentBounds.top;
+  var minTop  = viewportBounds.top + padding - parentBounds.top;
+  var maxTop  = viewportBounds.bottom - padding - parentBounds.top;
   var minLeft = viewportBounds.left + padding - parentBounds.left;
   var maxLeft = viewportBounds.right - padding - parentBounds.left;
 
@@ -66,15 +64,14 @@ var computePosition = function(props) {
     arrowOffset = anchorTop - top;
   }
 
-  this.setState({
-    visibility: props.visible ? 'visible' : 'hidden',
+  return {
     top: top,
     left: left,
     width: nodeWidth,
     height: nodeHeight,
     placement: placement,
     arrowOffset: arrowOffset
-  });
+  };
 };
 
 class Popover extends React.Component {
@@ -91,9 +88,17 @@ class Popover extends React.Component {
     };
   }
 
-  componentDidMount: computePosition
+  componentDidMount() {
+    var state = computePosition(this.props, this);
+    state.visibility = this.props.visible ? 'visible' : 'hidden';
+    this.setState(state);
+  }
 
-  componentWillUpdate: computePosition
+  componentWillReceiveProps(props) {
+    var state = computePosition(props, this);
+    state.visibility = props.visible ? 'visible' : 'hidden';
+    this.setState(state);
+  }
 
   render() {
     var props = this.props;
@@ -109,12 +114,16 @@ class Popover extends React.Component {
       }, styles[placement][visibility])
     }
 
-
-    return <OutsideClickable>
-      {visibility == 'visible' && bubble(state)}
+    return <OutsideClickable {...outside_props}>
+      {this.render_bubble()}
       <div style={styles.content}>{props.children}</div>
     </OutsideClickable>
-  };
+  }
+
+  render_bubble() {
+    if(this.state.visibility != 'visible') { return null; }
+    return <Bubble {...this.state} />;
+  }
 
   getNodeBounds(node) { return node.getBoundingClientRect(); };
 };

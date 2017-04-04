@@ -34,55 +34,42 @@ class Bubble extends React.Component {
 
   render() {
     var id = this.id;
-    var props = this.props;
+    var props = defaults(this.defaultProps, this.props);
     var dropShadow = props.dropShadow;
 
-    return svg.svg(
-      {
-        style: wrapperStyle,
-        width: props.width,
-        height: props.height
-      },
-      dropShadow && svg.filter(
-        {
-          id: id,
-          x: '-100%',
-          width: '300%',
-          y: '-100%',
-          height: '300%'
-        },
-        svg.feConvolveMatrix({
-          in: 'SourceAlpha',
-          result: 's',
-          order: '3 3',
-          kernelMatrix: '1 2 1 2 4 2 1 2 1'
-        }),
-        svg.feGaussianBlur({
-          in: 'SourceAlpha',
-          stdDeviation: 5
-        }),
-        svg.feOffset({dy: 5}),
-        svg.feComponentTransfer(
-          undefined,
-          svg.feFuncA({
-            type: 'linear',
-            slope: '.15'
-          })
-        ),
-        svg.feMerge(
-          undefined,
-          svg.feMergeNode(),
-          svg.feMergeNode({in: 's'}),
-          svg.feMergeNode(inSourceGraphic)
-        )
-      ),
-      svg.path({
-        d: bubblePath(props),
-        fill: props.backgroundColor,
-        filter: dropShadow && 'url(#' + id + ')'
-      })
-    );
-  };
+    return <svg style={wrapperStyle} width={props.width} height={props.height}>
+      {this.render_svg_filter}
+      <path d={bubblePath(props)} fill={props.backgroundColor} filter={dropShadow && 'url(#' + id + ')'} />
+    </svg>;
+  }
+
+  render_svg_filter() {
+    if(!dropShadow) { return null; }
+    return <filter
+      id={id}
+      x='-100%'
+      width='300%'
+      y='-100%'
+      height='300%'
+    >
+      <feConvolveMatrix
+        in='SourceAlpha'
+        result='s'
+        order='3 3'
+        kernelMatrix='1 2 1 2 4 2 1 2 1'
+      />
+      <feGaussianBlur in='SourceAlpha' stdDeviation={5} />
+      <feOffset dy={5} />
+      <feComponentTransfer>
+        <feFuncA type='linear' slope='0.15' />
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in='s' />
+        <feMergeNode {...inSourceGraphic} />
+      </feMerge>
+    </filter>;
+  }
 }
 
 // var prototype = defaults(

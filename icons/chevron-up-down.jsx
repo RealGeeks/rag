@@ -1,5 +1,6 @@
 'use strict';
 
+var defaults = require('lodash/object/defaults');
 var iconSize = require('../theme')().iconSize;
 var React = require('react');
 var PureRenderMixin = require('react-addons-pure-render-mixin');
@@ -16,7 +17,7 @@ class SelectIcon extends React.Component {
   }
 
   render() {
-    var props = this.props;
+    var props = defaults(this.defaultProps, this.props);
     var path_props = {
       d: 'm1 6 4-4 4 4m0 4-4 4-4-4',
       stroke: 'currentColor',

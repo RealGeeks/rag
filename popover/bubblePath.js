@@ -101,6 +101,5 @@ module.exports = function (options) {
   }
 
   push('z');
-
   return description.join(' ');
 };
