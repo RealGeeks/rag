@@ -1,6 +1,6 @@
-# Rag
+# @realgeeks/Rag-Texting
 
-Real Geeks UI Kit.
+Real Geeks UI Kit for text messaging system. (for now) We need to merge this into the main open Rag package but did not want to worry about any other systems currently using this for now.
 
 ## Usage
 
