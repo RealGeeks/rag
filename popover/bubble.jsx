@@ -38,15 +38,15 @@ class Bubble extends React.Component {
     var dropShadow = props.dropShadow;
 
     return <svg style={wrapperStyle} width={props.width} height={props.height}>
-      {this.render_svg_filter}
+      {this.render_svg_filter(dropShadow)}
       <path d={bubblePath(props)} fill={props.backgroundColor} filter={dropShadow && 'url(#' + id + ')'} />
     </svg>;
   }
 
-  render_svg_filter() {
-    if(!dropShadow) { return null; }
+  render_svg_filter(ds) {
+    if(!ds) { return null; }
     return <filter
-      id={id}
+      id={this.id}
       x='-100%'
       width='300%'
       y='-100%'

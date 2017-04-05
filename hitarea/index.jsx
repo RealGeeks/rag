@@ -114,7 +114,7 @@ class Hitarea extends React.Component {
 
     // Enter key
     if (!this.state.disabled && (keyCode == 13 || keyCode == 32)) {
-      component.setState(this.inactiveState);
+      this.setState(this.inactiveState);
     }
   }
 
