@@ -6,6 +6,7 @@ var styles = require('./styles')();
 var borderRadius = styles.borderRadius;
 var arrowSize = styles.arrowSize;
 var defaults = require('lodash/object/defaults');
+var extend = require('lodash/object/extend');
 var uniqueId = require('lodash/utility/uniqueId');
 var bubblePath = require('./bubblePath');
 var svg = require('../lib/svg');
@@ -34,7 +35,7 @@ class Bubble extends React.Component {
 
   render() {
     var id = this.id;
-    var props = defaults(this.defaultProps, this.props);
+    var props = extend(this.props, this.defaultProps);
     var dropShadow = props.dropShadow;
 
     return <svg style={wrapperStyle} width={props.width} height={props.height}>

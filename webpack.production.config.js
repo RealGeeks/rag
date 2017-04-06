@@ -41,8 +41,8 @@ module.exports = {
           presets: ['es2015', 'react']
         }
       },
-      { test: /\.scss$/, loaders: ['style', 'css', 'sass']},
-      { test: /\.css$/, loaders: ['style', 'css']},
+      { test: /\.scss$/, loaders: ['style', 'css', 'sass'] },
+      { test: /\.css$/, loaders: ['style', 'css'] },
     ]
   }
 };

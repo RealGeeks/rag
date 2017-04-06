@@ -14,7 +14,7 @@ class Input extends Hitarea {
   }
 
   render() {
-    var props = defaults(this.getHandlers(), this.props);
+    var props = defaults({}, this.props, this.getHandlers());
     var args = [props.type || 'text'];
 
     var state = props.disabled && 'disabled' ||
