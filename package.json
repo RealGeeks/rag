@@ -25,7 +25,7 @@
   "peerDependencies": {
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "react-addons-pure-render-mixin": "15.4.2"
+    "react-addons-pure-render-mixin": "15.3.2"
   },
   "dependencies": {
     "clamp": "^1.0.1",
@@ -52,7 +52,7 @@
     "browser-sync": "^2.18.8",
     "browser-sync-webpack-plugin": "^1.1.4",
     "del": "^1.1.1",
-    "react-addons-test-utils": "^15.4.2",
+    "react-addons-test-utils": "^15.3.2",
     "sinon": "^1.12.2",
     "svgcss": "^0.3.0",
     "tape": "^3.4.0",
