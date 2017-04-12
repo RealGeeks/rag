@@ -7,13 +7,12 @@ var dom = require('react-dom');
 var PureRenderMixin = require('react-addons-pure-render-mixin');
 
 class X extends React.Component {
-  constructor(props, context) {
+  constructor(props) {
     super(props);
     this.defaultProps = {
       width: (iconSize * 10 / 16),
       height: iconSize
     }
-    this.context = context;
   }
 
   render() {

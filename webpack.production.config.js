@@ -25,7 +25,6 @@ module.exports = {
     new webpack.IgnorePlugin(/vertx/),
     new webpack.IgnorePlugin(/configs/),
     new webpack.IgnorePlugin(/un~$/),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
   ],
   resolve: {

@@ -7,9 +7,8 @@ var PureRenderMixin = require('react-addons-pure-render-mixin');
 var dom = require('react-dom');
 
 class SelectIcon extends React.Component {
-  constructor(props, context) {
+  constructor(props) {
     super(props);
-    this.context = context;
     this.defaultProps = {
       width: iconSize * 10 / 16,
       height: iconSize

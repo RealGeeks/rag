@@ -21,7 +21,7 @@ module.exports = function () {
     abstractions.fill
   );
 
-  return {
+  var styles = {
     container: container,
     backdrop: defaults({background: 'rgba(0,0,0,.3)'}, container),
     window: defaults({
@@ -47,4 +47,7 @@ module.exports = function () {
       display: 'block'
     }
   };
+
+  console.log(styles);
+  return styles;
 };

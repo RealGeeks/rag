@@ -1,14 +1,13 @@
 'use strict';
 
 var defaults = require('lodash/object/defaults');
-var react = require('react');
-var reactTransitionGroup =
-  react.createFactory(require('react/lib/ReactTransitionGroup'));
+var React = require('react');
+var ReactTransitionGroup = require('react-addons-css-transition-group');
 var transitionChild = require('../transitionChild');
 
 var spec = {
   render: function (props) {
-    return reactTransitionGroup(defaults({
+    var transition_props = defaults({
       component: 'div',
       childFactory: transitionChild.bind(null, {
         style: props.childStyle,
@@ -16,17 +15,21 @@ var spec = {
         enter: props.childEnter,
         leave: props.childLeave
       })
-    }, props));
+    }, props);
+
+    return <ReactTransitionGroup {...transition_props}>
+      {this.props.children}
+    </ReactTransitionGroup>;
   }
 };
 
 if (process.env.NODE_ENV != 'production') {
   spec.displayName = 'Transiton Group';
   spec.propTypes = {
-    childStyle: react.PropTypes.object,
-    childAppear: react.PropTypes.object,
-    childEnter: react.PropTypes.object,
-    childLeave: react.PropTypes.object
+    childStyle: React.PropTypes.object,
+    childAppear: React.PropTypes.object,
+    childEnter: React.PropTypes.object,
+    childLeave: React.PropTypes.object
   };
 }
 

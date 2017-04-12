@@ -4,21 +4,19 @@ var defaults = require('lodash/object/defaults');
 var theme = require('../theme')();
 var iconSize = theme.iconSize;
 var React = require('react');
-var dom = require('react-dom');
 var PureRenderMixin = require('react-addons-pure-render-mixin');
 
 
 class Glyph extends React.Component {
-  constructor(props, context) {
+  constructor(props) {
     super(props);
-    this.context = context;
   }
 
   render() {
     var props = this.props;
     var scale = props.scale || 1;
-    var width = options.width || iconSize;
-    var height = options.height || iconSize;
+    var width = props.width || iconSize;
+    var height = props.height || iconSize;
     var viewBox = '0 0 ' + width + ' ' + height;
 
     var svg_props = {
@@ -29,7 +27,7 @@ class Glyph extends React.Component {
     };
 
     var pathProps = {
-      d: options.path,
+      d: props.path,
       stroke: 'currentColor',
       strokeWidth: theme.strokeWidth,
       fill: 'none'
