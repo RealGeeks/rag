@@ -25,7 +25,6 @@ class Modal extends React.Component {
   }
 
   render() {
-    console.log(styles.window);
     var props = _.defaults(this.defaultProps, this.props);
     return <Hitarea tag='div' style={styles[props.backdrop ? 'backdrop' : 'container']} action={props.onBackdropClick && this.handleBackdropClick.bind(this)}>
       <Scroller style={styles.window}>
