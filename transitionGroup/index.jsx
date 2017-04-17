@@ -6,7 +6,7 @@ var ReactTransitionGroup = require('react-addons-css-transition-group');
 var transitionChild = require('../transitionChild');
 
 var spec = {
-  render: function (props) {
+  render(props) {
     var transition_props = defaults({
       component: 'div',
       childFactory: transitionChild.bind(null, {
