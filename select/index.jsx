@@ -20,11 +20,9 @@ class Select extends Hitarea {
     delete props.block;
     delete props.options;
 
-    props.style = styles[
-      props.disabled && 'disabled' ||
-      this.state.focus && 'focus' ||
-      'normal'
-    ];
+    var style_type = props.disabled && 'disabled' || this.state.focus && 'focus' || 'normal';
+
+    props.style = styles[style_type];
 
     return <span style={styles[props.block ? 'block' : 'wrapper']}>
       <select {...props}>{options}</select>
