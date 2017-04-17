@@ -46,7 +46,7 @@ class Tel extends React.Component {
     var input_props = defaults({
       type: 'tel',
       value: formatPhone(this.state.value),
-      onChange: this.onChange
+      onChange: this.onChange.bind(this)
     }, props);
 
     return <Input {...input_props} />;
@@ -55,7 +55,7 @@ class Tel extends React.Component {
   value() { return this.state.value; }
 
   // EVENTS
-  onChange() {
+  onChange(event) {
     var target = event.target;
     var props = this.props;
     var value = keepDigits(target.value, props.limit);
