@@ -1,6 +1,6 @@
 {
   "name": "@realgeeks/rag-texting",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Real Geeks UI Kit.",
   "main": "./output/index.js",
   "repository": {
