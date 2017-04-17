@@ -2,7 +2,7 @@
   "name": "@realgeeks/rag-texting",
   "version": "1.0.7",
   "description": "Real Geeks UI Kit.",
-  "main": "./output/index.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/RealGeeks/rag.git"

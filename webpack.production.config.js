@@ -3,11 +3,11 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    './index'
+    './rag'
   ],
   devtool: 'eval',
   output: {
-    path: path.join(__dirname, "output"),
+    path: __dirname,
     filename: 'index.js',
     library: 'rag',
     libraryTarget: 'umd'

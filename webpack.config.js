@@ -4,12 +4,12 @@ var path = require('path'),
 
 module.exports = {
   entry: [
-    "./index.js"
+    "./rag.js"
   ],
   devtool: "eval",
   output: {
-    path: path.join(__dirname, "output"),
-    filename: 'bundle.js'
+    path: __dirname,
+    filename: 'index.js'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
