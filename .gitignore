@@ -4,9 +4,9 @@ generated
 .tmp
 *.log
 test-bundle.js
+index.js
 
 .DS_Store
 
 rag.sublime-project
-
 rag.sublime-workspace
