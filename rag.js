@@ -1,11 +1,50 @@
 'use strict';
 
-Button      = require('./button');
-ButtonGroup = require('./buttonGroup');
-Modal       = require('./modal');
-Tel         = require('./tel');
-Map         = require('./map');
-ScrollView  = require('./scroll-view');
-Surface     = require('./surface');
+var Button           = require('./button'),
+    ButtonGroup      = require('./buttonGroup'),
+    Hitarea          = require('./hitarea'),
+    ChevronUpDown    = require('./icons/chevron-up-down'),
+    Cog              = require('./icons/cog'),
+    Minus            = require('./icons/minus'),
+    X                = require('./icons/x'),
+    Input            = require('./input'),
+    Map              = require('./map'),
+    Modal            = require('./modal'),
+    OutsideClickable = require('./outsideClickable'),
+    Popover          = require('./popover'),
+    Bubble           = require('./popover/bubble'),
+    ScrollView       = require('./scroll-view'),
+    Select           = require('./select'),
+    Spinner          = require('./spinner'),
+    Surface          = require('./surface'),
+    Tel              = require('./tel'),
+    TransitionGroup  = require('./transitionGroup'),
+    Theme            = require('./theme'),
+    Prefix           = require('./lib/prefix'),
+    Shade            = require('./lib/shade');
 
-module.exports = { Button, ButtonGroup, Modal, Tel, Map, ScrollView, Surface }
+
+module.exports = {
+  Button,
+  ButtonGroup,
+  Bubble,
+  ChevronUpDown,
+  Cog,
+  Hitarea,
+  Input,
+  Map,
+  Minus,
+  Modal,
+  OutsideClickable,
+  Popover,
+  Prefix,
+  ScrollView,
+  Select,
+  Shade,
+  Spinner,
+  Surface,
+  Tel,
+  Theme,
+  TransitionGroup,
+  X
+};

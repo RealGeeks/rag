@@ -18,7 +18,7 @@ class Minus extends React.Component {
   }
 
   render() {
-    var props = defaults(this.props, this.defaultProps);
+    var props = defaults({}, this.props, this.defaultProps);
     return <Glyph {...props} />;
   }
 }
