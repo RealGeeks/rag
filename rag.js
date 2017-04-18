@@ -1,6 +1,7 @@
 'use strict';
 
-var Button           = require('./button'),
+var Abstractions     = require('./lib/abstractions'),
+    Button           = require('./button'),
     ButtonGroup      = require('./buttonGroup'),
     Hitarea          = require('./hitarea'),
     ChevronUpDown    = require('./icons/chevron-up-down'),
@@ -18,6 +19,7 @@ var Button           = require('./button'),
     Spinner          = require('./spinner'),
     Surface          = require('./surface'),
     Tel              = require('./tel'),
+    TelUtil          = require('./tel/util'),
     TransitionGroup  = require('./transitionGroup'),
     Theme            = require('./theme'),
     Prefix           = require('./lib/prefix'),
@@ -25,6 +27,7 @@ var Button           = require('./button'),
 
 
 module.exports = {
+  Abstractions,
   Button,
   ButtonGroup,
   Bubble,
@@ -44,6 +47,7 @@ module.exports = {
   Spinner,
   Surface,
   Tel,
+  TelUtil,
   Theme,
   TransitionGroup,
   X
