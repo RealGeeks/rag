@@ -7,9 +7,9 @@
     "type": "git",
     "url": "https://github.com/RealGeeks/rag.git"
   },
-  "file": {
+  "files": [
     "index.js"
-  },
+  ],
   "scripts": {
     "test": "testem ci",
     "start": "webpack --watch",
