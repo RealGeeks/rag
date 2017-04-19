@@ -1,7 +1,7 @@
 'use strict';
 
 var defaults = require('lodash/object/defaults');
-var React = require('React');
+var React = require('react');
 // var PureRenderMixin = require('react-addons-pure-render-mixin');
 var Button = require('../button');
 var style = require('./style')();
