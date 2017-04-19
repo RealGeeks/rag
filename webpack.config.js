@@ -35,48 +35,13 @@ module.exports = {
   resolve: {
     extensions: [".js", '.jsx', ".scss", ".css"]
   },
-  externals: [
-    {
-      react: {
-        root: 'React',
-        commonjs2: 'react',
-        commonjs: 'react',
-        amd: 'react',
-      }
-    },
-    {
-      'react-dom': {
-        root: 'ReactDOM',
-        commonjs2: 'react-dom',
-        commonjs: 'react-dom',
-        amd: 'react-dom'
-      }
-      {
-        'lodash': {
-          root: 'lodash',
-          commonjs2: 'lodash',
-          commonjs: 'lodash',
-          amd: 'lodash'
-        }
-      },
-      {
-        'react-addons-pure-render-mixin': {
-          root: 'ReactAddonsPureRenderMixin',
-          commonjs2: 'react-addons-pure-render-mixin',
-          commonjs: 'react-addons-pure-render-mixin',
-          amd: 'react-addons-pure-render-mixin'
-        }
-      },
-      {
-        'react-addons-css-transition-group': {
-          root: 'ReactAddonsCSSTransitionGroup',
-          commonjs2: 'react-addons-css-transition-group',
-          commonjs: 'react-addons-css-transition-group',
-          amd: 'react-addons-css-transition-group'
-        }
-      }
-    },
-  ],
+  externals: {
+    'react': "react",
+    'react-dom': "react-dom",
+    'lodash': 'lodash',
+    'react-addons-pure-render-mixin': 'react-addons-pure-render-mixin',
+    'react-addons-css-transition-group': 'react-addons-css-transition-group'
+  },
   node: {
     fs: 'empty',
     net: 'empty',
