@@ -28,7 +28,10 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({minimize: true}),
   ],
   resolve: {
-    extensions: ['.js', '.jsx', '.css', '.scss']
+    extensions: [".js", '.jsx', ".scss", ".css"],
+    alias: {
+      react: path.resolve(__dirname, './node_modules/react')
+    }
   },
   externals: [
     {
@@ -48,7 +51,7 @@ module.exports = {
       }
     },
     {
-      'lodash': {
+      lodash: {
         root: 'lodash',
         commonjs2: 'lodash',
         commonjs: 'lodash',
