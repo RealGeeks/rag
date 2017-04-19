@@ -25,11 +25,53 @@ module.exports = {
     new webpack.IgnorePlugin(/vertx/),
     new webpack.IgnorePlugin(/configs/),
     new webpack.IgnorePlugin(/un~$/),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({minimize: true}),
   ],
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss']
   },
+  externals: [
+    {
+      react: {
+        root: 'React',
+        commonjs2: 'react',
+        commonjs: 'react',
+        amd: 'react',
+      }
+    },
+    {
+      'react-dom': {
+        root: 'ReactDOM',
+        commonjs2: 'react-dom',
+        commonjs: 'react-dom',
+        amd: 'react-dom'
+      }
+    },
+    {
+      'lodash': {
+        root: 'lodash',
+        commonjs2: 'lodash',
+        commonjs: 'lodash',
+        amd: 'lodash'
+      }
+    },
+    {
+      'react-addons-pure-render-mixin': {
+        root: 'ReactAddonsPureRenderMixin',
+        commonjs2: 'react-addons-pure-render-mixin',
+        commonjs: 'react-addons-pure-render-mixin',
+        amd: 'react-addons-pure-render-mixin'
+      }
+    },
+    {
+      'react-addons-css-transition-group': {
+        root: 'ReactAddonsCSSTransitionGroup',
+        commonjs2: 'react-addons-css-transition-group',
+        commonjs: 'react-addons-css-transition-group',
+        amd: 'react-addons-css-transition-group'
+      }
+    }
+  ],
   module: {
     loaders: [
       {

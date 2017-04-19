@@ -23,6 +23,7 @@
   "homepage": "https://github.com/RealGeeks/rag",
   "license": "MIT",
   "peerDependencies": {
+    "lodash": "^3.9.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-addons-pure-render-mixin": "15.4.2",
@@ -37,7 +38,6 @@
     "eventemitter3": "^1.1.0",
     "inner": "^0.2.0",
     "load-gmaps": "^0.1.0",
-    "lodash": "^3.3.1",
     "mallet": "^0.2.0",
     "prevent-overscroll": "^0.1.0",
     "query-string": "^1.0.0",
