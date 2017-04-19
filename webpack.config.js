@@ -34,9 +34,6 @@ module.exports = {
   },
   resolve: {
     extensions: [".js", '.jsx', ".scss", ".css"]
-    alias: {
-      react: path.resolve(__dirname, './node_modules/react')
-    }
   },
   externals: [
     {

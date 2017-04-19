@@ -28,53 +28,15 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({minimize: true}),
   ],
   resolve: {
-    extensions: [".js", '.jsx', ".scss", ".css"],
-    alias: {
-      react: path.resolve(__dirname, './node_modules/react')
-    }
+    extensions: [".js", '.jsx', ".scss", ".css"]
   },
-  externals: [
-    {
-      react: {
-        root: 'React',
-        commonjs2: 'react',
-        commonjs: 'react',
-        amd: 'react',
-      }
-    },
-    {
-      'react-dom': {
-        root: 'ReactDOM',
-        commonjs2: 'react-dom',
-        commonjs: 'react-dom',
-        amd: 'react-dom'
-      }
-    },
-    {
-      lodash: {
-        root: 'lodash',
-        commonjs2: 'lodash',
-        commonjs: 'lodash',
-        amd: 'lodash'
-      }
-    },
-    {
-      'react-addons-pure-render-mixin': {
-        root: 'ReactAddonsPureRenderMixin',
-        commonjs2: 'react-addons-pure-render-mixin',
-        commonjs: 'react-addons-pure-render-mixin',
-        amd: 'react-addons-pure-render-mixin'
-      }
-    },
-    {
-      'react-addons-css-transition-group': {
-        root: 'ReactAddonsCSSTransitionGroup',
-        commonjs2: 'react-addons-css-transition-group',
-        commonjs: 'react-addons-css-transition-group',
-        amd: 'react-addons-css-transition-group'
-      }
-    }
-  ],
+  externals: {
+    'react': "React",
+    'react-dom': 'ReactDOM',
+    'lodash': 'lodash',
+    'react-addons-pure-render-mixin': 'ReactAddonsPureRenderMixin',
+    'react-addons-css-transition-group': 'ReactAddonsCSSTransitionGroup'
+  },
   module: {
     loaders: [
       {
