@@ -8,7 +8,8 @@
     "url": "https://github.com/RealGeeks/rag.git"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "theme.js"
   ],
   "scripts": {
     "test": "testem ci",
