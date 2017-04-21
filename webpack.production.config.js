@@ -28,7 +28,13 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({minimize: true}),
   ],
   resolve: {
-    extensions: [".js", '.jsx', ".scss", ".css"]
+    extensions: [".js", '.jsx', ".scss", ".css"],
+    alias: {
+      React: path.resolve(__dirname, 'node_modules/react'),
+      ReactDOM: path.resolve(__dirname, 'node_modules/react-dom'),
+      ReactAddonsPureRenderMixin: path.resolve(__dirname, 'node_modules/react-addons-pure-render-mixin'),
+      ReactAddonsCSSTransitionGroup: path.resolve(__dirname, 'node_modules/react-addons-css-transition-group')
+    }
   },
   externals: {
     'react': "React",
