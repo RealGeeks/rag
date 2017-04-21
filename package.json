@@ -1,6 +1,6 @@
 {
   "name": "@realgeeks/rag-texting",
-  "version": "1.0.18",
+  "version": "1.0.17",
   "description": "Real Geeks UI Kit.",
   "main": "index.js",
   "repository": {
@@ -9,7 +9,8 @@
   },
   "files": [
     "index.js",
-    "theme.js"
+    "theme.js",
+    "lib/configurable.js"
   ],
   "scripts": {
     "test": "testem ci",
@@ -24,13 +25,13 @@
   "homepage": "https://github.com/RealGeeks/rag",
   "license": "MIT",
   "peerDependencies": {
-    "lodash": "^3.9.1",
+    "lodash": "^3.9.1"
+  },
+  "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-addons-pure-render-mixin": "^15.4.2",
-    "react-addons-css-transition-group": "^15.4.2"
-  },
-  "dependencies": {
+    "react-addons-css-transition-group": "^15.4.2",
     "clamp": "^1.0.1",
     "colr-convert": "^1.0.4",
     "empty": "^0.10.0",
