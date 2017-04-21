@@ -1,6 +1,6 @@
 {
   "name": "@realgeeks/rag-texting",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Real Geeks UI Kit.",
   "main": "index.js",
   "repository": {
@@ -8,9 +8,7 @@
     "url": "https://github.com/RealGeeks/rag.git"
   },
   "files": [
-    "index.js",
-    "theme.js",
-    "lib/configurable.js"
+    "index.js"
   ],
   "scripts": {
     "test": "testem ci",
@@ -28,10 +26,6 @@
     "lodash": "^3.9.1"
   },
   "dependencies": {
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-addons-pure-render-mixin": "^15.4.2",
-    "react-addons-css-transition-group": "^15.4.2",
     "clamp": "^1.0.1",
     "colr-convert": "^1.0.4",
     "empty": "^0.10.0",
@@ -43,6 +37,10 @@
     "mallet": "^0.2.0",
     "prevent-overscroll": "^0.1.0",
     "query-string": "^1.0.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-addons-pure-render-mixin": "^15.4.2",
+    "react-addons-css-transition-group": "^15.4.2",
     "react-touch-mixin": "^0.1.1",
     "scriptload": "^0.1.0",
     "supports": "^0.1.1"

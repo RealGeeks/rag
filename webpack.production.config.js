@@ -36,13 +36,6 @@ module.exports = {
       ReactAddonsCSSTransitionGroup: path.resolve(__dirname, 'node_modules/react-addons-css-transition-group')
     }
   },
-  externals: {
-    'react': "React",
-    'react-dom': 'ReactDOM',
-    'lodash': 'lodash',
-    'react-addons-pure-render-mixin': 'ReactAddonsPureRenderMixin',
-    'react-addons-css-transition-group': 'ReactAddonsCSSTransitionGroup'
-  },
   module: {
     loaders: [
       {
