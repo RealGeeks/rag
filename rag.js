@@ -1,6 +1,7 @@
 'use strict';
 
-var Abstractions     = require('./lib/abstractions'),
+var Theme            = require('./theme'),
+    Abstractions     = require('./lib/abstractions'),
     Button           = require('./button'),
     ButtonGroup      = require('./buttonGroup'),
     Hitarea          = require('./hitarea'),
@@ -21,12 +22,12 @@ var Abstractions     = require('./lib/abstractions'),
     Tel              = require('./tel'),
     TelUtil          = require('./tel/util'),
     TransitionGroup  = require('./transitionGroup'),
-    Theme            = require('./theme'),
     Prefix           = require('./lib/prefix'),
     Shade            = require('./lib/shade');
 
 
 module.exports = {
+  Theme,
   Abstractions,
   Button,
   ButtonGroup,
@@ -48,7 +49,6 @@ module.exports = {
   Surface,
   Tel,
   TelUtil,
-  Theme,
   TransitionGroup,
   X
 };
