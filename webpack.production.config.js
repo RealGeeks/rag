@@ -39,7 +39,7 @@ module.exports = {
   externals: {
     'react':     "React",
     'react-dom': 'ReactDOM',
-    'lodash':    'lodash',
+    'lodash':    'lodash'
   },
   module: {
     loaders: [
