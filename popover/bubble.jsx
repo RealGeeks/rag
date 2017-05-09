@@ -35,7 +35,7 @@ class Bubble extends React.Component {
 
   render() {
     var id = this.id;
-    var props = extend(this.props, this.defaultProps);
+    var props = extend(this.defaultProps, this.props);
     var dropShadow = props.dropShadow;
 
     return <svg style={wrapperStyle} width={props.width} height={props.height}>
