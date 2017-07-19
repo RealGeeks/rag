@@ -1,6 +1,7 @@
 'use strict';
 
 var defaults = require('lodash/object/defaults');
+var _extend = require('lodash/object/extend')
 var iconSize = require('../theme')().iconSize;
 var React = require('react');
 var PureRenderMixin = require('react-addons-pure-render-mixin');
@@ -29,7 +30,7 @@ class SelectIcon extends React.Component {
   }
 }
 
-var prototype = Object.assign(SelectIcon.prototype, PureRenderMixin);
+var prototype = _extend(SelectIcon.prototype, PureRenderMixin);
 
 if (process.env.NODE_ENV != 'production') {
   SelectIcon.displayName = 'Select Icon';

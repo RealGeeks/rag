@@ -5,13 +5,14 @@ var com_style = require('./style')();
 var div = require('react-dom').div;
 var containerStyle = require('./style')();
 var prototype;
+var _extend = require('lodash/object/extend')
 
 function Container(props, context) {
   this.props = props;
   this.context = context;
 }
 
-prototype = Object.assign(Container.prototype, react.Component.prototype);
+prototype = _extend(Container.prototype, react.Component.prototype);
 
 prototype.render = function () {
   var component = this;
@@ -19,7 +20,7 @@ prototype.render = function () {
   var style = containerStyle;
 
   if (styleProp) {
-    style = Object.assign({}, com_style, styleProp);
+    style = _extend({}, com_style, styleProp);
   }
 
   return div(
