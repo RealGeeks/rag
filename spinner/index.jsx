@@ -4,7 +4,7 @@ var defaults = require('lodash/object/defaults');
 var React = require('react');
 var prefixProp = require('../lib/prefix').prop;
 var styles = require('./styles')();
-var raf = requestAnimationFrame.bind(window);
+var raf = requestAnimationFrame;
 
 // var
 class Spinner extends React.Component {
@@ -22,7 +22,7 @@ class Spinner extends React.Component {
 
   // Speed is measured in revolutions per second.
   componentDidMount() {
-    this.frame = raf(this.compute);
+    this.frame = raf(window, this.compute);
   }
 
   componentWillUnmount() { cancelAnimationFrame(this.frame); }
@@ -46,7 +46,7 @@ class Spinner extends React.Component {
     });
 
     this.ts = timestamp;
-    this.frame = raf(this.compute);
+    this.frame = raf(window, this.compute);
   }
 }
 
