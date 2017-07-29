@@ -4,10 +4,8 @@ var defaults = require('lodash/object/defaults');
 var React = require('react');
 var prefixProp = require('../lib/prefix').prop;
 var styles = require('./styles')();
-var raf = requestAnimationFrame;
-var raf_poly = require('raf')
+var raf = window.requestAnimationFrame;
 
-// var
 class Spinner extends React.Component {
   constructor(props) {
     super(props);

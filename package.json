@@ -39,7 +39,6 @@
     "mallet": "^0.2.0",
     "prevent-overscroll": "^0.1.0",
     "query-string": "^1.0.0",
-    "raf": "^3.3.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-pure-render-mixin": "^15.4.2",
     "react-touch-mixin": "^0.1.1",
