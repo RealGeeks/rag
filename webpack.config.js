@@ -17,6 +17,10 @@ module.exports = {
       host: 'localhost',
       port: 8080,
       server: { baseDir: ['output'] }
+    }),
+    new PolyfillInjectorPlugin({
+      polyfills: ['requestAnimationFrame'],
+      filename: './lib/request-animation-frame-polyfill.js'
     })
   ],
   module: {
