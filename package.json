@@ -59,7 +59,6 @@
     "svgcss": "^0.3.0",
     "tape": "^3.4.0",
     "testem": "^0.6.33",
-    "webpack": "^2.3.2",
-    "webpack-polyfill-injector": "0.0.3"
+    "webpack": "^2.3.2"
   }
 }

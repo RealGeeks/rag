@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var PolyfillInjectorPlugin = require('webpack-polyfill-injector');
 
 module.exports = {
   entry: [
@@ -27,10 +26,6 @@ module.exports = {
     new webpack.IgnorePlugin(/configs/),
     new webpack.IgnorePlugin(/un~$/),
     new webpack.optimize.UglifyJsPlugin({minimize: true}),
-    new PolyfillInjectorPlugin({
-      polyfills: ['requestAnimationFrame'],
-      filename: './lib/request-animation-frame-polyfill.js'
-    })
   ],
   resolve: {
     extensions: [".js", '.jsx', ".scss", ".css"],

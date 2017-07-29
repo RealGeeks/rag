@@ -5,6 +5,7 @@ var React = require('react');
 var prefixProp = require('../lib/prefix').prop;
 var styles = require('./styles')();
 var raf = requestAnimationFrame;
+var raf_poly = require('raf')
 
 // var
 class Spinner extends React.Component {
