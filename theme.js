@@ -2,16 +2,17 @@
 
 module.exports = require('./lib/configurable')({
   colors: {
-    accent: '#0099cc',
-    success: '#669900',
-    warning: '#ff8800',
-    danger: '#ff4444',
+    lt_accent: '#6badd6',
+    accent: '#38a4fc',
+    success: '#2CA94F',
+    warning: '#ffcc00',
+    danger: '#dd0000',
     background: '#ffffff',
     foreground: '#333333'
   },
   padding: 10,
   borderRadius: 2,
-  fontSize: 16,
+  fontSize: 14,
   fontFamily: '"Helvetica Neue", Helvetica, Ubuntu, "Segoe UI", Arial, sans-serif',
   lineHeight: 1.375,
   iconSize: 16,

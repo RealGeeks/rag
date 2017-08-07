@@ -4,9 +4,9 @@ var defaults = require('lodash/object/defaults');
 var React = require('react');
 var prefixProp = require('../lib/prefix').prop;
 var styles = require('./styles')();
-// var raf = window.requestAnimationFrame;
-var raf = require('raf').polyfill()
+var raf = requestAnimationFrame;
 
+// DEPRECATED -- don't use this anymore
 class Spinner extends React.Component {
   constructor(props) {
     super(props);
@@ -21,9 +21,7 @@ class Spinner extends React.Component {
   }
 
   // Speed is measured in revolutions per second.
-  componentDidMount() {
-    this.frame = requestAnimationFrame(this.compute)
-  }
+  componentDidMount() { this.frame = raf(this.compute); }
 
   componentWillUnmount() { cancelAnimationFrame(this.frame); }
 
@@ -46,7 +44,7 @@ class Spinner extends React.Component {
     });
 
     this.ts = timestamp;
-    this.frame = requestAnimationFrame(this.compute)
+    this.frame = raf(this.compute);
   }
 }
 
