@@ -8,15 +8,12 @@ var facebookLoginButtonSpec = {
 
   render: function () {
     var props = this.props;
-    var iframeSource = props.iframeSource;
-    var width = props.width || 215;
-    var height = props.height || 43;
 
     return dom.iframe(
       {
-        src: iframeSource,
-        width: width,
-        height: height,
+        src: props.iframeSource,
+        width: props.iframeWidth || 215,
+        height: props.iframeHeight || 43,
         frameBorder: 0,
         scrolling: 'no',
         style: {
