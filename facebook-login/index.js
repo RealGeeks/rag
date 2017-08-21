@@ -12,8 +12,9 @@ var facebookLoginButtonSpec = {
     return dom.iframe(
       {
         src: props.iframeSource,
-        width: props.iframeWidth || 215,
-        height: props.iframeHeight || 43,
+        // Default size is for a medium button
+        width: props.iframeWidth || 270,
+        height: props.iframeHeight || 55,
         frameBorder: 0,
         scrolling: 'no',
         style: {
