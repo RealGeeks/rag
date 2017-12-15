@@ -22,9 +22,11 @@ class Tel extends React.Component {
 
   componentDidUpdate() {
     var node = this.node;
-    var cursor = adjustCursor(this.state.cursor, node.value);
+    if (this.state) {
+      var cursor = adjustCursor(this.state.cursor, node.value)
 
-    node.setSelectionRange(cursor, cursor);
+      node.setSelectionRange(cursor, cursor);
+    }
   }
 
   componentDidMount() { this.node = ReactDOM.findDOMNode(this); }
