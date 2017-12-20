@@ -14,7 +14,7 @@ class ScrollView extends React.Component {
 
   componentDidMount() {
     if(!require('supports/touch')) { return }
-    this.detachListeners = preventOverscroll(this.getDOMNode());
+    this.detachListeners = PreventOverscroll(this.getDOMNode());
   }
 
   componentWillUnmount() {
