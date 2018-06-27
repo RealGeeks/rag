@@ -16,7 +16,7 @@ var map = react.createFactory(require('./'));
 loadGMaps.url = 'test/fixtures/google-maps.js';
 
 test('Map', function (assert) {
-  assert.plan(12);
+  assert.plan(13);
 
   var component = TestUtils.renderIntoDocument(map({
     ready: function (_map, api) {
@@ -84,45 +84,46 @@ test('Map', function (assert) {
           position: 3
         }
       }, 'options');
+    }
+  }));
 
-      component.setProps({
-        zoom: 4
-      }, function () {
+  var otherComponent = TestUtils.renderIntoDocument(map({
+    zoom: 4,
+    ready: function () {
         assert.deepEqual(
-          component.state.center,
+          otherComponent.state.center,
           {
             lat: 0,
             lng: 0
           },
           'unchanged prop should not change state'
         );
-        assert.equal(component.state.zoom, 4, 'should set zoom state');
+        assert.equal(otherComponent.state.zoom, 4, 'should set zoom state');
 
-        component.map.getZoom = sinon.spy(_.constant(4));
-        component.updateBounds = sinon.spy();
-        component.onZoom();
+        otherComponent.map.getZoom = sinon.spy(_.constant(4));
+        otherComponent.updateBounds = sinon.spy();
+        otherComponent.onZoom();
 
         assert.ok(
-          component.map.getZoom.called,
+          otherComponent.map.getZoom.called,
           'getZoom should be called when map zoom changes'
         );
         assert.ok(
-          !component.updateBounds.called,
+          !otherComponent.updateBounds.called,
           'updateBounds should not be triggered when zoom change comes from app'
         );
 
-        component.map.getZoom = sinon.spy(_.constant(5));
-        component.onZoom();
+        otherComponent.map.getZoom = sinon.spy(_.constant(5));
+        otherComponent.onZoom();
 
         assert.ok(
-          component.updateBounds.called,
+          otherComponent.updateBounds.called,
           'updateBounds should be called when user changes zoom'
         );
-      });
-
     }
   }));
 
+  assert.ok(!otherComponent.map, 'no other map');
   assert.ok(!component.map, 'no map');
   assert.equal(ReactDOM.findDOMNode(component).innerHTML, '', 'no children');
   assert.deepEqual(component.state, {

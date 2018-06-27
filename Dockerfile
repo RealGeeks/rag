@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /code
 
 COPY .npmrc package.json package-lock.json /code/
-RUN npm install
+RUN npm install --no-save
 
 COPY . /code
 
