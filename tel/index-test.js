@@ -1,9 +1,10 @@
 'use strict';
 
 var test = require('tape');
-var react = require('react/addons');
+var react = require('react');
+var TestUtils = require('react-addons-test-utils');
+
 var tel = react.createFactory(require('./'));
-var TestUtils = react.addons.TestUtils;
 
 test('Tel', function (assert) {
   assert.plan(1);

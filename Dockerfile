@@ -1,9 +1,8 @@
-FROM node:8.11.3-alpine
+FROM node:8.11.3
 
-RUN apk --update --no-cache add \
+RUN apt-get update && apt-get install -y \
   python \
-  make \
-  build-base
+  make
 
 WORKDIR /code
 

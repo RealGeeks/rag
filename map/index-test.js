@@ -5,11 +5,12 @@ require('es6-promise').polyfill();
 var test = require('tape');
 var sinon = require('sinon');
 var _ = require('lodash');
-var react = require('react/addons');
-var map = react.createFactory(require('./'));
-var TestUtils = react.addons.TestUtils;
-
+var react = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
 var loadGMaps = require('load-gmaps');
+
+var map = react.createFactory(require('./'));
 
 // Use our stubbed Google Maps script.
 loadGMaps.url = 'test/fixtures/google-maps.js';
@@ -18,7 +19,7 @@ test('Map', function (assert) {
   assert.plan(12);
 
   var component = TestUtils.renderIntoDocument(map({
-    ready: function (map, api) {
+    ready: function (_map, api) {
       var addListenerSpy =
         sinon.spy(window.google.maps.event, 'addListener');
       var removeListenerSpy =
@@ -123,7 +124,7 @@ test('Map', function (assert) {
   }));
 
   assert.ok(!component.map, 'no map');
-  assert.equal(component.getDOMNode().innerHTML, '', 'no children');
+  assert.equal(ReactDOM.findDOMNode(component).innerHTML, '', 'no children');
   assert.deepEqual(component.state, {
     center: {
       lat: 0,

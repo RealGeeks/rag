@@ -1,8 +1,10 @@
 'use strict';
 
 var constant = require('lodash').constant;
-var react = require('react/addons');
 var joinClasses = require('react/lib/joinClasses');
+var react = require('react/addons');
+var ReactDOM = require('react-dom');
+
 var createFactory = react.createFactory;
 var scroller = createFactory(require('../scroll-view'));
 var button = createFactory(require('../button'));
@@ -56,7 +58,7 @@ var componentSpec = {
   },
 
   onTap: function (event) {
-    if (event.target == this.getDOMNode()) {
+    if (event.target == ReactDOM.findDOMNode(this)) {
       this.close();
     }
   },
