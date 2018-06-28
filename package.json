@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "testem ci",
-    "prepublish": "gulp scss",
+    "prepublishOnly": "gulp scss",
     "build": "gulp build",
     "css": "gulp css"
   },
@@ -31,19 +31,22 @@
     "gulp-jscs": "^1.4.0",
     "gulp-jshint": "^1.9.0",
     "gulp-notify": "^2.1.0",
-    "gulp-sass": "^2.3.1",
+    "gulp-sass": "^4.0.1",
     "gulp-uglify": "^1.0.2",
     "merge-stream": "^0.1.7",
     "multipipe": "^0.1.2",
+    "react-addons-pure-render-mixin": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
     "sinon": "^1.12.2",
     "tape": "^3.4.0",
-    "testem": "^0.6.33",
+    "testem": "^2.8.2",
     "uglifyify": "^3.0.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.2.1"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "envify": "^3.2.0",
     "es6-promise": "^2.0.1",
     "inner": "^0.2.0",
@@ -51,7 +54,8 @@
     "lodash": "^2.4.1",
     "prevent-overscroll": "^0.1.0",
     "query-string": "^1.0.0",
-    "react": "^0.13.3",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "react-touch-mixin": "^0.1.1",
     "scriptload": "^0.1.0",
     "supports": "^0.1.1"
