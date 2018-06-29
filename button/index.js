@@ -1,7 +1,7 @@
 'use strict';
 
-var react = require('react/addons');
-var joinClasses = require('react/lib/joinClasses');
+var react = require('react/dist/react-with-addons');
+var classnames = require('classnames');
 var dom = react.DOM;
 
 var HITAREA = 'hitarea';
@@ -44,7 +44,7 @@ var buttonSpec = {
     classes.push(props.className, state);
 
     return dom[props.href ? 'a' : 'span']({
-      className: joinClasses.apply(undefined, classes),
+      className: classnames.apply(undefined, classes),
       onClick: props.onClick
     },
       children

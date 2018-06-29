@@ -1,6 +1,7 @@
 'use strict';
 
-var react = require('react/addons');
+var react = require('react/dist/react-with-addons');
+var ReactDOM = require('react-dom');
 var preventOverscroll = require('prevent-overscroll');
 
 var componentSpec = {
@@ -22,7 +23,7 @@ var componentSpec = {
 
 if (require('supports/touch')) {
   componentSpec.componentDidMount = function () {
-    this.detachListeners = preventOverscroll(this.getDOMNode());
+    this.detachListeners = preventOverscroll(ReactDOM.findDOMNode(this));
   };
 
   componentSpec.componentWillUnmount = function () {

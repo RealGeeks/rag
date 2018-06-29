@@ -4,6 +4,7 @@ var _ = require('lodash');
 var defaults = _.defaults;
 var omit = _.omit;
 var react = require('react');
+var ReactDOM = require('react-dom');
 var util = require('./util');
 var keepDigits = util.keepDigits;
 var countDigits = util.countDigits;
@@ -215,7 +216,7 @@ prototype.render = function () {
 prototype.componentDidMount = function () {
   var tel = this;
   var value = tel.props.value;
-  var node = tel.node = react.findDOMNode(tel);
+  var node = tel.node = ReactDOM.findDOMNode(tel);
   var scheduleUpdate = tel.scheduleUpdate;
 
   node.value = formatPhone(value != null ? value : tel.val);
@@ -233,8 +234,8 @@ prototype.componentDidMount = function () {
     }
   } else {
     node.addEventListener('input', function () {
-      var countryCode = tel.refs.dialCode.getDOMNode().value;
-      var phone = tel.refs.phoneInput.getDOMNode().value;
+      var countryCode = ReactDOM.findDOMNode(tel.refs.dialCode).value;
+      var phone = ReactDOM.findDOMNode(tel.refs.phoneInput).value;
       tel.refs.phoneInput.value = phone;
       tel.refs.dialCode.value = countryCode;
     });
@@ -268,8 +269,8 @@ prototype.componentWillUnmount = function () {
 
 prototype.value = function () {
   if (this.props.useIntlPhoneInput) {
-    var countryCode = this.refs.dialCode.getDOMNode().value;
-    var phone = this.refs.phoneInput.getDOMNode().value;
+    var countryCode = ReactDOM.findDOMNode(this.refs.dialCode).value;
+    var phone = ReactDOM.findDOMNode(this.refs.phoneInput).value;
 
     // Convert countryCode (us) to dialCode (1)
     var allCountries = require('./country_data').allCountries;

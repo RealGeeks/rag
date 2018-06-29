@@ -1,7 +1,7 @@
 'use strict';
 
 var test = require('tape');
-var react = require('react/addons');
+var react = require('react/dist/react-with-addons');
 var tel = react.createFactory(require('./'));
 var TestUtils = react.addons.TestUtils;
 

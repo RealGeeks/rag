@@ -5,7 +5,8 @@ require('es6-promise').polyfill();
 var test = require('tape');
 var sinon = require('sinon');
 var _ = require('lodash');
-var react = require('react/addons');
+var react = require('react/dist/react-with-addons');
+var ReactDOM = require('react-dom');
 var map = react.createFactory(require('./'));
 var TestUtils = react.addons.TestUtils;
 
@@ -123,7 +124,7 @@ test('Map', function (assert) {
   }));
 
   assert.ok(!component.map, 'no map');
-  assert.equal(component.getDOMNode().innerHTML, '', 'no children');
+  assert.equal(ReactDOM.findDOMNode(component).innerHTML, '', 'no children');
   assert.deepEqual(component.state, {
     center: {
       lat: 0,
