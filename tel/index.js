@@ -1,4 +1,5 @@
 'use strict';
+
 var _ = require('lodash');
 var defaults = _.defaults;
 var omit = _.omit;
@@ -10,6 +11,9 @@ var adjustCursor = util.adjustCursor;
 var formatPhone = util.formatPhone;
 var backspace = util.backspace;
 var input = react.DOM.input;
+
+var document = document || {documentMode: null};
+var navigator = navigator || {userAgent: ''};
 
 var ua = navigator.userAgent;
 
