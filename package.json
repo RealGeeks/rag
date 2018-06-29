@@ -1,6 +1,6 @@
 {
   "name": "rag",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Real Geeks UI Kit.",
   "repository": {
     "type": "git",
@@ -47,6 +47,7 @@
     "watchify": "^2.2.1"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "envify": "^3.2.0",
     "es6-promise": "^2.0.1",
     "inner": "^0.2.0",
