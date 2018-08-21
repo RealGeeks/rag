@@ -47,7 +47,7 @@
     "envify": "^3.2.0",
     "es6-promise": "^2.0.1",
     "inner": "^0.2.0",
-    "load-gmaps": "^0.1.0",
+    "@realgeeks/load-gmaps": "^0.1.6",
     "lodash": "^2.4.1",
     "prevent-overscroll": "^0.1.0",
     "query-string": "^1.0.0",
