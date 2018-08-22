@@ -97,10 +97,18 @@ var mapComponent = {
   componentDidMount: function () {
     var component = this;
     var props = component.props;
-    var loadGmaps = require('load-gmaps');
+    var loadGmaps = require('@realgeeks/load-gmaps');
 
     if (props.gmapsApiKey) {
       loadGmaps.key = props.gmapsApiKey;
+    }
+
+    if (props.client) {
+      loadGmaps.client = props.client;
+    }
+
+    if (props.channel) {
+      loadGmaps.channel = props.channel;
     }
 
     loadGmaps().then(function (mapsApi) {
