@@ -4,3 +4,4 @@ generated
 .tmp
 *.log
 test-bundle.js
+.DS_Store
