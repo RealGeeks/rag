@@ -8,7 +8,7 @@ var _ = require('lodash');
 var react = require('react');
 var ReactDOM = require('react-dom');
 var TestUtils = require('react-addons-test-utils');
-var loadGMaps = require('load-gmaps');
+var loadGMaps = require('@realgeeks/load-gmaps');
 
 var map = react.createFactory(require('./'));
 
