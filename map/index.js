@@ -3,7 +3,8 @@
 var _ = require('lodash');
 var inner = require('inner');
 var react = require('react');
-var joinClasses = require('react/lib/joinClasses');
+var ReactDOM = require('react-dom');
+var classnames = require('classnames');
 var dom = react.DOM;
 
 var mapComponent = {
@@ -88,7 +89,7 @@ var mapComponent = {
     var props = this.props;
 
     return dom.div({
-      className: joinClasses('rag-map', props.className),
+      className: classnames('rag-map', props.className),
       style: props.style
     });
   },
@@ -112,7 +113,7 @@ var mapComponent = {
 
     loadGmaps().then(function (mapsApi) {
       var map = component.map = new mapsApi.Map(
-        component.getDOMNode(),
+        ReactDOM.findDOMNode(component),
         component.createMapOptions(props, mapsApi)
       );
       var newState = {};

@@ -1,8 +1,9 @@
 'use strict';
 
 var constant = require('lodash').constant;
-var react = require('react/addons');
-var joinClasses = require('react/lib/joinClasses');
+var react = require('react/dist/react-with-addons');
+var ReactDOM = require('react-dom');
+var classnames = require('classnames');
 var createFactory = react.createFactory;
 var scroller = createFactory(require('../scroll-view'));
 var button = createFactory(require('../button'));
@@ -35,7 +36,7 @@ var componentSpec = {
 
     return div(
       {
-        className: joinClasses(
+        className: classnames(
           namespace,
           props.backdrop && namespace + '-backdrop'
         ),
@@ -43,7 +44,7 @@ var componentSpec = {
           (component.onClick || component.onTap)
       },
       scroller(
-        {className: joinClasses(namespace + '-window', props.className)},
+        {className: classnames(namespace + '-window', props.className)},
         props.closeButton && button({
           className: namespace + '-close',
           type: ['hitarea'],
@@ -56,7 +57,7 @@ var componentSpec = {
   },
 
   onTap: function (event) {
-    if (event.target == this.getDOMNode()) {
+    if (event.target == ReactDOM.findDOMNode(this)) {
       this.close();
     }
   },

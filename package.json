@@ -1,6 +1,6 @@
 {
   "name": "rag",
-  "version": "0.9.5-test",
+  "version": "1.0.1",
   "description": "Real Geeks UI Kit.",
   "repository": {
     "type": "git",
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "testem ci",
-    "prepublish": "gulp scss",
+    "prepublishOnly": "gulp scss",
     "build": "gulp build",
     "css": "gulp css"
   },
@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/RealGeeks/rag",
   "license": "MIT",
+  "engines": {
+    "node": "4.1.1"
+  },
   "devDependencies": {
     "@realgeeks/svgcss": "^1.0.0",
     "browser-sync": "^1.9.0",
@@ -44,6 +47,7 @@
     "watchify": "^2.2.1"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "envify": "^3.2.0",
     "es6-promise": "^2.0.1",
     "inner": "^0.2.0",
@@ -51,7 +55,10 @@
     "lodash": "^2.4.1",
     "prevent-overscroll": "^0.1.0",
     "query-string": "^1.0.0",
-    "react": "^0.13.3",
+    "react": "^15.4.2",
+    "react-addons-pure-render-mixin": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^15.4.2",
     "react-touch-mixin": "^0.1.1",
     "scriptload": "^0.1.0",
     "supports": "^0.1.1"

@@ -1,6 +1,6 @@
 'use strict';
 
-var react = require('react/addons');
+var react = require('react/dist/react-with-addons');
 
 var componentSpec = {
   mixins: [
