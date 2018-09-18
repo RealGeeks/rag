@@ -1,6 +1,7 @@
 'use strict';
 
 var react = require('react/dist/react-with-addons');
+var dom = require('react-dom-factories');
 
 var componentSpec = {
   mixins: [
@@ -9,7 +10,7 @@ var componentSpec = {
   ],
 
   render: function () {
-    return react.DOM.div(this.props);
+    return dom.div(this.props);
   }
 };
 

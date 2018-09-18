@@ -1,7 +1,7 @@
 'use strict';
 
 var react = require('react/dist/react-with-addons');
-var dom = react.DOM;
+var dom = require('react-dom-factories');
 
 var facebookLoginButtonSpec = {
   mixins: [react.addons.PureRenderMixin],

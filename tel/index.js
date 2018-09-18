@@ -5,13 +5,14 @@ var defaults = _.defaults;
 var omit = _.omit;
 var react = require('react');
 var ReactDOM = require('react-dom');
+var dom = require('react-dom-factories');
 var util = require('./util');
 var keepDigits = util.keepDigits;
 var countDigits = util.countDigits;
 var adjustCursor = util.adjustCursor;
 var formatPhone = util.formatPhone;
 var backspace = util.backspace;
-var input = react.DOM.input;
+var input = dom.input;
 
 var document = document || {documentMode: null};
 var navigator = navigator || {userAgent: ''};
@@ -173,7 +174,6 @@ prototype.render = function () {
   var tel = this;
   var props = tel.props;
   var className = props.className;
-  var dom = react.DOM;
   var allCountries = require('./country_data').allCountries;
   var options = _.map(allCountries, function (c) {
     return dom.option(

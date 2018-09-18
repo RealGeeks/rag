@@ -7,7 +7,7 @@ var classnames = require('classnames');
 var createFactory = react.createFactory;
 var scroller = createFactory(require('../scroll-view'));
 var button = createFactory(require('../button'));
-var div = react.DOM.div;
+var div = require('react-dom-factories').div;
 
 var namespace = 'rag-modal';
 

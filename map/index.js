@@ -5,7 +5,7 @@ var inner = require('inner');
 var react = require('react');
 var ReactDOM = require('react-dom');
 var classnames = require('classnames');
-var dom = react.DOM;
+var dom = require('react-dom-factories');
 
 var mapComponent = {
   getInitialState: _.constant({

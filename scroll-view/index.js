@@ -3,6 +3,7 @@
 var react = require('react/dist/react-with-addons');
 var ReactDOM = require('react-dom');
 var preventOverscroll = require('prevent-overscroll');
+var dom = require('react-dom-factories');
 
 var componentSpec = {
   mixins: [react.addons.PureRenderMixin],
@@ -17,7 +18,7 @@ var componentSpec = {
   },
 
   render: function () {
-    return react.DOM.div(this.props);
+    return dom.div(this.props);
   }
 };
 

@@ -2,7 +2,7 @@
 
 var react = require('react/dist/react-with-addons');
 var classnames = require('classnames');
-var dom = react.DOM;
+var dom = require('react-dom-factories');
 
 var HITAREA = 'hitarea';
 var namespace = 'rag-button';
