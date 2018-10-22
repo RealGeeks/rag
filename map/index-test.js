@@ -19,7 +19,7 @@ test('Map', function (assert) {
   assert.plan(13);
 
   var component = TestUtils.renderIntoDocument(map({
-    ready: function (_map, api) {
+    ready: function (map, api) {
       var addListenerSpy =
         sinon.spy(window.google.maps.event, 'addListener');
       var removeListenerSpy =
@@ -90,36 +90,36 @@ test('Map', function (assert) {
   var otherComponent = TestUtils.renderIntoDocument(map({
     zoom: 4,
     ready: function () {
-        assert.deepEqual(
-          otherComponent.state.center,
-          {
-            lat: 0,
-            lng: 0
-          },
-          'unchanged prop should not change state'
-        );
-        assert.equal(otherComponent.state.zoom, 4, 'should set zoom state');
+      assert.deepEqual(
+        otherComponent.state.center,
+        {
+          lat: 0,
+          lng: 0
+        },
+        'unchanged prop should not change state'
+      );
+      assert.equal(otherComponent.state.zoom, 4, 'should set zoom state');
 
-        otherComponent.map.getZoom = sinon.spy(_.constant(4));
-        otherComponent.updateBounds = sinon.spy();
-        otherComponent.onZoom();
+      otherComponent.map.getZoom = sinon.spy(_.constant(4));
+      otherComponent.updateBounds = sinon.spy();
+      otherComponent.onZoom();
 
-        assert.ok(
-          otherComponent.map.getZoom.called,
-          'getZoom should be called when map zoom changes'
-        );
-        assert.ok(
-          !otherComponent.updateBounds.called,
-          'updateBounds should not be triggered when zoom change comes from app'
-        );
+      assert.ok(
+        otherComponent.map.getZoom.called,
+        'getZoom should be called when map zoom changes'
+      );
+      assert.ok(
+        !otherComponent.updateBounds.called,
+        'updateBounds should not be triggered when zoom change comes from app'
+      );
 
-        otherComponent.map.getZoom = sinon.spy(_.constant(5));
-        otherComponent.onZoom();
+      otherComponent.map.getZoom = sinon.spy(_.constant(5));
+      otherComponent.onZoom();
 
-        assert.ok(
-          otherComponent.updateBounds.called,
-          'updateBounds should be called when user changes zoom'
-        );
+      assert.ok(
+        otherComponent.updateBounds.called,
+        'updateBounds should be called when user changes zoom'
+      );
     }
   }));
 
