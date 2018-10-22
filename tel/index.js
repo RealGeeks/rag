@@ -194,9 +194,9 @@ prototype.render = function () {
     style.WebkitUserModify = 'read-write';
   }
 
+  var propsWithoutuseIntlPhoneInput = Object.assign({}, props);
+  delete propsWithoutuseIntlPhoneInput.useIntlPhoneInput;
   if (props.useIntlPhoneInput) {
-    let propsWithoutuseIntlPhoneInput = Object.assign({}, props);
-    delete propsWithoutuseIntlPhoneInput.useIntlPhoneInput;
     return dom.div(
       undefined,
       dom.select(
@@ -210,7 +210,7 @@ prototype.render = function () {
       input(propsWithoutuseIntlPhoneInput)
     );
   } else {
-    return input(propsithoutuseIntlPhoneInput);
+    return input(propsWithoutuseIntlPhoneInput);
   }
 };
 
