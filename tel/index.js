@@ -195,7 +195,8 @@ prototype.render = function () {
   }
 
   if (props.useIntlPhoneInput) {
-    props.ref = 'phoneInput';
+    let propsWithoutuseIntlPhoneInput = Object.assign({}, props);
+    delete propsWithoutuseIntlPhoneInput.useIntlPhoneInput;
     return dom.div(
       undefined,
       dom.select(
@@ -206,10 +207,10 @@ prototype.render = function () {
         },
         options
       ),
-      input(props)
+      input(propsWithoutuseIntlPhoneInput)
     );
   } else {
-    return input(props);
+    return input(propsithoutuseIntlPhoneInput);
   }
 };
 
