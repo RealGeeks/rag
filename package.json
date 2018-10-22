@@ -1,6 +1,6 @@
 {
   "name": "rag",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Real Geeks UI Kit.",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "scripts": {
     "test": "testem ci",
     "prepublishOnly": "gulp scss",
-    "build": "gulp build",
+    "build": "gulp vars images && gulp build",
     "css": "gulp css"
   },
   "author": "Sorin Iclanzan <sorin@iclanzan.com> (http://iclanzan.com/)",
