@@ -28,4 +28,7 @@ An iframe to hold a Facebook login button.  Requires an `iframeSource` prop
 which should be something like
 `//www.somedomain.com/socialmedia/facebook/button/`.
 
-## Development
+
+# Changelog
+
+2.0.0 - remove onTap event 

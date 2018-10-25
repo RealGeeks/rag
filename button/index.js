@@ -8,7 +8,7 @@ var HITAREA = 'hitarea';
 var namespace = 'rag-button';
 
 var buttonSpec = {
-  mixins: [require('react-touch-mixin'), react.addons.PureRenderMixin],
+  mixins: [react.addons.PureRenderMixin],
 
   render: function () {
     var props = this.props;
@@ -45,9 +45,11 @@ var buttonSpec = {
 
     return dom[props.href ? 'a' : 'span']({
       className: classnames.apply(undefined, classes),
-      onClick: props.onClick
+      onClick: function (e) {
+        props.onClick && props.onClick(e);
+      }
     },
-      children
+    children
     );
   }
 };

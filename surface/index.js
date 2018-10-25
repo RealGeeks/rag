@@ -3,13 +3,14 @@
 var react = require('react/dist/react-with-addons');
 
 var componentSpec = {
-  mixins: [
-    require('react-touch-mixin'),
-    react.addons.PureRenderMixin
-  ],
+  mixins: [react.addons.PureRenderMixin],
 
   render: function () {
-    return react.DOM.div(this.props);
+    var props = Object.assign({}, props, {
+      onClick: this.props.onClick
+    });
+
+    return react.DOM.div(props);
   }
 };
 

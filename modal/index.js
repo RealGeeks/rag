@@ -40,8 +40,7 @@ var componentSpec = {
           namespace,
           props.backdrop && namespace + '-backdrop'
         ),
-        onClick: props.closeOnBackdropClick &&
-          (component.onClick || component.onTap)
+        onClick: props.closeOnBackdropClick && component.onClick
       },
       scroller(
         {className: classnames(namespace + '-window', props.className)},
@@ -56,7 +55,7 @@ var componentSpec = {
     );
   },
 
-  onTap: function (event) {
+  onClick: function (event) {
     if (event.target == ReactDOM.findDOMNode(this)) {
       this.close();
     }
