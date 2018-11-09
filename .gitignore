@@ -5,3 +5,4 @@ generated
 .tmp
 *.log
 test-bundle.js
+vendor.scss

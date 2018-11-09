@@ -8,8 +8,9 @@
   },
   "scripts": {
     "test": "testem ci",
-    "prepublish": "npm build",
+    "prepublish": "npm run sass-flatten && npm build",
     "build": "gulp vars images && gulp build",
+    "sass-flatten": "npx @realgeeks/sass-flatten _style.scss vendor.scss",
     "css": "gulp css"
   },
   "author": "Sorin Iclanzan <sorin@iclanzan.com> (http://iclanzan.com/)",
