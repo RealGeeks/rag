@@ -8,10 +8,11 @@
   },
   "scripts": {
     "test": "testem ci",
-    "prepublish": "npm run sass-flatten && npm build",
+    "prepublish": "npm build && npm run sass-flatten",
     "build": "gulp vars images && gulp build",
-    "sass-flatten": "npx @realgeeks/sass-flatten _style.scss vendor.scss",
-    "css": "gulp css"
+    "sass-flatten": "sass-flatten _style.scss vendor.scss",
+    "css": "gulp css",
+    "release:patch": "np --no-yarn --any-branch patch"
   },
   "author": "Sorin Iclanzan <sorin@iclanzan.com> (http://iclanzan.com/)",
   "bugs": {
@@ -22,6 +23,7 @@
     "node": "4.1.1"
   },
   "devDependencies": {
+    "@realgeeks/sass-flatten": "^0.2.9",
     "@realgeeks/svgcss": "^1.0.0",
     "browser-sync": "^1.9.0",
     "browserify": "^8.1.1",
@@ -38,6 +40,7 @@
     "gulp-uglify": "^1.0.2",
     "merge-stream": "^0.1.7",
     "multipipe": "^0.1.2",
+    "np": "^3.0.4",
     "sinon": "^1.12.2",
     "tape": "^3.4.0",
     "testem": "^0.6.33",
