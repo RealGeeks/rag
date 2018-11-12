@@ -7,7 +7,6 @@
     "url": "https://github.com/RealGeeks/rag.git"
   },
   "scripts": {
-    "test": "testem ci",
     "prepublish": "npm build && npm run sass-flatten",
     "build": "gulp vars images && gulp build",
     "sass-flatten": "sass-flatten _style.scss vendor.scss",

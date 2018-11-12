@@ -10,5 +10,5 @@
   ],
   "on_exit": "rm test-bundle.js",
   "parallel": 4,
-  "launch_in_dev": [ "chrome", "firefox", "safari" ]
+  "launch_in_dev": [ "chrome",  "safari" ]
 }
