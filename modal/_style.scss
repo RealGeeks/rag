@@ -1,6 +1,9 @@
 .rag-modal {
   @extend %fill;
-  // @extend %center;
+  @extend %ragcenter;
+
+  top: 0 !important;
+  left: 0 !important;
 
   height: 100%;
   padding: $padding-content;
