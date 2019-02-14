@@ -1,6 +1,6 @@
 {
   "name": "rag",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Real Geeks UI Kit.",
   "repository": {
     "type": "git",
@@ -55,7 +55,7 @@
     "es6-promise": "^2.0.1",
     "gulp-cli": "^2.0.1",
     "inner": "^0.2.0",
-    "lodash": "^2.4.1",
+    "lodash": "^4.17.11",
     "node-sass": "^4.9.4",
     "prevent-overscroll": "^0.1.0",
     "query-string": "^1.0.0",
@@ -63,7 +63,7 @@
     "react-addons-pure-render-mixin": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
-    "scriptload": "^0.1.0",
+    "@realgeeks/scriptload": "^0.1.1",
     "supports": "^0.1.1"
   },
   "browserify": {
