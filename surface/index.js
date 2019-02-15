@@ -1,16 +1,15 @@
 'use strict';
 
-var react = require('react/dist/react-with-addons');
+var createReactClass = require('create-react-class');
+var div = require('react-dom-factories').div;
 
 var componentSpec = {
-  mixins: [react.addons.PureRenderMixin],
-
   render: function () {
     var props = Object.assign({}, props, {
       onClick: this.props.onClick
     });
 
-    return react.DOM.div(props);
+    return div(props);
   }
 };
 
@@ -18,4 +17,4 @@ if (process.env.NODE_ENV != 'production') {
   componentSpec.displayName = 'Surface';
 }
 
-module.exports = react.createClass(componentSpec);
+module.exports = createReactClass(componentSpec);

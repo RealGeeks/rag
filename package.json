@@ -50,7 +50,9 @@
   },
   "dependencies": {
     "@realgeeks/load-gmaps": "^0.1.8",
+    "@realgeeks/scriptload": "^0.1.1",
     "classnames": "^2.2.6",
+    "create-react-class": "^15.6.3",
     "envify": "^3.2.0",
     "es6-promise": "^2.0.1",
     "gulp-cli": "^2.0.1",
@@ -63,7 +65,7 @@
     "react-addons-pure-render-mixin": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
-    "@realgeeks/scriptload": "^0.1.1",
+    "react-dom-factories": "^1.0.2",
     "supports": "^0.1.1"
   },
   "browserify": {

@@ -1,12 +1,11 @@
 'use strict';
 
-var react = require('react/dist/react-with-addons');
 var ReactDOM = require('react-dom');
+var createReactClass = require('create-react-class');
 var preventOverscroll = require('prevent-overscroll');
+var div = require('react-dom-factories').div;
 
 var componentSpec = {
-  mixins: [react.addons.PureRenderMixin],
-
   getDefaultProps: function () {
     return {
       style: {
@@ -17,7 +16,7 @@ var componentSpec = {
   },
 
   render: function () {
-    return react.DOM.div(this.props);
+    return div(this.props);
   }
 };
 
@@ -35,4 +34,4 @@ if (process.env.NODE_ENV != 'production') {
   componentSpec.displayName = 'Scroll View';
 }
 
-module.exports = react.createClass(componentSpec);
+module.exports = createReactClass(componentSpec);

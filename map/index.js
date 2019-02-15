@@ -2,10 +2,10 @@
 
 var _ = require('lodash');
 var inner = require('inner');
-var react = require('react');
 var ReactDOM = require('react-dom');
 var classnames = require('classnames');
-var dom = react.DOM;
+var dom = require('react-dom-factories');
+var createReactClass = require('create-react-class');
 
 var mapComponent = {
   getInitialState: _.constant({
@@ -172,4 +172,4 @@ if (process.env.NODE_ENV != 'production') {
   mapComponent.displayName = 'Map';
 }
 
-module.exports = react.createClass(mapComponent);
+module.exports = createReactClass(mapComponent);

@@ -11,7 +11,8 @@ var countDigits = util.countDigits;
 var adjustCursor = util.adjustCursor;
 var formatPhone = util.formatPhone;
 var backspace = util.backspace;
-var input = react.DOM.input;
+var DOM = require('react-dom-factories');
+var input = DOM.input;
 
 var document = document || {documentMode: null};
 var navigator = navigator || {userAgent: ''};
@@ -173,7 +174,7 @@ prototype.render = function () {
   var tel = this;
   var props = tel.props;
   var className = props.className;
-  var dom = react.DOM;
+  var dom = DOM;
   var allCountries = require('./country_data').allCountries;
   var options = _.map(allCountries, function (c) {
     return dom.option(
