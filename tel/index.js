@@ -163,8 +163,7 @@ var Tel = function (props, context) {
 
 var prototype = defaults(
   Tel.prototype,
-  react.Component.prototype,
-  require('react/lib/ReactComponentWithPureRenderMixin')
+  react.Component.prototype
 );
 
 Tel.defaultProps = {

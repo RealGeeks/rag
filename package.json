@@ -62,10 +62,8 @@
     "prevent-overscroll": "^0.1.0",
     "prop-types": "^15.7.2",
     "query-string": "^1.0.0",
-    "react": "^15.4.2",
-    "react-addons-pure-render-mixin": "^15.4.2",
-    "react-addons-test-utils": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
     "react-dom-factories": "^1.0.2",
     "supports": "^0.1.1"
   },
