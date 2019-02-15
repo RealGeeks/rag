@@ -5,6 +5,7 @@ var defaults = _.defaults;
 var omit = _.omit;
 var react = require('react');
 var ReactDOM = require('react-dom');
+var PropTypes = require('prop-types');
 var util = require('./util');
 var keepDigits = util.keepDigits;
 var countDigits = util.countDigits;
@@ -289,9 +290,9 @@ prototype.value = function () {
 if (process.env.NODE_ENV != 'production') {
   Tel.displayName = 'Tel Input';
   Tel.propTypes = {
-    defaultValue: react.PropTypes.string,
-    value: react.PropTypes.string,
-    onChange: react.PropTypes.func
+    defaultValue: PropTypes.string,
+    value: PropTypes.string,
+    onChange: PropTypes.func
   };
 }
 

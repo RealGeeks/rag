@@ -60,6 +60,7 @@
     "lodash": "^4.17.11",
     "node-sass": "^4.9.4",
     "prevent-overscroll": "^0.1.0",
+    "prop-types": "^15.7.2",
     "query-string": "^1.0.0",
     "react": "^15.4.2",
     "react-addons-pure-render-mixin": "^15.4.2",
