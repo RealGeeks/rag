@@ -1,8 +1,10 @@
 'use strict';
 
-var isDigit = exports.isDigit = function (char) {
-  return char >= '0' && char <= '9';
-};
+function isDigit(c) {
+  return c >= '0' && c <= '9';
+}
+
+exports.isDigit = isDigit;
 
 exports.keepDigits = function (string) {
   var result = '';

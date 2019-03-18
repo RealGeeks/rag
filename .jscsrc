@@ -23,8 +23,6 @@
   "disallowMultipleVarDecl": true,
   "requireBlocksOnNewline": true,
   "disallowEmptyBlocks": true,
-  "disallowSpacesInsideObjectBrackets": true,
-  "disallowSpacesInsideArrayBrackets": true,
   "disallowSpacesInsideParentheses": true,
   "disallowQuotedKeysInObjects": true,
   "disallowDanglingUnderscores": true,
